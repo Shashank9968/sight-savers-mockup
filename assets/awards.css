@@ -75,3 +75,18 @@
  .bookbar{display:none}.packs{grid-template-columns:1fr}
 }
 @media(max-width:420px){.bgrid{grid-template-columns:1fr}}
+
+/* Oct 14: fixed mobile bottom bar removed; Book + WhatsApp live in the LARQ-style footer */
+.mbar{display:none!important}
+body{padding-bottom:0!important}
+.ftr .fcta{display:none}
+@media (max-width:900px){
+  .ftr .fcta{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 0 28px;margin-bottom:28px;border-bottom:1px solid var(--ftr-line)}
+  .ftr .fpill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 14px;border-radius:999px;
+    border:1px solid currentColor;color:inherit;text-decoration:none;font-size:14px;letter-spacing:.01em;white-space:nowrap}
+  .ftr .fpill:first-child{background:var(--white,#fff);color:var(--ink,#1c242c);border-color:transparent}
+  .ftr .fpill svg{width:18px;height:18px}
+  .ftr .fpill:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+}
+@media (max-width:900px){.ftr .top{grid-template-columns:1fr 1fr;gap:28px 20px}.ftr .top>div:first-child{grid-column:1/-1}}
+@media (max-width:360px){.ftr .fcta{grid-template-columns:1fr}}
