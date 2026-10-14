@@ -1,0 +1,63 @@
+/* Sight Savers Optics – clickable mockup THEME
+   Every colour, font, radius and shadow used by the prototype lives here.
+   To reskin the whole prototype, swap this one file (keep the variable names).
+   Baseline: Baymax UX mockups v1 (3 Oct 2026). */
+:root{
+  /* ink + neutrals */
+  --ink:#15181D; --ink-2:#2A2F36; --slate:#5B636B; --slate-2:#9AA1A9; --muted-2:#B8B2A8;
+  --line:#E2DDD5; --line-2:#ECE8E1; --line-3:#C9C3B9; --line-4:#D6D0C6; --control-border:#B9B3A9;
+  --paper:#FAF8F5; --stone:#EFEBE5; --white:#FFFFFF; --ph-1:#ECE7DF; --ph-2:#DCD5CA; --ph-icon:#A39B8F;
+  /* brand */
+  --red:#C42E27; --red-deep:#A3241E; --logo-red:#DB2C22;
+  --teal:#1F4B47; --teal-2:#2C625D; --teal-ink:#183B38; --teal-soft:#A9CFC9; --teal-text:#D3E4E1;
+  --mist:#E8F0EE; --mist-2:#D5E3E0;
+  /* WhatsApp + status */
+  --wa:#0F7A43; --wa-tint:#E6F3EC; --wa-line:#BFDCCB; --wa-ink:#0D4D2C; --ok:#2F7A55;
+  --warn:#8A5A00; --warn-tint:#FFF4DB; --warn-line:#F1D79A; --warn-ink:#5E4300; --anno-bg:#FFFBEF; --anno-ink:#6B4E00;
+  /* dark surfaces (top bar, footer) */
+  --dark-text:#D9DCE0; --dark-text-2:#C9CDD2; --dark-line:#3A4048; --dark-line-2:#2E343C; --dark-pill:#E3E6E9;
+  /* overlays */
+  --on-dark-line:rgba(255,255,255,.6); --on-dark-fill:rgba(255,255,255,.12); --on-dark-rule:rgba(255,255,255,.2);
+  --label-bg:rgba(255,255,255,.88); --scrim:rgba(21,24,29,.55);
+  /* map + illustration */
+  --map-land:#EEF1EC; --map-water:#CFE0E6; --map-road:#FFFFFF; --map-minor:#E1E5DE; --map-label:#7C9AA5;
+  --frame-1:#5A3B2A; --frame-2:#8C5A3C; --frame-3:#3A261B; --frame-pin:#D9C7A8; --glass:#FFFFFF; --glass-2:#E9EEF0;
+  --sun-lens:#2B3036; --sun-lens-2:#55606B;
+  --swatch-havana:linear-gradient(135deg,#5A3B2A,#8C5A3C); --swatch-black:#15181D; --swatch-crystal:linear-gradient(135deg,#C9B8A3,#EDE3D5); --swatch-navy:#3F4E5C;
+  --hero-fade:linear-gradient(180deg,#FFFFFF 0%,#FAF8F5 100%); --pdp-stage:radial-gradient(ellipse at 50% 45%,#FFFFFF 0%,#F1EEE9 70%);
+  /* type */
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --ar:"IBM Plex Sans Arabic","Plus Jakarta Sans",Tahoma,sans-serif;
+  /* radii */
+  --r-xs:5px; --r-s:8px; --r-m:12px; --r:14px; --r-l:22px; --r-xl:28px; --r-pill:999px;
+  /* action roles: red = book only, black = buy / continue */
+  --book-bg:var(--red); --book-bg-hover:var(--red-deep); --book-text:var(--white);
+  --buy-bg:var(--ink); --buy-bg-hover:var(--ink-2); --buy-text:var(--white);
+  --focus:var(--ink); --err:var(--red);
+  /* sizing */
+  --tap:44px; --fs-min:12px; --fs-body:16px; --fs-body-ar:17.6px; --fs-lead:19px; --fs-lead-ar:20px;
+  /* type scale + shape of components (reskin knobs) */
+  --fs-display:62px; --fs-display-m:38px; --fs-h2:40px; --fs-h2-m:29px; --fs-page:48px; --fs-page-m:34px;
+  --display-font:var(--serif); --display-weight:500; --display-tracking:-.02em; --display-lh:1.04;
+  --eyebrow-tracking:.14em; --eyebrow-size:12.5px; --eyebrow-color:var(--teal);
+  --btn-radius:var(--r-pill); --btn-weight:700; --btn-h:48px; --card-radius:var(--r); --card-border:var(--line);
+  --header-h:84px; --section-pad:88px; --section-pad-m:44px;
+  --accent:var(--teal); --accent-2:var(--teal-2); --accent-tint:var(--mist);
+  /* weights (reskin knobs) */
+  --w-semi:600; --w-bold:700; --w-heavy:800; --h3-weight:700;
+  /* surfaces (reskin knobs) */
+  --header-bg:var(--white); --topbar-bg:var(--ink); --topbar-text:var(--dark-text); --topbar-hover:var(--white); --topbar-line:var(--dark-line);
+  --footer-bg:var(--ink); --footer-text:var(--dark-text-2); --footer-head:var(--white); --footer-line:var(--dark-line-2); --footer-fine:var(--slate-2); --footer-pill:var(--dark-pill); --footer-pill-line:var(--dark-line);
+  --band-bg:var(--accent); --band-text:var(--white); --band-text-2:var(--teal-text); --band-text-3:var(--teal-soft); --band-line:var(--on-dark-line); --band-fill:var(--on-dark-fill);
+  --band-btn-bg:var(--white); --band-btn-text:var(--ink); --cta-bg:var(--ink); --cta-text:var(--white);
+  --card-bg:var(--white); --chip-on-bg:var(--ink); --chip-on-text:var(--white); --chip-border:var(--line);
+  --ex-text:var(--warn); --ex-bg:var(--warn-tint); --ex-line:var(--warn-line); --ex-weight:800;
+  --eyebrow-weight:700; --link-weight:700; --nav-weight:600; --btn-hover-shadow:var(--sh-1); --btn-border:1.5px;
+  --theme-name:"Original"; --lead-color:var(--ink-2);
+  /* shadows */
+  --sh-1:0 1px 2px rgba(21,24,29,.06),0 2px 8px rgba(21,24,29,.05);
+  --sh-2:0 8px 30px rgba(21,24,29,.10);
+  --sh-3:0 18px 50px rgba(21,24,29,.22);
+  --sh-up:0 -6px 20px rgba(21,24,29,.07);
+}

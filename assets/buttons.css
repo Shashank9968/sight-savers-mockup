@@ -1,0 +1,107 @@
+/* Sight Savers Optics · P2 "Modern clinic luxe" · BUTTON SYSTEM v2 (4 Oct 2026)
+   Load AFTER components.css. Self-contained sizing: every size is a literal value (explicit vertical padding + min-height),
+   so a stale or missing theme.css can never collapse a button again. Colours use theme variables WITH literal fallbacks.
+   Shape: full pill (999px) for every button. Benchmarks: Apple Store (pill, 500 weight, quiet secondary),
+   Warby Parker (pill, generous padding), Aesop (restraint, no gloss).
+
+   Variants                     Use
+   .btn-book                    primary booking action (Book red)
+   .btn-ink                     non-booking primary (Add to cart, Show times, Search)
+   .btn-line                    secondary outline: light bg -> ink hairline; on .on-photo/.on-dark -> translucent white outline (no blur)
+   .btn-white / .btn-on-dark    white filled, for dark photos and dark bands
+   .btn-wa                      WhatsApp (soft green tint; solid green on dark)
+   .lnk / .btn-text             tertiary text link with arrow
+   Sizes: default 50px · .btn-sm 44px · .btn-lg 54px · .btn-block full width · .btn-icon square-round */
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  box-sizing:border-box;min-height:50px;padding:14px 26px;          /* 14 + 20 line + 14 + 2 border = 50 even if min-height is ignored */
+  font:500 15px/20px var(--sans,"Inter Tight",system-ui,sans-serif);letter-spacing:-.006em;
+  border:1px solid transparent;border-radius:999px;
+  white-space:nowrap;text-align:center;text-decoration:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;user-select:none;
+  transition:background-color .2s cubic-bezier(.2,.7,.2,1),border-color .2s cubic-bezier(.2,.7,.2,1),color .2s,box-shadow .2s,transform .2s cubic-bezier(.2,.7,.2,1);
+}
+.btn .ico{width:17px;height:17px;flex:none;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .ico:last-child:not(:first-child){transform:translateX(3px)}
+[dir=rtl] .btn:hover .ico:last-child:not(:first-child){transform:translateX(-3px)}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{outline:2px solid var(--focus,#1D242B);outline-offset:3px}
+.on-photo .btn:focus-visible,.on-dark .btn:focus-visible,.ftr .btn:focus-visible{outline-color:#fff}
+.ar .btn{font-family:var(--ar,"IBM Plex Sans Arabic",sans-serif);font-size:15.5px;letter-spacing:0}
+
+/* primary · Book */
+.btn-book{background:var(--book,#961C31);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(122,22,39,.28),0 8px 18px -10px rgba(150,28,49,.6)}
+.btn-book:hover{background:var(--book-hover,#7A1627);color:#fff;transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 4px rgba(122,22,39,.26),0 14px 26px -12px rgba(150,28,49,.66)}
+.btn-book:active{transform:translateY(0) scale(.98)}
+
+/* dark primary */
+.btn-ink{background:var(--ink,#1D242B);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 2px rgba(22,30,38,.2),0 8px 18px -10px rgba(22,30,38,.5)}
+.btn-ink:hover{background:#2B343D;color:#fff;transform:translateY(-1px)}
+.cindex .btn-ink,.notice .btn-ink{background:var(--book,#961C31);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 18px -10px rgba(150,28,49,.6)}
+.cindex .btn-ink:hover,.notice .btn-ink:hover{background:var(--book-hover,#7A1627)}
+
+/* secondary · outline (light backgrounds) */
+.btn-line{background:transparent;color:var(--ink,#1D242B);border-color:rgba(29,36,43,.24);box-shadow:none}
+.btn-line:hover{background:#fff;border-color:var(--ink,#1D242B);color:var(--ink,#1D242B)}
+/* secondary on a dark photo / dark band: translucent outline, no backdrop blur */
+.on-photo .btn-line,.on-dark .btn-line,.ftr .btn-line{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.62)}
+.on-photo .btn-line:hover,.on-dark .btn-line:hover,.ftr .btn-line:hover{background:rgba(255,255,255,.2);border-color:#fff;color:#fff}
+.moss .btn-line{background:#fff;border-color:rgba(29,36,43,.2);color:var(--ink,#1D242B)}  /* .moss is a light mist panel since the component refresh */
+
+/* white filled (on-dark primary) */
+.btn-white,.btn-on-dark{background:#fff;color:var(--ink,#1D242B);border-color:rgba(29,36,43,.12);box-shadow:0 1px 2px rgba(22,30,38,.06),0 8px 18px -12px rgba(22,30,38,.3)}
+.btn-white:hover,.btn-on-dark:hover{background:#fff;border-color:rgba(29,36,43,.3);transform:translateY(-1px)}
+.on-photo .btn-white,.on-photo .btn-on-dark,.on-dark .btn-white,.on-dark .btn-on-dark{border-color:#fff;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.on-photo .btn-on-dark:hover,.on-dark .btn-on-dark:hover{background:#F2F3F5}
+
+/* WhatsApp */
+.btn-wa{background:var(--wa-tint,#E8F1EC);color:var(--wa,#1E6B46);border-color:var(--wa-line,#BED7C9);box-shadow:none}
+.btn-wa:hover{background:var(--wa-tint-2,#DAE9E0);color:var(--wa-hover,#185A3A);border-color:var(--wa,#1E6B46)}
+.btn-wa .ico{width:18px;height:18px}
+.on-photo .btn-wa,.on-dark .btn-wa,.ftr .btn-wa{background:var(--wa,#1E6B46);color:#fff;border-color:var(--wa,#1E6B46)}
+.on-photo .btn-wa:hover,.on-dark .btn-wa:hover{background:var(--wa-hover,#185A3A)}
+
+/* sizes */
+.btn-sm{min-height:44px;padding:11px 20px;font-size:14px;line-height:20px;gap:8px}   /* 11+20+11+2 = 44 */
+.btn-lg{min-height:54px;padding:16px 32px;font-size:16px;line-height:20px}
+.btn-block{display:flex;width:100%}
+.btn-icon{padding:0;width:50px;min-width:50px}
+.btn[aria-disabled=true],.btn:disabled{opacity:.45;pointer-events:none}
+
+/* tertiary · text link with arrow (keeps Bob's .lnk class) */
+.lnk,.btn-text{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;
+  font:500 14.5px/20px var(--sans,"Inter Tight",system-ui,sans-serif);letter-spacing:-.003em;color:var(--ink,#1D242B);
+  text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:6px;
+  transition:text-decoration-color .2s,color .2s}
+.lnk:hover,.btn-text:hover{text-decoration-color:currentColor}
+.lnk-wa{color:var(--wa,#1E6B46)}
+.on-photo .lnk,.on-dark .lnk{color:#fff}
+
+/* contexts that used to squash buttons (all now keep vertical padding) */
+/* buttons inside navigation (mega-menu cards, drawer): beat the flat-nav link styles (.nav a / .nav .mega .mc-ctas a) */
+.nav .btn.btn,.nav .mega .mc-ctas .btn,.nav .mega-prod .btn,.mega-panel .btn,.drawer .btn{min-height:44px;padding:11px 20px;border-radius:999px;font-size:14px;line-height:20px;display:inline-flex;justify-content:center;isolation:auto}
+.nav .btn::before,.mega-panel .btn::before{content:none!important}
+.drawer .btns .btn{min-height:50px;padding:14px 22px;font-size:15px}
+.hdr .btn-book{min-height:44px;padding:11px 20px;font-size:14px;line-height:20px;border-radius:999px;gap:0}
+.sp-hero .ctas .btn{min-height:44px;padding:11px 20px;font-size:14px;line-height:20px}
+.buy .btn-block{min-height:54px;padding:16px 28px;border-radius:999px;font-size:15.5px}
+.qb .go .btn{width:100%}
+.qb .wa{border-radius:999px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.modal .btns .btn{min-width:120px}
+@media (max-width:860px){
+  .mbar .btn{min-height:50px;padding:14px 16px;border-radius:999px;width:100%}
+  .mbar.buybar .btn-wa{padding:0;width:50px;min-width:50px}
+  .hero .ctas .btn{width:100%}
+}
+@media (max-width:520px){
+  .btn{padding:14px 20px;white-space:normal}
+  .btn-sm{padding:11px 16px}
+}
+@media (max-width:380px){
+  .mbar .btn{font-size:14px;padding:14px 10px}
+}
+@media (prefers-reduced-motion:reduce){.btn,.btn .ico,.lnk{transition:none}.btn:hover,.btn:active{transform:none}}
