@@ -191,13 +191,13 @@ const linesEl=$('[data-lines]');
 const STN={karama:'Al Karama',burjuman:'BurJuman',dip:'Dubai Investment Park'};
 function renderCart(){
   const c=getCart();
-  if(!c.length){linesEl.innerHTML=`<div class="empty" style="text-align:start"><h2 class="d3">Your cart is empty.</h2><p class="muted" style="margin:10px 0 20px">We sell soft and coloured contact lenses and lens care online. Frames and specialist lenses are fitted in store.</p><div class="ctas"><a class="btn btn-ink" href="contact-lenses.html">Shop contact lenses</a><a class="btn btn-line" href="eyewear.html">Eyewear lookbook</a></div></div>`;}
+  if(!c.length){linesEl.innerHTML=`<div class="empty" style="text-align:start"><h2 class="d3">Your cart is empty.</h2><p class="muted" style="margin:10px 0 20px">We sell soft and coloured contact lenses and lens care online. Frames and specialist lenses are fitted in store.</p><div class="ctas"><a class="btn btn-ink" href="contact-lenses.html">Shop contact lenses</a><a class="btn btn-line" href="eyewear.html">Shop frames &amp; sunglasses</a></div></div>`;}
   else linesEl.innerHTML=c.map((l,i)=>{
     const q=lineQty(l);
-    const eyes=l.eyes?l.eyes.map(e=>`${e.eye==='B'?'Both eyes':e.eye==='R'?'Right (OD)':'Left (OS)'}: ${e.p}${e.cyl?' / '+e.cyl+' × '+e.ax:''} · ${e.q} box${e.q>1?'es':''}`).join('<br>'):`Qty ${l.q}`;
+    const eyes=l.opt?esc(l.opt):l.eyes?l.eyes.map(e=>`${e.eye==='B'?'Both eyes':e.eye==='R'?'Right (OD)':'Left (OS)'}: ${e.p}${e.cyl?' / '+e.cyl+' × '+e.ax:''} · ${e.q} box${e.q>1?'es':''}`).join('<br>'):`Qty ${l.q}`;
     const rx={upload:'Prescription: photo uploaded',wa:'Prescription: send on WhatsApp',store:'Prescription: on file at our store'}[l.rx]||'';
     const del=l.del==='collect'?'Collect from '+(STN[l.store]||'store'):'Delivery · UAE [confirm]';
-    return `<div class="cl-line"><div class="pl"><img src="${l.img}" alt=""></div><div><span class="mono">${esc(l.brand)}</span><h3>${esc(l.name)}</h3><p class="meta">${eyes}${rx?'<br>'+rx:''}<br>${del}</p></div>
+    return `<div class="cl-line"><div class="pl"><img src="${l.img}" alt=""></div><div><span class="mono">${esc(l.brand)}</span><h3>${esc(l.name)}</h3><p class="meta">${eyes}${rx?'<br>'+rx:''}${l.plan?'<br>'+esc(l.plan):''}<br>${del}</p></div>
     <div class="right"><b>${aed(q*l.price)}</b><button class="lnk" type="button" data-rm="${i}" aria-label="Remove ${esc(l.name)}">${'Remove'}</button></div></div>`;}).join('');
   const sub=c.reduce((a,l)=>a+lineQty(l)*l.price,0);
   $('[data-t="sub"]').textContent=aed(sub);$('[data-t="tot"]').textContent=aed(sub)+(c.some(l=>l.del!=='collect')?' + delivery':'');
@@ -251,5 +251,71 @@ if(bk){
       <a class="btn btn-wa" href="https://wa.me/${WA}?text=${encodeURIComponent(cmsg)}" data-wa="${esc(cmsg)}">Need to change or cancel? WhatsApp us</a><a class="btn btn-line" href="index.html">Back to home</a></div>`;
     bk.classList.add('hide');cf.classList.remove('hide');$('.aside').classList.add('hide');$('.mbar')&&$('.mbar').classList.add('hide');cf.focus();window.scrollTo(0,cf.getBoundingClientRect().top+scrollY-100);
   });
+}
+})();
+/* ---------- v2: tabs, shop listing, frames PDP, pack/subscribe pricing, cart announcements ---------- */
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const A=window.SSOapp;if(!A)return;const D=window.SSO||{};const Q=new URLSearchParams(location.search);const aed=A.aed;
+// cart: announce item count changes to screen readers
+const live=$('[data-cart-live]');let lastN=null;
+const cnt=()=>A.getCart().reduce((a,l)=>a+(l.eyes?l.eyes.reduce((x,e)=>x+e.q,0):l.q),0);
+lastN=cnt();document.addEventListener('sso:cart',()=>{const n=cnt();if(live&&n!==lastN)live.textContent=(A.AR?'السلة: ':'Cart updated: ')+n+(A.AR?'':(n===1?' item':' items'));lastN=n;});
+// tabs (best sellers)
+$$('[data-tabs]').forEach(tl=>{const tabs=$$('[role=tab]',tl);
+  const sel=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});};
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(!d)return;e.preventDefault();const n=tabs[(i+d+tabs.length)%tabs.length];sel(n);n.focus();});});});
+// shop listing filters
+const pf=$('[data-plp]');
+if(pf){const grid=$('[data-plp-grid]');const c0=Q.get('c');if(c0){const b=pf.querySelector(`input[name=c][value="${c0}"]`);if(b)b.checked=true;}
+  if(matchMedia('(max-width:860px)').matches)$('[data-plp-side]').open=false;
+  const vals=n=>$$(`input[name=${n}]:checked`,pf).map(x=>x.value);
+  const apply=()=>{const c=vals('c'),sh=vals('shape'),rp=vals('rep'),tp=vals('type');let n=0;
+    $$('.pcard',grid).forEach(el=>{const d=el.dataset;let ok=(!c.length||c.includes(d.cat))&&(!sh.length||sh.includes(d.shape))&&(!rp.length||rp.includes(d.rep))&&(!tp.length||tp.includes(d.type));
+      el.classList.toggle('hide',!ok);if(ok)n++;});
+    $('[data-plp-count]').textContent=n+(n===1?' product':' products');$('[data-plp-empty]').classList.toggle('hide',n>0);};
+  pf.addEventListener('change',apply);pf.addEventListener('reset',()=>setTimeout(apply));
+  $$('[data-plp-reset]').forEach(b=>b.addEventListener('click',e=>{if(b.type!=='reset'){pf.reset();}setTimeout(()=>{apply();pf.querySelector('input').focus();});}));apply();}
+// lens PDP: pack size + subscribe & save change the price (Bite pattern). Discounts are EXAMPLE.
+const bf=$('#buyf'),P=window.SSOpdp;
+if(bf&&P&&!P.care){const p=P.p;const PACK={1:0,3:.05,6:.10},SUB=.05;
+  const disc=n=>n>=6?PACK[6]:n>=3?PACK[3]:0;
+  $$('[data-pp]',bf).forEach(x=>{const k=+x.dataset.pp;x.textContent=aed(p.price*(1-PACK[k]))+'/box';});
+  const sync=()=>{const per=P.perEye();$$('input[name=packsz]',bf).forEach(r=>r.checked=+r.value===per);};
+  const reprice=()=>{const b=P.boxes(),per=P.perEye();const base=b*p.price;const pd=disc(per);const sub=bf.plan&&bf.plan.value==='sub';
+    const tot=base*(1-pd)*(sub?1-SUB:1);const once=base*(1-pd);
+    $$('[data-total]').forEach(x=>x.textContent=aed(tot));const sv=base-tot;const s=$('[data-saving]');if(s)s.textContent=sv>0.5?'You save '+aed(sv)+' (EXAMPLE)':'';
+    const o=$('[data-once]');if(o)o.textContent=aed(once);const sp=$('[data-subp]');if(sp)sp.textContent=aed(once*(1-SUB));
+    const btn=$('button[type=submit]',bf);if(btn&&!btn.dataset.l)btn.dataset.l=btn.innerHTML;};
+  $$('input[name=packsz]',bf).forEach(r=>r.addEventListener('change',()=>{P.setPerEye(+r.value);}));
+  $$('input[name=plan]',bf).forEach(r=>r.addEventListener('change',reprice));
+  document.addEventListener('sso:qty',()=>{sync();reprice();});sync();reprice();
+  // remember discount on the cart line
+  bf.addEventListener('submit',()=>setTimeout(()=>{const c=A.getCart();const l=c[c.length-1];if(!l||l.id!==p.id||!l.eyes||l.disc!==undefined)return;
+    const pd=disc(P.perEye()),sub=bf.plan.value==='sub';l.disc=1-(1-pd)*(sub?1-SUB:1);l.price=+(p.price*(1-l.disc)).toFixed(2);l.plan=sub?'Subscribe & save (EXAMPLE)':'One-time';A.setCart(c);}),true);
+  // coloured shade picker
+  const sn=$('[data-shade-n]');if(sn){$$('[data-shade]').forEach(a=>{const on=a.dataset.shade===p.id;if(on){a.setAttribute('aria-current','true');sn.textContent=a.title;}});}
+}
+// frames PDP
+const ff=$('#framef');
+if(ff){const F=(D.frames||[]),C=D.cols||{};const f=F.find(x=>x.id===Q.get('p'))||F.find(x=>x.id===$('[data-frame]').dataset.frame);
+  const set=(k,v)=>$$(`[data-ff="${k}"]`).forEach(x=>x.textContent=v);const cat=f.cat==='optical'?'Optical frame':'Sunglasses';
+  set('brand',f.brand);set('name',f.name);set('cat',cat);set('cat2',cat);set('crumb',f.brand+' '+f.name);set('price',aed(f.price));set('br',f.bridge);set('tp',f.temple);
+  if(f.cat==='sun')set('demo','Standard sun lenses');
+  document.title=f.brand+' '+f.name+' · Sight Savers Optics';
+  $('[data-sw]').innerHTML=f.cols.map((c,i)=>`<label class="sw" title="${C[c][0]}"><input class="sr" type="radio" name="col" value="${c}"${i?'':' checked'}><span style="background:${C[c][1]}" aria-hidden="true"></span><span class="sr">${C[c][0]}</span></label>`).join('');
+  $('[data-sz]').innerHTML=f.sizes.map(([s,w],i)=>`<label class="chip"><input class="sr" type="radio" name="size" value="${s}"${(s==='M'||f.sizes.length===1)?' checked':''}> ${s} · ${w}</label>`).join('');
+  const img=$('[data-ff="img"]'),alt=$('[data-ff="alt"]');
+  const upd=()=>{const c=ff.col.value;img.src=`assets/img/frames/${f.id}-${c}.svg`;img.alt=`${f.brand} ${f.name}, ${C[c][0]}`;set('coln',C[c][0]);
+    const o=f.cols.find(x=>x!==c);alt.src=`assets/img/frames/${f.id}-${o}.svg`;const sz=f.sizes.find(s=>s[0]===(ff.size&&ff.size.value))||f.sizes[0];set('lw',sz[1]);
+    set('total',aed(f.price));set('addl','Add to cart · '+aed(f.price));set('line','1 frame · '+C[c][0]+' · size '+sz[0]);};
+  ff.addEventListener('change',upd);upd();
+  $$('[data-also] .pcard').forEach(c=>{if(c.querySelector(`a[href="frame.html?p=${f.id}"]`))c.remove();});
+  if(!$$('[data-also] .pcard').length===false&&$$('[data-also] .pcard').length>3)$$('[data-also] .pcard')[3].remove();
+  ff.addEventListener('submit',e=>{e.preventDefault();const c=A.getCart();const col=ff.col.value,sz=ff.size.value,ln=ff.lens.value;
+    c.push({id:f.id,name:f.name,brand:f.brand,img:`assets/img/frames/${f.id}-${col}.svg`,price:f.price,q:1,del:ff.del.value,frame:true,
+      opt:`${C[col][0]} · size ${sz} · ${ln==='store'?'lenses added in store':(f.cat==='sun'?'standard sun lenses':'demo lenses')}`});
+    A.setCart(c);A.added();});
 }
 })();
