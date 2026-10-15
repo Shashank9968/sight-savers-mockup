@@ -285,7 +285,7 @@ if(bf&&P&&!P.care){const p=P.p;const PACK={1:0,3:.05,6:.10},SUB=.05;
   const sync=()=>{const per=P.perEye();$$('input[name=packsz]',bf).forEach(r=>r.checked=+r.value===per);};
   const reprice=()=>{const b=P.boxes(),per=P.perEye();const base=b*p.price;const pd=disc(per);const sub=bf.plan&&bf.plan.value==='sub';
     const tot=base*(1-pd)*(sub?1-SUB:1);const once=base*(1-pd);
-    $$('[data-total]').forEach(x=>x.textContent=aed(tot));const sv=base-tot;const s=$('[data-saving]');if(s)s.textContent=sv>0.5?'You save '+aed(sv)+' (EXAMPLE)':'';
+    $$('[data-total]').forEach(x=>x.textContent=aed(tot));const sv=base-tot;const s=$('[data-saving]');if(s)s.textContent=sv>0.5?'You save '+aed(sv)+' (EXAMPLE)':'Save up to 10% on 6 boxes, plus 5% with Subscribe & save (EXAMPLE)';
     const o=$('[data-once]');if(o)o.textContent=aed(once);const sp=$('[data-subp]');if(sp)sp.textContent=aed(once*(1-SUB));
     const btn=$('button[type=submit]',bf);if(btn&&!btn.dataset.l)btn.dataset.l=btn.innerHTML;};
   $$('input[name=packsz]',bf).forEach(r=>r.addEventListener('change',()=>{P.setPerEye(+r.value);}));
