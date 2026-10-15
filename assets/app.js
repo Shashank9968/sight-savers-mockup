@@ -14,7 +14,7 @@ const page=(location.pathname.split('/').pop()||'index.html');
 /* ---------- mockup strip + look switch ---------- */
 const sw=$('[data-switch]');
 if(sw){
-  const V1MAP={'eyewear.html':'eyeglasses.html','eye-tests.html':'book.html'};
+  const V1MAP={'lens-advisor.html':'contact-lenses.html','eyewear.html':'eyeglasses.html','eye-tests.html':'book.html'};
   const tail=location.search+location.hash;
   const opts=[['p2','P2'],['v1','V1'],['b2','B2'],['c2','C2']];
   sw.innerHTML=(AR?'':'<span class="sr">Look: </span>')+opts.map(([k,l])=>{
