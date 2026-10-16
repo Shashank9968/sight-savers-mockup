@@ -1,0 +1,5 @@
+(()=>{const T={lens:['Best-selling contact lenses','contact-lenses.html'],frames:['Optical frames','shop.html?c=optical'],sun:['Sunglasses','shop.html?c=sun'],clinic:['Specialist clinic','specialty.html','All services']};
+const bs=[...document.querySelectorAll('.hq-chip')],rs=[...document.querySelectorAll('.hq-row')],t=document.getElementById('hq-t'),a=document.getElementById('hq-all');if(!bs.length)return;
+function sel(k,focus){if(!T[k])return;bs.forEach(b=>{const on=b.dataset.k===k;b.setAttribute('aria-pressed',on);if(on&&focus)b.focus();});rs.forEach(r=>r.hidden=r.dataset.k!==k);t.textContent=T[k][0];a.href=T[k][1];a.textContent=T[k][2]||'Shop all';}
+bs.forEach((b,i)=>{b.addEventListener('click',()=>sel(b.dataset.k));b.addEventListener('keydown',e=>{let j=null;if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%bs.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i-1+bs.length)%bs.length;if(e.key==='Home')j=0;if(e.key==='End')j=bs.length-1;if(j!==null){e.preventDefault();sel(bs[j].dataset.k,true);}});});
+const q=new URLSearchParams(location.search).get('k');if(q)sel(q);})();
