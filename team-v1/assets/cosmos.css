@@ -508,3 +508,23 @@ body.hiq .xq-glass .hq-chip{background:rgba(13,27,42,.46)!important}
 @media (max-width:760px){body.hiq .xq1::after{background:linear-gradient(0deg,rgba(13,27,42,.86) 0%,rgba(13,27,42,.76) 62%,rgba(13,27,42,.3) 78%,rgba(13,27,42,0) 92%)}}
 body.hiq .hdr:not(.hiq-solid) a.wa{background:rgba(255,255,255,.14)!important;color:#fff!important;border:1px solid rgba(255,255,255,.45)!important}body.hiq .hdr:not(.hiq-solid) a.wa svg{color:#fff!important}
 body.hiq .xq-glass .hq-chip:not([aria-pressed=true]){background:rgba(13,27,42,.62)!important}
+/* hiq: keep face clear of text (face ≈ x37–58%, y10–56% of man-studio) */
+body.hiq .xq1{background:#E4EBF3}
+body.hiq .xq1 picture{inset:0 auto 0 74%;width:auto;transform:translateX(-47.5%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
+body.hiq .xq1 img.bg{width:auto;height:100%;max-width:none;object-fit:initial}
+body.hiq .xq-iris{width:62vh;height:62vh;max-width:600px;max-height:600px;left:74%;top:36%;transform:translate(-50%,-44%)}
+body.hiq .xq1 h1{font-size:clamp(44px,5.2vw,84px)!important;max-width:11ch!important}
+body.hiq .xq-glass{max-width:520px}
+@media (max-width:1100px){body.hiq .xq1 picture{left:79%}body.hiq .xq-iris{left:79%;width:52vh;height:52vh}body.hiq .xq-glass{max-width:470px}body.hiq .xq1 h1{max-width:10ch!important}}
+@media (max-width:760px){
+ body.hiq .xq1 picture{inset:0 auto auto 50%;height:400px;-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 18%);mask-image:linear-gradient(0deg,transparent 0,#000 18%)}
+ body.hiq .xq-iris{left:50%;top:28px;width:230px;height:230px;transform:translateX(-50%)}
+ body.hiq .xq1 h1{max-width:13ch!important}body.hiq .xq-glass{max-width:none}
+}
+body.hiq .xq1 picture{display:block}body.hiq .xq1 img.bg{display:block}
+body.hiq .xq1 picture{width:calc(max(640px,min(92vh,980px)) * 1.4996)}
+body.hiq .xq1 img.bg{width:100%;height:100%}
+@media (max-width:760px){body.hiq .xq1 picture{width:600px}}
+body.hiq .xq-iris{top:33%;transform:translate(-50%,-50%);width:min(68vh,660px);height:min(68vh,660px);max-width:none;max-height:none}
+@media (max-width:1100px){body.hiq .xq-iris{width:min(68vh,600px);height:min(68vh,600px)}}
+@media (max-width:760px){body.hiq .xq-iris{top:132px;width:260px;height:260px}}
