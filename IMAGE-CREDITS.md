@@ -32,3 +32,18 @@ All under the Pexels License (free commercial use, no attribution required).
 - `colour-portrait.jpg` (2400×3000, 4:5 face crop): "Studio Shot of a Young Blonde in a Glamour Makeup Look" by Vince Mariel Conlu, Pexels (https://www.pexels.com/photo/17094611/), 6000×4000 source. Replaces macro `colour-eye-blue.jpg` (coloured-lens tiles, lifestyle image and card bubbles).
 - `lens-flatlay.jpg` (2400×1600): "White and Blue Contact Lens Container on Blue Table" by Nataliya Vaitkevich, Pexels (https://www.pexels.com/photo/5843432/), 6099×4066 source. Replaces `green-eye.jpg` on the lens product gallery row.
 - `lens-essentials.jpg` (1600×2400): "Flatlay of Contact Lens Items on White Surface" by Nataliya Vaitkevich, Pexels (https://www.pexels.com/photo/5842836/), 3987×5981 source. Replaces macro `scleral-eye.jpg` in the keratoconus gallery.
+
+## Owner's site (sightsaversoptics.ae / cosmosenterprises.in) — added 15 Oct 2026, approved by Shashank
+
+| File | Source |
+|---|---|
+| assets/img/founder.png | Owner's site (sightsaversoptics.ae) — https://sightsaversoptics.ae/wp-content/uploads/2024/09/about-pic.png |
+| assets/img/clinic-room.jpg | Owner's site (sightsaversoptics.ae) — /wp-content/uploads/2024/09/WhatsApp-Image-2024-08-16-at-10.07.25_df4cda9b.jpg |
+| assets/img/own-lva-reading.jpg | Owner's site (sightsaversoptics.ae) — /wp-content/uploads/2024/09/lva-2.webp |
+| assets/img/own-revital.jpg | Owner's site (cosmosenterprises.in) — /wp-content/themes/cosmos-theme/revital-2.jpg |
+| assets/img/own-lowvision-falcon.jpg | Owner's site (cosmosenterprises.in) — /wp-content/themes/cosmos-theme/ocutech_section.png |
+| assets/img/own-eaglet-esp.jpg | Owner's site (cosmosenterprises.in) — /wp-content/themes/cosmos-theme/esp_machine.jpg |
+| assets/img/own-freeform.jpg | Owner's site (cosmosenterprises.in) — /wp-content/themes/cosmos-theme/freeform.jpg |
+| assets/img/own-ocutech-falcon.jpg, own-scleral-lens.jpg | Owner's site (cosmosenterprises.in) — downloaded, not currently used |
+
+Award badge is a drawn laurel (no official You & Eye logo was published on either site).
