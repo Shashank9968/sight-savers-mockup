@@ -123,6 +123,7 @@ if(pdp){
   $$('[data-related] .lc').forEach(c=>{if(c.querySelector(`a[href="lens.html?p=${p.id}"]`))c.remove();});
   const form=$('#buyf');
   if(care){$$('[data-rx]',form).forEach(x=>x.classList.add('hide'));$('[data-care]',form).classList.remove('hide');$('[data-delno]').textContent='02';}
+  {let n=0;$$('fieldset.blk',form).forEach(f=>{if(f.classList.contains('hide')||f.closest('.hide'))return;const m=f.querySelector('.hd .mono');if(!m)return;const d=m.querySelector('[data-delno]');if(d){d.textContent=String(++n).padStart(2,'0');return;}const t=m.textContent;if(/^\d\d ·/.test(t)){m.textContent=String(++n).padStart(2,'0')+t.slice(2);}});}
   const tbl=$('[data-tbl]');tbl.classList.toggle('toric',toric);
   const pw=[];
   if(col)pw.push(['0.00','0.00 (plano, colour only)']);
