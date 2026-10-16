@@ -191,3 +191,60 @@ footer .legal a,.legal a{padding:12px 8px;min-width:44px;justify-content:center}
 .rec-sec .sh p,.rec-sec .sh .muted{color:var(--ink-2,#4A5560)}
 @media (max-width:640px){.sp-tbl tbody th{font-size:17px!important;font-weight:600;padding:0 0 6px!important;border:0!important}.sp-tw{overflow:visible!important}}
 @media (max-width:640px){.sp-tbl,.sp-tbl tr,.sp-tbl td,.sp-tbl th{min-width:0!important;max-width:100%;white-space:normal!important;box-sizing:border-box}.sp-tw{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}}
+/* ===== Bright palette (Oct 16, Baymax spec) — swap colours via these tokens ===== */
+:root{--sky:#EAF4FF;--sky-2:#D6E9FF;--aqua:#E6FAF6;--lilac:#F1EDFF;--blush:#FFF1EC;--ink:#1D242B;--ink-2:#4A5560;--book:#961C31;--wa:#1E6B46;--line:#E3E8EF;
+--g-sky:linear-gradient(180deg,var(--sky),#FFF);--g-aqua:linear-gradient(180deg,var(--aqua),#FFF);
+--bone:#FFFFFF;--band:#FFFFFF;--white:#FFFFFF;--bone-2:#F4F7FB;
+--ftr-bg:linear-gradient(180deg,#FFF,var(--sky));--ftr-text:var(--ink-2);--ftr-head:var(--ink);--ftr-mute:var(--ink-2);--ftr-line:var(--line)}
+body{background:#FFFFFF!important}
+/* 1 · Hero scrims, no tint */
+.lhero:after,[dir=rtl] .lhero:after{background:linear-gradient(90deg,rgba(13,27,42,.55) 0%,rgba(13,27,42,.15) 45%,rgba(13,27,42,0) 70%),linear-gradient(180deg,rgba(13,27,42,.35),transparent 120px)!important}
+.ohero .hdr:not(.m-scrolled):not(:hover):not(:focus-within):not(.search-open){background:transparent!important}
+/* 2 · Section rhythm (home) */
+main > section{background-color:transparent}
+.t-sky{background:var(--g-sky)!important}.t-aqua{background:var(--g-aqua)!important}
+.ohero main:has(> .cz-onlysec) > .cz-award{background:#FFF!important}
+.ohero main:has(> .cz-onlysec) > .lq-sec{background:#FFF!important}
+.ohero main:has(> .cz-onlysec) > .feat{background:var(--g-aqua)!important}
+.ohero main:has(> .cz-onlysec) > section:has(#h-col),.ohero main:has(> .cz-onlysec) > section:nth-child(7){background:var(--g-sky)!important}
+.ohero main:has(> .cz-onlysec) > section.sec:has(+ .sec + .sec:last-child){background:var(--g-sky)!important}
+.ohero main:has(> .cz-onlysec) > section.sec:has(+ .sec:last-child){background:#FFF!important}
+.trust{background:#FFF!important;border-color:var(--line)!important}
+/* 3 · Only in the UAE */
+.cz-onlysec{background:radial-gradient(1200px 500px at 15% 0%,var(--sky-2) 0%,transparent 60%),radial-gradient(900px 500px at 90% 100%,var(--lilac) 0%,transparent 60%),#F7FBFF!important}
+/* 4 · Never run out band: light, ink text, graphite button */
+.saveband{background:linear-gradient(120deg,var(--aqua),var(--sky))!important;color:var(--ink)!important}
+.saveband *{color:inherit}
+.saveband h2,.saveband h3,.saveband b,.saveband strong{color:var(--ink)!important}
+.saveband p,.saveband li,.saveband .mono,.saveband small{color:var(--ink-2)!important}
+.saveband .btn,.saveband a.btn{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important}
+.saveband .btn *{color:#fff!important}
+.saveband .btn-line,.saveband .btn-white{background:transparent!important;color:var(--ink)!important;border-color:rgba(29,36,43,.3)!important}
+.saveband .btn-line *,.saveband .btn-white *{color:var(--ink)!important}
+/* PDP / specialty / shop panels */
+.cross.moss{background:var(--g-sky)!important;color:var(--ink)}
+.cross.moss h2,.cross.moss h3{color:var(--ink)!important}.cross.moss p{color:var(--ink-2)!important}
+.sp-band{background:var(--g-sky)!important}
+main:has(> .sp-glance-sec) > section.sec:has(#h-faq),main:has(> .sp-glance-sec) > section.sec:nth-last-child(4){background:var(--g-aqua)!important}
+.fbar{background:rgba(255,255,255,.92)!important;border-color:var(--line)!important}
+.sp-glance,.cz-ex,.buy,.pcard .pt-info{background:#FFF}
+/* 5 · Product image wash by category */
+.pcard[data-cat=lenses]{--wash:var(--sky)}.pcard[data-cat=coloured]{--wash:var(--lilac)}
+.pcard[data-cat=optical],.pcard[data-cat=sun]{--wash:#F4F6F9}.pcard[data-cat=care]{--wash:var(--aqua)}
+.pcard .pt-media,.lq .pt-media{background:linear-gradient(180deg,var(--wash,var(--sky)) 0%,#FFF 100%)!important}
+.pstage,.pdp2 .pstage .gal .g-main,.pdp2 .stage{--tint:var(--sky)}
+/* 6 · Light footer */
+.ftr{background:linear-gradient(180deg,#FFF,var(--sky))!important;color:var(--ink-2)!important;border-top:1px solid var(--line)}
+.ftr a{color:var(--ink-2)!important}.ftr a:hover{color:var(--ink)!important}
+.ftr .brand,.ftr .tag,.ftr .word,.ftr h2,.ftr h3,.ftr b{color:var(--ink)!important}
+.ftr .mark{filter:none!important}
+.ftr .mono{color:var(--ink-2)!important}
+.ftr .btn-line{background:transparent!important;color:var(--ink)!important;border-color:rgba(29,36,43,.3)!important}
+.ftr .fpill{color:var(--ink)!important;border-color:rgba(29,36,43,.3)!important;background:#fff!important}
+.ftr .ftile *{color:#fff!important}.ftr .ftile a{color:#fff!important}
+.ftr :focus-visible{outline-color:var(--ink)!important}
+/* Hero headline contrast >=4.5:1 on bright photos: deeper version of the same neutral scrim (no tint) */
+.lhero:after,[dir=rtl] .lhero:after{background:linear-gradient(90deg,rgba(13,27,42,.78) 0%,rgba(13,27,42,.55) 40%,rgba(13,27,42,.12) 70%,rgba(13,27,42,0) 85%),linear-gradient(180deg,rgba(13,27,42,.35),transparent 120px)!important}
+@media (max-width:760px){.lhero:after,[dir=rtl] .lhero:after{background:linear-gradient(0deg,rgba(13,27,42,.82) 0%,rgba(13,27,42,.6) 45%,rgba(13,27,42,.1) 80%),linear-gradient(180deg,rgba(13,27,42,.35),transparent 120px)!important}}
+.lhero h1{max-width:min(12ch,100%);text-wrap:balance}
+@media (min-width:761px){.lhero h1{max-width:min(11.5ch,calc(100% - 320px))}}
