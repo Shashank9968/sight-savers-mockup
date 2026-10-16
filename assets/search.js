@@ -63,7 +63,7 @@ const sp=$('#search'),sb=$('[data-search]'),qi=$('#q'),dd=$('#sdd'),st=$('[data-
 let opts=[],act=-1,tmr;
 const recs=()=>window.SSOrecs;
 function opt(href,main,sub,thumb,kind,cls){return {href,html:`${thumb?`<span class="sdd-thumb"><img src="${thumb}" alt=""></span>`:''}<span class="sdd-main"><span class="sdd-t"${AR?' lang="en"':''}>${main}</span>${sub?`<span class="sdd-s">${sub}</span>`:''}</span>${kind?`<span class="sdd-k">${kind}</span>`:''}`,cls:cls||''};}
-const prodOpt=d=>opt(d.url,esc(d.title),`${esc(d.brand)} · ${aed(d.price)}${d.ex?' · EXAMPLE':''}`,d.image,'','sdd-prod');
+const prodOpt=d=>opt(d.url,esc(d.title),`${esc(d.brand)} · ${aed(d.price)}`,d.image,'','sdd-prod');
 function groupsFor(q){
   const g=[];
   if(!q.trim()){
@@ -128,7 +128,7 @@ if(page){
     const top=med&&i===0&&d.type==='clinic';
     const thumb=d.image?`<a class="sres-th" href="${d.url}" tabindex="-1" aria-hidden="true"><img src="${d.image}" alt="" loading="lazy"></a>`:`<span class="sres-th sres-ic" aria-hidden="true"><svg class="ico l"><use href="#i-${{brand:'star',clinic:'eye',service:'cal',store:'pin',faq:'info'}[d.type]||'search'}"/></svg></span>`;
     let acts='';
-    if(d.type==='product')acts=`<b>${aed(d.price)}${d.ex?'<span class="ex">EXAMPLE</span>':''}</b>`+(d.brand==='Lens care'?`<button class="add" type="button" data-add="${d.id}">Add</button>`:`<a class="add" href="${d.url}">Choose power</a>`);
+    if(d.type==='product')acts=`<b>${aed(d.price)}${d.ex?'':''}</b>`+(d.brand==='Lens care'?`<button class="add" type="button" data-add="${d.id}">Add</button>`:`<a class="add" href="${d.url}">Choose power</a>`);
     else if(d.cta)acts=`<a class="btn ${top?'btn-book':'btn-ink'} btn-sm" href="${d.cta}">${d.type==='store'?'Book here':'Book an assessment'}</a>`;
     else if(d.type==='service'&&/book\.html/.test(d.url))acts=`<a class="btn btn-ink btn-sm" href="${d.url}">Book</a>`;
     return `<li class="sres-item${top?' sres-med':''}">${thumb}<div class="sres-b"><span class="mono">${label[d.type]}${d.brand&&d.type==='product'?' · '+esc(d.brand):''}${top?' · in store only':''}</span><h2><a href="${d.url}">${esc(d.title)}</a></h2><p class="small muted">${esc(d.body)}</p></div><div class="sres-acts">${acts}</div></li>`;}

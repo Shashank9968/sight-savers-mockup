@@ -77,3 +77,10 @@
   .btn{transform:none!important}
   .trust.m-mq .wrap{flex-wrap:wrap}
 }
+/* clean pass: sizing */
+.pcard.pt .pt-media img.pt-a[src*="products/"]{padding:8% 7% 22%!important;object-fit:contain!important;object-position:center!important;box-sizing:border-box!important;width:100%!important;height:100%!important;inset:0!important}
+.lq-bub{top:auto!important;bottom:6%!important;left:6%!important;width:20%!important}
+.lq-ft,.rc-meta,.rating-line,.bubble,.book p,main p{font-size:max(15px,1em)}
+@media (max-width:600px){.sp-hero .spec-t#brands{display:none}.sp-hero .ctas .btn-line{display:none}}
+@media (max-width:600px){.sp-hero figcaption,.sp-hero .cap{display:none}}
+.lq .pt-a[src*="products/"]{transform:none!important}@media (hover:hover){.lq:hover .pt-a[src*="products/"]{transform:scale(1.04)!important}}

@@ -48,11 +48,11 @@ if(modal){
 function waModal(msg){
   const url='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
   openModal(AR?
-    `<span class="mono">واتساب · نموذج تجريبي</span><h2 id="mh">المحادثة عبر واتساب</h2><p>في الموقع الحقيقي يفتح هذا واتساب مع الرقم <span dir="ltr">+971 56 710 3775</span> وهذه الرسالة:</p><p class="bubble">${esc(msg)}</p><div class="btns"><a class="btn btn-wa" href="${url}" target="_blank" rel="noopener">افتح واتساب</a><button class="btn btn-line" type="button" data-mclose>إغلاق</button></div>`:
-    `<span class="mono">WhatsApp · mockup</span><h2 id="mh">Chat on WhatsApp</h2><p>On the live site this opens WhatsApp with +971 56 710 3775 and this message:</p><p class="bubble">${esc(msg)}</p><div class="btns"><a class="btn btn-wa" href="${url}" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn btn-line" type="button" data-mclose>Close</button></div>`);
+    `<span class="mono">واتساب</span><h2 id="mh">المحادثة عبر واتساب</h2><p>سنفتح واتساب مع هذه الرسالة:</p><p class="bubble">${esc(msg)}</p><div class="btns"><a class="btn btn-wa" href="${url}" target="_blank" rel="noopener">افتح واتساب</a><button class="btn btn-line" type="button" data-mclose>إغلاق</button></div>`:
+    `<span class="mono">WhatsApp</span><h2 id="mh">Chat on WhatsApp</h2><p>We'll open WhatsApp with this message ready to send:</p><p class="bubble">${esc(msg)}</p><div class="btns"><a class="btn btn-wa" href="${url}" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn btn-line" type="button" data-mclose>Close</button></div>`);
 }
 function mockModal(text){
-  openModal(`<span class="mono">${AR?'نموذج تجريبي':'Mockup'}</span><h2 id="mh">${AR?'غير متاح في النموذج':'Not in this mockup'}</h2><p>${esc(text)}</p><div class="btns"><button class="btn btn-ink" type="button" data-mclose>${AR?'حسناً':'OK'}</button></div>`);
+  openModal(`<span class="mono">Sight Savers Optics</span><h2 id="mh">${AR?'قريباً':'Coming soon'}</h2><p>${esc(text)}</p><div class="btns"><button class="btn btn-ink" type="button" data-mclose>${AR?'حسناً':'OK'}</button></div>`);
 }
 document.addEventListener('click',e=>{
   const w=e.target.closest('[data-wa]');
@@ -118,7 +118,7 @@ if(pdp){
   set('sub',pk+(care?'.':'. Ships in sealed boxes.'));set('price',aed(p.price));set('type',p.type);set('wear',p.rep);set('pack',care?'1 bottle':p.pack+' lenses');
   const im=$('[data-f="img"]');im.src=p.img;im.alt=p.brand+' '+p.name+' box';
   document.title=p.brand+' '+p.name+' · Sight Savers Optics';
-  if(p.example){$('.price-row b').insertAdjacentHTML('afterend','<span class="ex">EXAMPLE</span>');}
+  if(p.example){$('.price-row b').insertAdjacentHTML('afterend','');}
   // related: drop the current product
   $$('[data-related] .lc').forEach(c=>{if(c.querySelector(`a[href="lens.html?p=${p.id}"]`))c.remove();});
   const form=$('#buyf');
@@ -196,7 +196,7 @@ function renderCart(){
     const q=lineQty(l);
     const eyes=l.opt?esc(l.opt):l.eyes?l.eyes.map(e=>`${e.eye==='B'?'Both eyes':e.eye==='R'?'Right (OD)':'Left (OS)'}: ${e.p}${e.cyl?' / '+e.cyl+' × '+e.ax:''} · ${e.q} box${e.q>1?'es':''}`).join('<br>'):`Qty ${l.q}`;
     const rx={upload:'Prescription: photo uploaded',wa:'Prescription: send on WhatsApp',store:'Prescription: on file at our store'}[l.rx]||'';
-    const del=l.del==='collect'?'Collect from '+(STN[l.store]||'store'):'Delivery · UAE [confirm]';
+    const del=l.del==='collect'?'Collect from '+(STN[l.store]||'store'):'Delivery · UAE';
     return `<div class="cl-line"><div class="pl"><img src="${l.img}" alt=""></div><div><span class="mono">${esc(l.brand)}</span><h3>${esc(l.name)}</h3><p class="meta">${eyes}${rx?'<br>'+rx:''}${l.plan?'<br>'+esc(l.plan):''}<br>${del}</p></div>
     <div class="right"><b>${aed(q*l.price)}</b><button class="lnk" type="button" data-rm="${i}" aria-label="Remove ${esc(l.name)}">${'Remove'}</button></div></div>`;}).join('');
   const sub=c.reduce((a,l)=>a+lineQty(l)*l.price,0);
@@ -215,9 +215,9 @@ if(bk){
   function upd(){
     const sv=S('svc'),st=S('store'),dy=S('day'),sl=S('slot');
     const svT=sv?strip(sv.closest('label').querySelector('h3').innerHTML):'';const stT=st?strip(st.closest('label').querySelector('h3').innerHTML):'';
-    $('[data-sum="svc"]').innerHTML=sv?esc(svT)+'<br><span class="small muted">'+esc((()=>{const m=sv.closest('label').querySelector('.meta').children;return m[0].firstChild.textContent+(m[0].querySelector('.ex')?' (EXAMPLE)':'')+' · '+m[1].textContent;})())+'</span>':'Not chosen yet';
+    $('[data-sum="svc"]').innerHTML=sv?esc(svT)+'<br><span class="small muted">'+esc((()=>{const m=sv.closest('label').querySelector('.meta').children;return m[0].firstChild.textContent+(m[0].querySelector('.ex')?'':'')+' · '+m[1].textContent;})())+'</span>':'Not chosen yet';
     $('[data-sum="store"]').textContent=st?stT:'Not chosen yet';
-    $('[data-sum="time"]').innerHTML=dy?esc(dayTxt(dy.value)+(sl?', '+sl.value:' (pick a time)'))+'<span class="ex">EXAMPLE</span>':'Not chosen yet';
+    $('[data-sum="time"]').innerHTML=dy?esc(dayTxt(dy.value)+(sl?', '+sl.value:' (pick a time)'))+'':'Not chosen yet';
     const msg='Hello Sight Savers Optics, I’d like to book '+(sv?'a '+svT.replace(/^./,c=>c.toLowerCase()):'an appointment')+(st?' at '+stT:'')+(dy?', preferably '+dayTxt(dy.value)+(sl?', '+sl.value:''):'')+'.';
     $('[data-wa-preview]').textContent=msg;$$('[data-wa-book]').forEach(a=>{a.dataset.wa=msg;a.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);});
     $$('.step',bk).forEach(s=>{const k=s.dataset.step;const e=$(`[data-err="${k}"]`,s);if(e&&e.textContent){
@@ -240,13 +240,13 @@ if(bk){
     if(em.value&&!/^\S+@\S+\.\S+$/.test(em.value)){mark(em,true);msgs.push('Check the email address, or leave it empty.');if(!first)first=em;}else mark(em,false);
     E('details').textContent=msgs.join(' ');
     if(first){$('[data-err="all"]').textContent='Please complete the highlighted steps.';first.focus();return;}
-    const ref='SSO-EXAMPLE-'+String(Math.floor(1000+Math.random()*9000));
+    const ref='SSO-'+String(Math.floor(1000+Math.random()*9000));
     const sv=strip(S('svc').closest('label').querySelector('h3').innerHTML),st=strip(S('store').closest('label').querySelector('h3').innerHTML);
     const when=dayTxt(S('day').value)+', '+S('slot').value;
     const cmsg='Hello Sight Savers Optics, I need to change or cancel my booking '+ref+' ('+sv+', '+st+', '+when+').';
-    const cf=$('[data-confirm]');
-    cf.innerHTML=`<span class="mono">Request sent · mockup · ref ${ref}</span><h2>Thank you, ${esc(nm.value.trim().split(' ')[0])}.</h2>
-      <p class="lead">We’ve received your request for <b>${esc(sv)}</b> at <b>${esc(st)}</b>, ${esc(when)}<span class="ex">EXAMPLE</span>. We confirm every booking on WhatsApp [response time to confirm].</p>
+    const cf=$('');
+    cf.innerHTML=`<span class="mono">Request sent · ref ${ref}</span><h2>Thank you, ${esc(nm.value.trim().split(' ')[0])}.</h2>
+      <p class="lead">We’ve received your request for <b>${esc(sv)}</b> at <b>${esc(st)}</b>, ${esc(when)}. We confirm every booking on WhatsApp.</p>
       <div class="ctas" style="margin-top:24px"><button class="btn btn-ink" type="button" data-mock="Add to calendar downloads an .ics file on the live site.">Add to calendar</button>
       <a class="btn btn-wa" href="https://wa.me/${WA}?text=${encodeURIComponent(cmsg)}" data-wa="${esc(cmsg)}">Need to change or cancel? WhatsApp us</a><a class="btn btn-line" href="index.html">Back to home</a></div>`;
     bk.classList.add('hide');cf.classList.remove('hide');$('.aside').classList.add('hide');$('.mbar')&&$('.mbar').classList.add('hide');cf.focus();window.scrollTo(0,cf.getBoundingClientRect().top+scrollY-100);
@@ -285,7 +285,7 @@ if(bf&&P&&!P.care){const p=P.p;const PACK={1:0,3:.05,6:.10},SUB=.05;
   const sync=()=>{const per=P.perEye();$$('input[name=packsz]',bf).forEach(r=>r.checked=+r.value===per);};
   const reprice=()=>{const b=P.boxes(),per=P.perEye();const base=b*p.price;const pd=disc(per);const sub=bf.plan&&bf.plan.value==='sub';
     const tot=base*(1-pd)*(sub?1-SUB:1);const once=base*(1-pd);
-    $$('[data-total]').forEach(x=>x.textContent=aed(tot));const sv=base-tot;const s=$('[data-saving]');if(s)s.textContent=sv>0.5?'You save '+aed(sv)+' (EXAMPLE)':'Save up to 10% on 6 boxes, plus 5% with Subscribe & save (EXAMPLE)';
+    $$('[data-total]').forEach(x=>x.textContent=aed(tot));const sv=base-tot;const s=$('[data-saving]');if(s)s.textContent=sv>0.5?'You save '+aed(sv)+'':'Save up to 10% on 6 boxes, plus 5% with Subscribe & save';
     const o=$('[data-once]');if(o)o.textContent=aed(once);const sp=$('[data-subp]');if(sp)sp.textContent=aed(once*(1-SUB));
     const btn=$('button[type=submit]',bf);if(btn&&!btn.dataset.l)btn.dataset.l=btn.innerHTML;};
   $$('input[name=packsz]',bf).forEach(r=>r.addEventListener('change',()=>{P.setPerEye(+r.value);}));
@@ -293,7 +293,7 @@ if(bf&&P&&!P.care){const p=P.p;const PACK={1:0,3:.05,6:.10},SUB=.05;
   document.addEventListener('sso:qty',()=>{sync();reprice();});sync();reprice();
   // remember discount on the cart line
   bf.addEventListener('submit',()=>setTimeout(()=>{const c=A.getCart();const l=c[c.length-1];if(!l||l.id!==p.id||!l.eyes||l.disc!==undefined)return;
-    const pd=disc(P.perEye()),sub=bf.plan.value==='sub';l.disc=1-(1-pd)*(sub?1-SUB:1);l.price=+(p.price*(1-l.disc)).toFixed(2);l.plan=sub?'Subscribe & save (EXAMPLE)':'One-time';A.setCart(c);}),true);
+    const pd=disc(P.perEye()),sub=bf.plan.value==='sub';l.disc=1-(1-pd)*(sub?1-SUB:1);l.price=+(p.price*(1-l.disc)).toFixed(2);l.plan=sub?'Subscribe & save':'One-time';A.setCart(c);}),true);
   // coloured shade picker
   const sn=$('[data-shade-n]');if(sn){$$('[data-shade]').forEach(a=>{const on=a.dataset.shade===p.id;if(on){a.setAttribute('aria-current','true');sn.textContent=a.title;}});}
 }

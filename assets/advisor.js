@@ -19,7 +19,7 @@ function score(a){
   else pool=pool.filter(l=>l.type==='Clear');
   return pool.map(l=>{let s=l.pop*0.5;const why=[];const pm=perMonth(l);
     if(a.look==='toric')why.push('A toric lens, made for astigmatism (you said your prescription has a CYL value)');
-    if(a.look==='colour')why.push('A coloured lens; available with or without power [confirm per shade]');
+    if(a.look==='colour')why.push('A coloured lens; available with or without power');
     if(a.look==='unsure')why.push('A clear spherical lens. If you do have astigmatism, an eye test will tell us');
     const daily=l.rep==='Daily';
     if(a.rep==='daily'){if(daily){s+=4;why.push('A fresh pair every day, as you prefer: no cleaning');}else s-=3;}
@@ -29,10 +29,10 @@ function score(a){
       why.push(comfy+(a.screen==='high'?', useful for long screen days':'')+' (maker’s description)');}
     if(a.dry==='often'&&daily){s+=1;why.push('Daily lenses avoid deposit build-up, which many dry-eye wearers find more comfortable');}
     const b=BAND[a.budget];
-    if(b){if(pm>=b[0]&&pm<b[1]){s+=3;why.push(`About AED ${Math.round(pm)} a month for both eyes, inside your budget (EXAMPLE estimate)`);}
-      else if(pm<b[0]){s+=1;why.push(`About AED ${Math.round(pm)} a month for both eyes, under your budget (EXAMPLE estimate)`);}
+    if(b){if(pm>=b[0]&&pm<b[1]){s+=3;why.push(`About AED ${Math.round(pm)} a month for both eyes, inside your budget`);}
+      else if(pm<b[0]){s+=1;why.push(`About AED ${Math.round(pm)} a month for both eyes, under your budget`);}
       else s-=Math.min(4,(pm-b[1])/50);}
-    else why.push(`About AED ${Math.round(pm)} a month for both eyes (EXAMPLE estimate)`);
+    else why.push(`About AED ${Math.round(pm)} a month for both eyes`);
     return {l,s,why:why.slice(0,4),pm};}).sort((x,y)=>y.s-x.s).slice(0,3);
 }
 function show(i,focus){steps.forEach((s,j)=>s.hidden=j!==i);cur=i;back.disabled=i===0;next.textContent=i===steps.length-1?'See my lenses':'Next';
@@ -43,7 +43,7 @@ form.addEventListener('submit',e=>{e.preventDefault();if(!$('input:checked',step
 back.addEventListener('click',()=>{if(cur>0)show(cur-1,true);});
 const card=(r)=>{const l=r.l;return `<article class="pcard qa-pick"><a class="ph" href="lens.html?p=${l.id}" tabindex="-1" aria-hidden="true"><img src="${l.img}" alt=""></a>
 <span class="mono">${A.esc(l.brand)} · ${l.rep.toLowerCase()}${l.type==='Toric'?' · toric':l.type==='Coloured'?' · coloured':''}</span><h3><a href="lens.html?p=${l.id}">${A.esc(l.name)}</a></h3>
-<p class="meta">${l.pack} lenses per box · AED ${l.price.toFixed(0)} per box</p><h4 class="mono qa-why">Why it fits</h4><ul class="qa-ul">${r.why.map(w=>`<li>${A.esc(w).replace('EXAMPLE','<span class="ex">EXAMPLE</span>')}</li>`).join('')}</ul>
+<p class="meta">${l.pack} lenses per box · AED ${l.price.toFixed(0)} per box</p><h4 class="mono qa-why">Why it fits</h4><ul class="qa-ul">${r.why.map(w=>`<li>${A.esc(w).replace('EXAMPLE','')}</li>`).join('')}</ul>
 <div class="row"><b>AED ${l.price.toFixed(0)}</b><span class="qa-btns"><a class="btn btn-line btn-sm" href="lens.html?p=${l.id}">View product</a><button class="btn btn-ink btn-sm" type="button" data-qa-add="${l.id}" aria-label="Add to cart: ${A.esc(l.brand+' '+l.name)}">Add to cart</button></span></div></article>`;};
 function results(){const a=ans();const picks=score(a);
   const exam=a.dry==='spec'||a.look==='unsure'||(a.look==='colour'&&false);
@@ -52,7 +52,7 @@ function results(){const a=ans();const picks=score(a);
   steps.forEach(s=>s.hidden=true);$('.qa-nav',form).hidden=true;$('.qa-prog',root).hidden=true;
   res.innerHTML=`<div class="sh qa-rh"><div><span class="mono">Your suggestions</span><h2 class="d2" tabindex="-1" id="qa-rh">${a.dry==='spec'?'Start with an eye test.':'Lenses that suit your day.'}</h2></div></div>${specMsg}
   ${a.dry==='spec'?'<p class="muted">If your optometrist confirms soft lenses are fine, these would match your other answers:</p>':''}<div class="qa-grid">${picks.map(card).join('')}</div>${unsure}
-  <p class="small muted qa-disc">Needs a valid prescription; your optometrist will confirm fit. You add your power on the product page or at checkout. Monthly costs are EXAMPLE estimates.</p>
+  <p class="small muted qa-disc">Needs a valid prescription; your optometrist will confirm fit. You add your power on the product page or at checkout.</p>
   <div class="ctas"><button class="btn btn-line" type="button" data-qa-restart>Start again</button><a class="btn btn-line" href="contact-lenses.html">See all contact lenses</a></div>`;
   res.hidden=false;$('#qa-rh').focus();}
 res.addEventListener('click',e=>{const ad=e.target.closest('[data-qa-add]');

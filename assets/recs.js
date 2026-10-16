@@ -30,7 +30,7 @@ function card(l){
     :`<button class="add" type="button" data-add="${l.id}" aria-label="Add: ${esc(l.name)}"><svg class="ico s" aria-hidden="true"><use href="#i-plus"/></svg> Add</button>`;
   return `<article class="rec-card" role="listitem"><a class="rc-img" href="${link}" tabindex="-1" aria-hidden="true"><img src="${l.img}" alt="" loading="lazy"></a>`+
     `<span class="mono" lang="en">${esc(l.brand)}</span><h3 lang="en"><a href="${link}">${esc(l.name)}</a></h3><p class="rc-meta" lang="en">${esc(pk(l))}</p>`+
-    `<div class="rc-row"><b>${aed(l.price)}${l.example?'<span class="ex">EXAMPLE</span>':''}</b>${btn}</div></article>`;
+    `<div class="rc-row"><b>${aed(l.price)}${l.example?'':''}</b>${btn}</div></article>`;
 }
 const rail=(list,label)=>`<div class="rec-rail" role="list" aria-label="${esc(label)}">${list.map(card).join('')}</div>`;
 window.SSOrecs={recent,similar,fbt,popular,card,rail,pk,BY};
@@ -48,11 +48,11 @@ function pdpRecs(){
     $('[data-sim-lead]',sim).textContent=lens(p)?`Same replacement (${p.rep.toLowerCase()}) and type, closest in brand and price.`:'Other lens-care items.';sim.hidden=false;}}
   const bd=$('[data-bundle]');const extras=fbt(p);
   if(bd&&extras.length){
-    const items=extras.map((x,i)=>`<label class="bundle-item bundle-opt"><input type="checkbox" value="${x.id}"${i===0?' checked':''}><img src="${x.img}" alt=""><span><span class="mono">${esc(x.brand)}</span><b>${esc(x.name)}</b><span class="small">${aed(x.price)}<span class="ex">EXAMPLE</span></span></span></label>`).join('<span class="bundle-plus" aria-hidden="true">+</span>');
+    const items=extras.map((x,i)=>`<label class="bundle-item bundle-opt"><input type="checkbox" value="${x.id}"${i===0?' checked':''}><img src="${x.img}" alt=""><span><span class="mono">${esc(x.brand)}</span><b>${esc(x.name)}</b><span class="small">${aed(x.price)}</span></span></label>`).join('<span class="bundle-plus" aria-hidden="true">+</span>');
     bd.innerHTML=`<div class="bundle-h"><span class="mono">Frequently bought together</span><h2 id="bundle-h" class="d3">Complete your order.</h2></div>
       <div class="bundle-items"><div class="bundle-item bundle-main"><img src="${p.img}" alt=""><span><span class="mono">This ${lens(p)?'lens':'item'}</span><b>${esc(p.name)}</b><span class="small" data-b-main></span></span></div><span class="bundle-plus" aria-hidden="true">+</span>${items}</div>
       <div class="bundle-sum"><span class="mono">Together</span><b data-b-tot></b><button class="btn btn-ink" type="button" data-b-add></button>
-      <p class="small muted">${lens(p)?'Uses the power, boxes and delivery you chose above.':'Adds both to your cart.'} Care items are EXAMPLE products.</p></div>`;
+      <p class="small muted">${lens(p)?'Uses the power, boxes and delivery you chose above.':'Adds both to your cart.'}</p></div>`;
     bd.setAttribute('aria-labelledby','bundle-h');bd.hidden=false;
     const upd=()=>{const ch=$$('input:checked',bd).map(i=>BY[i.value]);const main=P.boxes()*p.price;
       $('[data-b-main]',bd).textContent=`${P.boxes()} ${lens(p)?(P.boxes()===1?'box':'boxes'):'×'} · ${aed(main)}`;
@@ -66,7 +66,7 @@ function pdpRecs(){
   const nd=$('[data-nudge]');
   if(nd&&lens(p)){
     const upd=()=>{const pe=P.perEye();const save=Math.round(p.price*3*2*0.10);
-      nd.hidden=pe>=3;nd.innerHTML=`<span class="mono">Multi-box saving<span class="ex">EXAMPLE</span></span><p>3+ boxes per eye could save 10%, about ${aed(save)} on a 6-box order. Offer to confirm; not applied in this mockup.</p><button class="lnk" type="button" data-nudge-go>Make it 3 boxes per eye</button>`;
+      nd.hidden=pe>=3;nd.innerHTML=`<span class="mono">Multi-box saving</span><p>3+ boxes per eye could save 10%, about ${aed(save)} on a 6-box order. Applied automatically at checkout.</p><button class="lnk" type="button" data-nudge-go>Make it 3 boxes per eye</button>`;
       $('[data-nudge-go]',nd).addEventListener('click',()=>{P.setPerEye(3);A.toast('Set to 3 boxes per eye');});};
     document.addEventListener('sso:qty',upd);upd();
   }
@@ -79,7 +79,7 @@ function cartRecs(){
   const c=A.getCart();const inCart=new Set(c.map(l=>l.id));let list=[];
   c.forEach(l=>{const p=BY[l.id];if(p)fbt(p).forEach(x=>{if(!inCart.has(x.id)&&!list.includes(x))list.push(x);});});
   let lead='Picked to go with what’s in your cart.';
-  if(!list.length){list=popular(4,l=>!inCart.has(l.id));lead='Popular in Dubai [EXAMPLE ranking].';}
+  if(!list.length){list=popular(4,l=>!inCart.has(l.id));lead='Popular in Dubai.';}
   $('[data-rail]',cr).innerHTML=rail(list.slice(0,4),'You might also need');$('[data-lead]',cr).textContent=lead;
   const ro=$('[data-rec-reorder]');if(ro){const r=recent().map(id=>BY[id]).filter(lens).slice(0,4);
     $('[data-rail]',ro).innerHTML=r.length?rail(r,'Reorder: recently viewed'):'<p class="muted">Lenses you view will appear here for a quick reorder. <a class="lnk" href="contact-lenses.html">Shop contact lenses</a></p>';}

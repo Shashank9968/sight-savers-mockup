@@ -573,3 +573,4 @@ fieldset.blk{border:0;border-bottom:1px solid var(--line);min-width:0}
   .mbar .btn{font-size:13px;padding:0 8px}
 }
 .ar .mock-strip{font-family:var(--ar);letter-spacing:0}
+.ex{display:none!important}
