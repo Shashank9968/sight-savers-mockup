@@ -23,3 +23,6 @@ Full original list: `assets/img/CREDITS.md`.
 
 Kept as is (already ≥ rendered size): hero.jpg, hero-m.jpg, phoropter.jpg, case-leaf.jpg, emirati.jpg, man-crop.jpg, man-studio.jpg, frames-dark.jpg, green-eye.jpg, store.jpg, store1.jpg, framewall.jpg, tryon.jpg, exam.jpg, kid.jpg, redframes.jpg, lenskit.jpg, slitlamp2.jpg, myopia.jpg.
 Frame images (`frames/*.svg`) are vector drawings; they stay until studio photos arrive.
+
+## Specialist clinic story panel (Oct 15)
+`clinic-exam-wide.jpg` (2800×1208, desktop) and `clinic-exam-tall.jpg` (1000×1335, mobile): "Unrecognizable ophthalmologist checking vision of patient" by Ksenia Chernaya, Pexels (https://www.pexels.com/photo/5752287/), 3800×2537 source, Pexels License (free commercial use, no attribution required). Replaces the macro `scleral-eye.jpg` on the home clinic panel and keratoconus closing panel.
