@@ -1,0 +1,79 @@
+/* Sight Savers Optics · premium motion layer (loaded last). transform/opacity only; fully off for reduced motion. */
+:root{--m-ease:cubic-bezier(.2,.7,.2,1);--m-ease-out:cubic-bezier(.23,1,.32,1);--m-fast:200ms;--m-med:400ms;--m-slow:700ms}
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:280ms;animation-timing-function:var(--m-ease)}
+/* scroll progress hairline */
+.m-prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:var(--accent,#c8102e);transform-origin:0 50%;transform:scaleX(0);pointer-events:none;opacity:.85}
+[dir=rtl] .m-prog{transform-origin:100% 50%}
+/* reveal-on-scroll (only when JS ran: html.m-on) */
+.m-on .m-rv{opacity:0;transform:translate3d(0,22px,0);transition:opacity var(--m-slow) var(--m-ease),transform var(--m-slow) var(--m-ease);transition-delay:calc(var(--i,0)*70ms)}
+.m-on .m-rv.m-in{opacity:1;transform:none}
+/* sticky header shrink (shadow + bar compress via transform of inner only) */
+.hdr{transition:box-shadow var(--m-med) var(--m-ease),background-color var(--m-med) var(--m-ease)}
+.hdr.m-scrolled{box-shadow:0 8px 28px -18px rgba(20,28,36,.35)}
+/* hero ken-burns + parallax */
+.lhero img,.ph-head img,.sp-hero img{animation:m-kb 18s var(--m-ease) both;will-change:transform}
+@keyframes m-kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.lhero .lwrap>*{animation:m-up 900ms var(--m-ease) both}
+.lhero .lwrap>*:nth-child(2){animation-delay:120ms}.lhero .lwrap>*:nth-child(3){animation-delay:240ms}.lhero .lwrap>*:nth-child(4){animation-delay:360ms}.lhero .lwrap>*:nth-child(5){animation-delay:480ms}
+@keyframes m-up{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+/* cards */
+.pcard,.tile,.acc-card,.qa-card,.sp-rel,.mega-card{transition:transform var(--m-med) var(--m-ease),box-shadow var(--m-med) var(--m-ease)}
+@media (hover:hover){
+.pcard:hover,.acc-card:hover,.sp-rel:hover,.mega-card:hover{transform:translate3d(0,-4px,0);box-shadow:0 18px 40px -24px rgba(20,28,36,.45)}
+.tile:hover{transform:translate3d(0,-3px,0)}
+.pcard .ph img,.tile img,.acc-card img,.sp-rel img,.mega-card img{transition:transform var(--m-slow) var(--m-ease),opacity var(--m-med) var(--m-ease)}
+.pcard:hover .ph img,.tile:hover img,.acc-card:hover img,.sp-rel:hover img,.mega-card:hover img{transform:scale(1.05)}
+.pcard .ph{overflow:hidden}
+.pcard .ph .m-alt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.pcard:hover .ph .m-alt{opacity:1}
+/* pill buttons: shine + magnetic (transform set by JS via --mx/--my) */
+.btn{position:relative;overflow:hidden;transition:transform var(--m-fast) var(--m-ease),box-shadow var(--m-med) var(--m-ease),background-color var(--m-fast),color var(--m-fast);transform:translate3d(var(--mx,0),var(--my,0),0)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);transform:translateX(-120%);transition:transform 700ms var(--m-ease);pointer-events:none}
+.btn:hover::after{transform:translateX(120%)}
+.btn:hover{box-shadow:0 10px 24px -14px rgba(20,28,36,.55)}
+}
+.btn:active{transform:scale(.97)}
+/* animated underline links */
+.lnk,.ftr a,footer a,.mega-col a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size var(--m-med) var(--m-ease)}
+.lnk:hover,.lnk:focus-visible,footer a:hover,.mega-col a:hover{background-size:100% 1px}
+[dir=rtl] .lnk,[dir=rtl] footer a,[dir=rtl] .mega-col a{background-position:100% 100%}
+/* mega menu fade/slide */
+.nav-item.open .mega{animation:m-drop 320ms var(--m-ease) both}
+@keyframes m-drop{from{opacity:0;transform:translate3d(0,-8px,0)}to{opacity:1;transform:none}}
+.nav-item.open .mega .mega-col,.nav-item.open .mega .mega-card{animation:m-up 420ms var(--m-ease) both}
+.nav-item.open .mega .mega-col:nth-child(2){animation-delay:50ms}.nav-item.open .mega .mega-col:nth-child(3){animation-delay:100ms}
+/* tabs / filters crossfade, advisor step slide */
+[role=tabpanel]:not([hidden]),.m-fade{animation:m-fade 380ms var(--m-ease) both}
+@keyframes m-fade{from{opacity:0;transform:translate3d(0,6px,0)}to{opacity:1;transform:none}}
+.qa-step:not([hidden]){animation:m-step 420ms var(--m-ease) both}
+.qa-step.m-back:not([hidden]){animation-name:m-stepb}
+@keyframes m-step{from{opacity:0;transform:translate3d(28px,0,0)}to{opacity:1;transform:none}}
+@keyframes m-stepb{from{opacity:0;transform:translate3d(-28px,0,0)}to{opacity:1;transform:none}}
+[data-qa-res]:not([hidden]){animation:m-fade 500ms var(--m-ease) both}
+/* blur-up image loading */
+.m-on img.m-lz{filter:blur(12px);opacity:.6;transition:filter var(--m-slow) var(--m-ease),opacity var(--m-slow) var(--m-ease)}
+.m-on img.m-lz.m-ld{filter:none;opacity:1}
+/* cart badge bump + flying dot + toast */
+.count.m-bump{animation:m-bump 520ms var(--m-ease)}
+@keyframes m-bump{0%{transform:scale(1)}35%{transform:scale(1.45)}100%{transform:scale(1)}}
+.m-dot{position:fixed;z-index:220;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--accent,#c8102e);pointer-events:none;left:0;top:0;box-shadow:0 0 0 4px rgba(200,16,46,.15)}
+.toast{transition:opacity 320ms var(--m-ease),transform 420ms var(--m-ease)!important}
+/* marquee trust strip (narrow screens) */
+.trust.m-mq .wrap{flex-wrap:nowrap;overflow:hidden;justify-content:flex-start;max-width:100%}
+.trust.m-mq .m-track{display:flex;gap:32px;flex:none;animation:m-mq 28s linear infinite;padding-inline-end:32px}
+.trust.m-mq:hover .m-track,.trust.m-mq:focus-within .m-track{animation-play-state:paused}
+@keyframes m-mq{to{transform:translate3d(-100%,0,0)}}
+[dir=rtl] .trust.m-mq .m-track{animation-name:m-mqr}@keyframes m-mqr{to{transform:translate3d(100%,0,0)}}
+.trust.m-mq span{white-space:nowrap}
+/* number tween highlight */
+.m-tw{transition:color var(--m-med)}
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .m-on .m-rv{opacity:1!important;transform:none!important}
+  .m-on img.m-lz{filter:none!important;opacity:1!important}
+  .m-prog,.m-dot{display:none!important}
+  .btn{transform:none!important}
+  .trust.m-mq .wrap{flex-wrap:wrap}
+}
