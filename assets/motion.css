@@ -84,3 +84,4 @@
 @media (max-width:600px){.sp-hero .spec-t#brands{display:none}.sp-hero .ctas .btn-line{display:none}}
 @media (max-width:600px){.sp-hero figcaption,.sp-hero .cap{display:none}}
 .lq .pt-a[src*="products/"]{transform:none!important}@media (hover:hover){.lq:hover .pt-a[src*="products/"]{transform:scale(1.04)!important}}
+.btn{min-height:48px}
