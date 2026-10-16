@@ -26,3 +26,9 @@ Frame images (`frames/*.svg`) are vector drawings; they stay until studio photos
 
 ## Specialist clinic story panel (Oct 15)
 `clinic-exam-wide.jpg` (2800×1208, desktop) and `clinic-exam-tall.jpg` (1000×1335, mobile): "Unrecognizable ophthalmologist checking vision of patient" by Ksenia Chernaya, Pexels (https://www.pexels.com/photo/5752287/), 3800×2537 source, Pexels License (free commercial use, no attribution required). Replaces the macro `scleral-eye.jpg` on the home clinic panel and keratoconus closing panel.
+
+## Eye close-ups removed (Oct 15, late)
+All under the Pexels License (free commercial use, no attribution required).
+- `colour-portrait.jpg` (2400×3000, 4:5 face crop): "Studio Shot of a Young Blonde in a Glamour Makeup Look" by Vince Mariel Conlu, Pexels (https://www.pexels.com/photo/17094611/), 6000×4000 source. Replaces macro `colour-eye-blue.jpg` (coloured-lens tiles, lifestyle image and card bubbles).
+- `lens-flatlay.jpg` (2400×1600): "White and Blue Contact Lens Container on Blue Table" by Nataliya Vaitkevich, Pexels (https://www.pexels.com/photo/5843432/), 6099×4066 source. Replaces `green-eye.jpg` on the lens product gallery row.
+- `lens-essentials.jpg` (1600×2400): "Flatlay of Contact Lens Items on White Surface" by Nataliya Vaitkevich, Pexels (https://www.pexels.com/photo/5842836/), 3987×5981 source. Replaces macro `scleral-eye.jpg` in the keratoconus gallery.

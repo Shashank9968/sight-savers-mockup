@@ -51,5 +51,4 @@ $$('[data-lq]').forEach(function(car){var sec=car.closest('section'),tabs=$$('[r
     tr.dispatchEvent(new Event('scroll'));};
   tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});t.addEventListener('keydown',function(e){var n={ArrowRight:1,ArrowLeft:-1}[e.key],j=null;
     if(n)j=(i+n+tabs.length)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!==null){e.preventDefault();sel(tabs[j],true)}})});});
-$$('[data-mq]').forEach(function(m){var b=m.querySelector('[data-mq-p]');b.addEventListener('click',function(){var p=m.classList.toggle('paused');b.setAttribute('aria-pressed',p);b.setAttribute('aria-label',p?'Play scrolling slogans':'Pause scrolling slogans')})});
 })();
