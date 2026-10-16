@@ -320,3 +320,6 @@ if(ff){const F=(D.frames||[]),C=D.cols||{};const f=F.find(x=>x.id===Q.get('p'))|
     A.setCart(c);A.added();});
 }
 })();
+
+/* Label table cells so rows can stack as cards on small screens */
+document.querySelectorAll('table.sp-tbl').forEach(t=>{const h=[...t.querySelectorAll('thead th')].map(x=>x.textContent.trim());t.querySelectorAll('tbody tr').forEach(r=>[...r.children].forEach((c,i)=>{if(c.tagName==='TD'&&h[i])c.setAttribute('data-l',h[i]);}));});

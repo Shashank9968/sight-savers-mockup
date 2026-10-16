@@ -97,3 +97,97 @@
 .trust span{font-size:16px!important;font-weight:500;color:#1D242B!important}
 @media (max-width:760px){.trust span{font-size:15px!important}}
 .sec:has(+ .home-sc){padding-bottom:clamp(24px,3vw,40px)!important}
+/* ===== UX audit fixes (Oct 15, merged with Baymax gap review) ===== */
+/* 6 · Type scale: body 16/1.6, lead 18, labels >=13, badges 12/600 */
+body{font-size:16px}
+main p{line-height:1.6}
+.lead{font-size:18px!important;line-height:1.55}
+.small,small{font-size:max(13px,.875em)}
+.mono{font-size:13px}
+.crumb,.crumb a,.crumb span{font-size:13px;text-transform:none;letter-spacing:.01em}
+.crumb a{display:inline-flex;align-items:center;min-height:44px;padding-inline:8px;margin-inline:-8px}
+.lq-eb,.pt-info .lq-eb,.badges span{font:600 12px/1.2 var(--sans,inherit)!important;letter-spacing:.04em}
+.cz-sv em{font-size:12px!important}
+.cz-bt small{font-size:12px!important}
+.tx span,.tx small{font-size:13px!important}
+dl dt,.sp-glance dt{font-size:13px!important}
+.sp-glance dd{font-size:16px}
+table th,.sp-tbl th{font-size:13px!important}
+.packs .save,.pdp2 .packs .save{font-size:12.5px!important}
+.mono.req,.fbar-n{font-size:14px!important}
+/* 7 · Heading hierarchy */
+main h2.d2,main .d2:not(h1){font-size:clamp(32px,3.6vw,52px)!important;line-height:1.08!important}
+main h2.d3,main .d3:not(h1){font-size:clamp(28px,2.8vw,40px)!important;line-height:1.1!important}
+.pcard h3,.cz-ex-t h3,.sp-rel b,.rec-card h3{font-size:20px!important;line-height:1.3;font-weight:600}
+.pdp2 .buy h1{font-size:clamp(32px,3vw,44px)!important}
+.pdp-page main section:not(.pdp) h2,.pdp2 ~ * h2{font-size:clamp(28px,3vw,40px)!important}
+/* 3 · Remove repeated hand-bubble from product cards */
+.lq-bub{display:none!important}
+/* 4 · price line quiet */
+.lq-pr b{color:#1D242B}
+/* 8 · Whole card is the link */
+.pcard,.cz-ex,.sp-rel{position:relative}
+.pcard h3 a::after,.cz-ex-t h3 a::after{content:"";position:absolute;inset:0;z-index:1}
+.pcard .lq-z,.pcard .lq-qa,.pcard button,.pcard .lq-sw,.pcard [role=group],.cz-ex-l{position:relative;z-index:2}
+/* 9 · Product grid rhythm */
+.pt-info{display:flex;flex-direction:column;flex:1}
+.pcard{display:flex;flex-direction:column}
+.pcard .lq-qa{margin-top:auto}
+.pgrid,.plp-grid,.grid-p,[data-plp-grid]{row-gap:32px!important;column-gap:24px!important}
+@media (max-width:640px){
+ .pgrid,.plp-grid,.grid-p,[data-plp-grid]{row-gap:24px!important;column-gap:12px!important}
+ .pcard h3{font-size:15px!important;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .pcard .lq-qa{min-height:44px;font-size:14px}
+}
+@media (max-width:480px){.pcard .lq-ft{display:none}}
+/* 2 · Filter bar: never clip sort; scroll affordance on mobile */
+.fbar-in{flex-wrap:wrap!important;overflow:visible!important;gap:12px 16px!important}
+.fbar-cats{min-width:0;max-width:100%;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}
+.fbar-cats::-webkit-scrollbar{display:none}
+.fbar-cats .pills{flex-wrap:nowrap}
+.fbar-cats .pill{scroll-snap-align:start}
+@media (min-width:1101px){.fbar-cats{-webkit-mask-image:none;mask-image:none;padding-right:0}}
+@media (max-width:1100px){.fbar-in>.fbar-cats{flex:1 1 calc(100% - 200px)}.fbar-in>.fbar-more{flex:none}.fbar-in>.fbar-n{margin-left:0!important;margin-right:auto;align-self:center}.fbar-sort{flex:none}}
+/* 5 · Nav: no wrapped links; burger below 1180px */
+.nav a,.nav-top{white-space:nowrap}
+@media (max-width:1180px){.hdr .nav{display:none!important}.hdr .menu-btn{display:inline-flex!important}}
+/* Nav legibility over hero photo */
+.ohero .hdr:not(.m-scrolled):not(:hover):not(:focus-within):not(.search-open){background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0))!important}
+/* 1 · PDP option targets */
+.pdp2 .tog label{min-height:48px;display:inline-flex;align-items:center;padding:0 18px;cursor:pointer}
+.pdp2 .choice .ch{min-height:56px;padding:14px 16px;border-radius:16px;border:1px solid #D5D9DE;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.pdp2 .choice .ch:has(input:checked){border:2px solid #1D242B;padding:13px 15px}
+.pdp2 .choice .ch b{display:flex;align-items:center;gap:10px}
+.pdp2 input[type=radio]:not(.sr),.pdp2 input[type=checkbox]:not(.sr){inline-size:20px;block-size:20px;accent-color:#1D242B;flex:none}
+.pdp2 .subs label{min-height:64px;padding:16px;align-items:center}
+.pdp2 .packs label{min-height:56px!important}
+/* 10 · Tables stack on small screens */
+@media (max-width:640px){
+ .sp-tbl,.sp-tbl thead,.sp-tbl tbody,.sp-tbl tr,.sp-tbl td,.sp-tbl th{display:block;width:100%!important}
+ .sp-tbl thead{position:absolute;width:1px!important;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+ .sp-tbl tr{border:1px solid var(--hair,#E3E7EB);border-radius:16px;padding:14px 16px;margin-bottom:12px;background:#fff}
+ .sp-tbl td{padding:4px 0!important;border:0!important}
+ .sp-tbl td[data-l]::before{content:attr(data-l);display:block;font-size:13px;color:#5A6672;font-weight:600;margin-bottom:2px}
+ .tbl-wrap{overflow-x:auto}
+}
+/* 11 · Button system: 48px, 999px radius, 15px/500; WhatsApp as outline with green icon */
+.btn{min-height:48px;border-radius:999px;font-size:15px;font-weight:500}
+.btn-sm{min-height:48px;font-size:14px}
+.btn-lg,.buy .btn-block{min-height:56px}
+.btn-wa{background:transparent!important;color:#1D242B!important;border:1px solid rgba(29,36,43,.28)!important}
+.btn-wa .ico,.btn-wa svg{color:#1E6B46}
+.on-dark .btn-wa{color:#fff!important;border-color:rgba(255,255,255,.5)!important}
+.on-dark .btn-wa .ico,.on-dark .btn-wa svg{color:#7FD3A6}
+/* Specialty: room below glance strip, legible CTA over busy photo */
+.sp-glance-sec{margin-bottom:clamp(24px,4vw,56px)}
+.sp-story{position:relative;overflow:hidden}
+.sp-story::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,22,28,.88),rgba(16,22,28,.66));z-index:1;pointer-events:none}
+.sp-story .in{position:relative;z-index:2}
+/* Specialty list rows */
+.cz-svs a{min-height:56px;padding-block:16px}
+/* Footer link targets */
+footer a{min-height:44px;display:inline-flex;align-items:center}
+footer .legal a,.legal a{padding:12px 8px;min-width:44px;justify-content:center}
+.rec-sec .sh p,.rec-sec .sh .muted{color:var(--ink-2,#4A5560)}
+@media (max-width:640px){.sp-tbl tbody th{font-size:17px!important;font-weight:600;padding:0 0 6px!important;border:0!important}.sp-tw{overflow:visible!important}}
+@media (max-width:640px){.sp-tbl,.sp-tbl tr,.sp-tbl td,.sp-tbl th{min-width:0!important;max-width:100%;white-space:normal!important;box-sizing:border-box}.sp-tw{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}}
