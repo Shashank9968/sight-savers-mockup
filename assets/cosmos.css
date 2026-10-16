@@ -394,3 +394,49 @@ html body .cz-stats span,html body .trow b,html body .trow span,html body .home-
 @media (prefers-reduced-motion:reduce){.hq-chip{transition:none}}
 @media (max-width:760px){.hq h1{font-size:30px!important}.hq-chip{font-size:14px;gap:6px;padding:0 8px;white-space:nowrap}.hq-chip .ico{width:20px;height:20px}
  .hq-row,.hq-row.hq-3{grid-auto-columns:76%}.hq-pb .pr{flex-direction:column;align-items:stretch}.hq-pb .pr b{white-space:nowrap}.hq-sm{width:100%;justify-content:center;white-space:nowrap}}
+/* ===== Image-led quiz hero (hero-image-quiz.html only; scoped to body.hiq) ===== */
+.hiq .xq1{position:relative;height:clamp(360px,calc(56vh - 80px),480px);color:#fff;display:flex;align-items:flex-end;overflow:hidden}
+.hiq .xq1 img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 28%}
+.hiq .xq1::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,27,42,.78),rgba(13,27,42,.45) 45%,rgba(13,27,42,0) 75%),linear-gradient(0deg,rgba(13,27,42,.5),transparent 50%)}
+.hiq .xq1 .in{position:relative;z-index:2;width:100%;max-width:1360px;margin:0 auto;padding:0 40px 30px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end}
+.hiq .xq1 h1{font-size:clamp(40px,4.4vw,64px)!important;line-height:1.04!important;color:#fff;max-width:13ch!important;margin:0 0 16px}
+.hiq .xq1 h1 .focus-word{color:#fff}
+.hiq .xq-s{display:flex;align-items:center;gap:10px;background:#fff;border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 10px 30px rgba(13,27,42,.18);max-width:560px}
+.hiq .xq-s input{flex:1;border:0;outline:0;font:500 16px var(--body);background:transparent;min-width:0;color:var(--ink);min-height:44px}
+.hiq .xq-s:focus-within{box-shadow:0 0 0 3px var(--ink),0 10px 30px rgba(13,27,42,.18)}
+.hiq .xq-s .ico{width:20px;height:20px;color:var(--ink-2)}
+.hiq .xq-aw{display:flex;gap:8px;align-items:center;font-size:14px;margin:14px 0 0;color:#fff}.hiq .xq-aw .ico{width:18px;height:18px}
+.hiq .xq1 .hq-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;max-width:520px;margin:0}
+.hiq .xq1 .hq-chip{background:rgba(255,255,255,.16);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.55);color:#fff}
+.hiq .xq1 .hq-chip[aria-pressed=true]{background:#fff;color:var(--ink);border-color:#fff}
+.hiq .xq1 .hq-chip:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.hiq .xq1-m{display:none}
+.hiq .hq{padding-top:18px;background:#fff}
+.hiq .hq-cbox{align-items:start}.hiq .hq-cbox img{height:280px;aspect-ratio:auto}
+.hiq .hq-cbox h3{margin:6px 0!important}.hiq .hq-sv{margin:6px 0 12px}
+@media (max-width:760px){
+ .hiq .xq1{height:clamp(190px,26vh,230px)}
+ .hiq .xq1 .in{grid-template-columns:1fr;padding:0 16px 14px;gap:0}
+ .hiq .xq1 h1{font-size:30px!important;margin:0}
+ .hiq .xq1 .xq-s,.hiq .xq1 .xq-aw,.hiq .dchips{display:none}
+ .hiq .xq1-m{display:block;padding:10px 12px 0;background:#fff}
+ .hiq .xq1-m .xq-s{box-shadow:0 0 0 1px var(--line);padding:2px 4px 2px 14px;max-width:none}
+ .hiq .xq1-m .xq-s .btn{display:none}
+ .hiq .xq1-m .hq-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 0}
+ .hiq .hq{padding-top:10px}
+ .hiq .hq-rail{padding:12px}.hiq .hq-rh{margin-bottom:8px}
+ .hiq .hq-pi{aspect-ratio:2;padding:8px}
+ .hiq .hq-cbox img{height:200px}
+}
+.hiq .hq img,.hiq .hq .m-lz,.hiq .hq .m-rv,.hiq .xq1 img{opacity:1!important;transform:none!important;filter:none!important}
+.hiq .hq-cbox img{height:190px!important}
+.hiq .hq-cbox h3{font-size:30px!important}.hiq .hq-sv li,.hiq .hq-sv a{min-height:48px}
+.hiq .hq-rail{padding-top:16px;padding-bottom:16px}
+@media (max-width:760px){
+ .hiq .xq1{height:170px}.hiq .xq1 h1{font-size:28px!important}
+ .hiq .xq1-m .hq-chip{padding:0 10px;font-size:14px;white-space:nowrap}
+ .hiq .hq-pc{height:auto!important;min-height:0!important}.hiq .hq-rows,.hiq .hq-row{align-items:flex-start}
+ .hiq .hq-pc>*{flex-grow:0!important}.hiq .hq-pc .pr,.hiq .hq-pc .btn{margin-top:8px!important}
+ .hiq .hq-cbox img{height:160px!important}
+}
+@media (min-width:761px){.hiq .hq-sv{display:flex;flex-wrap:wrap;gap:4px 22px}.hiq .xq1{height:clamp(330px,calc(56vh - 110px),460px)}}
