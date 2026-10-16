@@ -82,3 +82,18 @@
 @media (max-width:980px){.pdp.pdp2{grid-template-columns:1fr;gap:28px}.pdp2 .pstage,.pdp2 .buy,.fpdp.pdp2 .buy{position:static}}
 @media (max-width:640px){.pdp2 .buy{padding:24px 20px}}
 .pdp2 .packs{border-radius:20px}.pdp2 .packs label{border-radius:16px!important}
+/* Big category circles + trust strip (Oct 15) */
+.home-sc{padding-top:0!important}
+.home-sc .shortcuts{display:flex!important;justify-content:space-between;gap:24px;padding:24px 0 40px!important;margin:0!important}
+.home-sc .shortcuts a{display:flex!important;flex-direction:column;align-items:center;gap:6px;min-height:48px;min-width:0;flex:1 1 0;font-size:17px!important;font-weight:600!important;color:#1D242B;text-align:center;text-decoration:none;line-height:1.25}
+.home-sc .shortcuts img{width:120px!important;height:120px!important;border-radius:50%!important;object-fit:cover;margin-bottom:10px;box-shadow:0 0 0 1px rgba(29,36,43,.08),0 10px 28px rgba(29,36,43,.10);transition:transform .4s var(--ease,ease),box-shadow .4s}
+.home-sc .shortcuts a:hover img{transform:translateY(-4px) scale(1.03);box-shadow:0 0 0 1px rgba(29,36,43,.1),0 16px 36px rgba(29,36,43,.16)}
+.home-sc .shortcuts small{display:block;font-size:14px!important;font-weight:400;color:#5A6672;letter-spacing:0;text-transform:none;font-family:inherit}
+@media (max-width:1180px){.home-sc .shortcuts{gap:12px}.home-sc .shortcuts img{width:100px!important;height:100px!important}.home-sc .shortcuts a{font-size:16px!important}}
+@media (max-width:760px){.home-sc .shortcuts{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding:16px 4px 28px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}.home-sc .shortcuts::-webkit-scrollbar{display:none}
+.home-sc .shortcuts a{flex:0 0 104px;scroll-snap-align:start;font-size:15px!important}.home-sc .shortcuts img{width:84px!important;height:84px!important}.home-sc .shortcuts small{font-size:13px!important}}
+@media (prefers-reduced-motion:reduce){.home-sc .shortcuts img,.home-sc .shortcuts a:hover img{transition:none;transform:none}}
+.trust .wrap{padding-block:20px!important}
+.trust span{font-size:16px!important;font-weight:500;color:#1D242B!important}
+@media (max-width:760px){.trust span{font-size:15px!important}}
+.sec:has(+ .home-sc){padding-bottom:clamp(24px,3vw,40px)!important}
