@@ -43,3 +43,6 @@ $$('.acc-btn').forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute
   $$('.acc-btn').forEach(x=>{if(x!==b&&x.getAttribute('aria-expanded')==='true'){x.setAttribute('aria-expanded','false');document.getElementById(x.getAttribute('aria-controls')).hidden=true;}});
   b.setAttribute('aria-expanded',!o);document.getElementById(b.getAttribute('aria-controls')).hidden=o;}));
 })();
+
+/* LARQ-grade transparent header: solid once scrolled (works with reduced motion too) */
+(function(){var h=document.querySelector('.hdr');if(!h||!document.body.classList.contains('ohero'))return;var t=0;function u(){t=0;h.classList.toggle('m-scrolled',(window.scrollY||0)>8)}addEventListener('scroll',function(){if(!t)t=requestAnimationFrame(u)},{passive:true});u()})();
