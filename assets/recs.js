@@ -28,7 +28,7 @@ function card(l){
   const link='lens.html?p='+l.id;
   const btn=lens(l)?`<a class="add" href="${link}" aria-label="Choose power: ${esc(l.brand+' '+l.name)}">Choose power <svg class="ico s flip" aria-hidden="true"><use href="#i-arrow"/></svg></a>`
     :`<button class="add" type="button" data-add="${l.id}" aria-label="Add: ${esc(l.name)}"><svg class="ico s" aria-hidden="true"><use href="#i-plus"/></svg> Add</button>`;
-  return `<article class="rec-card" role="listitem"><a class="rc-img" href="${link}" tabindex="-1" aria-hidden="true"><img src="${l.img}" alt="" loading="lazy"></a>`+
+  return `<article class="rec-card" role="listitem" data-cat="${lens(l)?(/colou?r/i.test(l.type||l.t||'')?'coloured':'lenses'):'care'}"><a class="rc-img" href="${link}" tabindex="-1" aria-hidden="true"><img src="${l.img}" alt="" loading="lazy"></a>`+
     `<span class="mono" lang="en">${esc(l.brand)}</span><h3 lang="en"><a href="${link}">${esc(l.name)}</a></h3><p class="rc-meta" lang="en">${esc(pk(l))}</p>`+
     `<div class="rc-row"><b>${aed(l.price)}${l.example?'':''}</b>${btn}</div></article>`;
 }
