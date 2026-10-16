@@ -35,3 +35,21 @@ if(f&&grid){var sel=$('[data-sort]',f);var orig=$$(':scope>*',grid);
   d.addEventListener('click',function(e){var o=$('.fbar-more[open]');if(o&&!o.contains(e.target))o.open=false});
   d.addEventListener('keydown',function(e){var o=$('.fbar-more[open]');if(e.key==='Escape'&&o){o.open=false;$('summary',o).focus()}});}
 })();
+/* LARQ-anatomy cards: swatches, sizes, frame quick-add, favourites tabs, marquee pause. */
+(function(){var d=document,$$=function(s,r){return Array.prototype.slice.call((r||d).querySelectorAll(s))};
+d.addEventListener('click',function(e){var b=e.target.closest('.lq-s[data-col],.lq-z');if(!b)return;var g=b.parentNode;
+  $$('button',g).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+  var card=b.closest('.lq');if(b.dataset.col&&card){var im=card.querySelector('.pt-a');if(im)im.src='assets/img/frames/'+card.dataset.id+'-'+b.dataset.col+'.svg'}});
+d.addEventListener('click',function(e){var b=e.target.closest('[data-qf]');if(!b||!window.SSOapp)return;var A=window.SSOapp,D=window.SSO||{};
+  var f=(D.frames||[]).find(function(x){return x.id===b.dataset.qf});if(!f)return;var card=b.closest('.lq');
+  var col=(card.querySelector('.lq-s[aria-pressed=true]')||{}).dataset;col=col&&col.col||f.cols[0];var sz=(card.querySelector('.lq-z[aria-pressed=true]')||{}).dataset;sz=sz&&sz.sz||f.sizes[0][0];
+  var C=D.cols||{};var c=A.getCart();c.push({id:f.id,name:f.name,brand:f.brand,img:'assets/img/frames/'+f.id+'-'+col+'.svg',price:f.price,q:1,del:'deliver',frame:true,opt:(C[col]?C[col][0]:col)+' · size '+sz+' · lenses added in store'});
+  A.setCart(c);A.added();b.classList.add('ok');b.textContent='Added';setTimeout(function(){b.classList.remove('ok');b.textContent='Add to cart'},1600)});
+$$('[data-lq]').forEach(function(car){var sec=car.closest('section'),tabs=$$('[role=tab]',sec),tr=car.querySelector('.car-track'),items=$$('.car-i',car);
+  var sel=function(t,focus){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1});if(focus)t.focus();
+    var k=t.dataset.tab;items.forEach(function(i){i.hidden=k==='all'?!i.hasAttribute('data-feat'):i.dataset.fk!==k});tr.setAttribute('aria-labelledby',t.id);tr.scrollLeft=0;
+    tr.dispatchEvent(new Event('scroll'));};
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});t.addEventListener('keydown',function(e){var n={ArrowRight:1,ArrowLeft:-1}[e.key],j=null;
+    if(n)j=(i+n+tabs.length)%tabs.length;if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!==null){e.preventDefault();sel(tabs[j],true)}})});});
+$$('[data-mq]').forEach(function(m){var b=m.querySelector('[data-mq-p]');b.addEventListener('click',function(){var p=m.classList.toggle('paused');b.setAttribute('aria-pressed',p);b.setAttribute('aria-label',p?'Play scrolling slogans':'Pause scrolling slogans')})});
+})();
