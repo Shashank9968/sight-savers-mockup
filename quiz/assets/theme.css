@@ -1,0 +1,51 @@
+/* Sight Savers Optics · clickable mockup · THEME: P2 "Modern clinic luxe" · palette v2 "Mist & graphite" + component refresh v1 (3 Oct 2026)
+   Colours are unchanged from site-report/ux/premium/p2-palette/theme.css. Only SHAPE (radii), SHADOW and a few derived
+   tints/hairlines/motion variables are new or changed. Drop-in replacement for assets/theme.css; pair with assets/components.css.
+   Changed:  --r (0 -> 12px, button radius), --r-bubble (10 -> 14px), --sh-pop (softer, layered).
+   New:      --r-sm --r-md --r-card --r-lg --r-pill · --sh-1 --sh-2 --sh-3 --sh-book --sh-book-2 · --hair --hair-2
+             --wa-tint --wa-tint-2 --wa-line · --band · --ease --dur · --btn-h --btn-h-sm */
+:root{
+  /* surfaces + ink (unchanged) */
+  --bone:radial-gradient(1400px 820px at 86% -6%,rgba(220,229,237,.6) 0%,rgba(220,229,237,0) 62%),linear-gradient(180deg,#F7F8F9 0%,#F2F3F5 40%,#ECEEF1 100%) #F2F3F5; --bone-2:#E8EBEE; --white:#FCFCFD; --pure:#FFFFFF; --stone:#D5D9DE;
+  --ink:#1D242B; --ink-2:#545D67; --ink-3:#646D77; --line:#DADEE3; --line-2:#B4BBC3;
+  --hdr-bg:rgba(247,248,249,.94);
+  /* accents (unchanged) */
+  --moss:#24323E; --moss-2:#E7ECF0; --moss-line:#C8D2DB;
+  --book:#961C31; --book-hover:#7A1627; --wa:#1E6B46; --wa-hover:#185A3A;
+  --err:#961C31; --ok:#1E6B46; --focus:#1D242B;
+  /* EXAMPLE tag + mockup strip (unchanged) */
+  --ex-text:#2E4B66; --ex-line:#A9BED1; --ex-bg:#E8EFF5;
+  --strip-bg:#E9EDF1; --strip-text:#27323D; --strip-line:#C6CFD8;
+  /* on dark / on photo (unchanged) */
+  --on-dark:#FFFFFF; --on-dark-2:rgba(255,255,255,.85); --on-dark-3:rgba(255,255,255,.75); --on-dark-line:rgba(255,255,255,.7);
+  --hero-shade:linear-gradient(90deg,rgba(14,20,27,.68) 0%,rgba(14,20,27,.34) 42%,rgba(14,20,27,0) 64%),linear-gradient(0deg,rgba(58,78,98,.24),rgba(58,78,98,.24));
+  --hero-shade-m:linear-gradient(0deg,rgba(14,20,27,.84) 0%,rgba(14,20,27,.42) 48%,rgba(14,20,27,.06) 75%),linear-gradient(0deg,rgba(58,78,98,.24),rgba(58,78,98,.24));
+  --photo-fallback:#20262C; --scrim:rgba(20,26,32,.55);
+  /* footer (unchanged; the footer is now the page's only dark band) */
+  --ftr-bg:#1B2229; --ftr-text:#C5CBD1; --ftr-head:#FFFFFF; --ftr-mute:#96A0AA; --ftr-line:#2E3740;
+  /* derived tints + hairlines (NEW · all derived from the palette above, no new hues) */
+  --hair:rgba(29,36,43,.09); --hair-2:rgba(29,36,43,.16);          /* ink at 9% / 16%: card + control hairlines */
+  --wa-tint:#E8F1EC; --wa-tint-2:#DAE9E0; --wa-line:#BED7C9;      /* WhatsApp at ~10% / 16% / 30% on white; --wa text on them = 5.7:1 / 5.2:1 */
+  --band:#FAFBFC;                                                  /* soft section shift (between --white and --bone) */
+  /* type (unchanged) */
+  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ar:"IBM Plex Sans Arabic","Inter Tight",Tahoma,sans-serif;
+  --fs-min:12px; --fs-body:15px; --fs-body-ar:16.5px; --fs-lead:17px; --fs-lead-ar:19px;
+  --fs-d1:112px; --fs-d1-m:50px; --fs-d2:64px; --fs-d2-m:38px; --fs-d3:34px;
+  /* shape (CHANGED + NEW) */
+  --r:12px; --r-bubble:14px; --r-round:50%;
+  --r-sm:8px; --r-md:12px; --r-card:18px; --r-lg:24px; --r-pill:999px;
+  --btn-h:48px; --btn-h-sm:44px;
+  /* elevation (CHANGED + NEW): hairline-plus-whisper shadows instead of slabs */
+  --sh-1:0 1px 2px rgba(22,30,38,.04),0 1px 1px rgba(22,30,38,.02);
+  --sh-2:0 1px 2px rgba(22,30,38,.04),0 10px 28px -10px rgba(22,30,38,.12);
+  --sh-3:0 2px 6px rgba(22,30,38,.05),0 22px 44px -16px rgba(22,30,38,.20);
+  --sh-book:0 1px 2px rgba(122,22,39,.22),0 6px 16px -6px rgba(150,28,49,.42);
+  --sh-book-2:0 2px 4px rgba(122,22,39,.24),0 12px 24px -8px rgba(150,28,49,.48);
+  --sh-pop:0 2px 8px rgba(22,30,38,.06),0 30px 70px -20px rgba(22,30,38,.28); --sh-none:none;
+  /* motion (NEW) */
+  --ease:cubic-bezier(.2,.7,.2,1); --dur:.22s;
+  /* layout (unchanged) */
+  --wrap:1312px; --gut:64px; --gut-t:40px; --gut-m:18px; --tap:44px; --hdr-h:72px; --sec:120px; --sec-m:56px;
+}
