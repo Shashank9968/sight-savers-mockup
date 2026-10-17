@@ -540,3 +540,48 @@ body.hiq .xq-iris{top:33%;transform:translate(-50%,-50%);width:min(68vh,660px);h
 .mx-faq summary:hover{color:var(--ink-2)}
 .mx-faq p{margin:0 0 16px;padding:0 4px;color:var(--ink-2);line-height:1.6}
 @media (prefers-reduced-motion:reduce){.mx-faq summary{transition:none}}
+
+/* ---- mxd: myopia-control.html illustrated eye-growth diagram (scoped, new, Oct 17) ----
+   Figure breaks out of the 820px .mx-exp text column, up to the .wrap's own content
+   width (min(1200px, 100vw - 2*gut)) so it can never exceed the viewport. */
+.mxd{width:min(1200px,calc(100vw - 2*var(--gut,24px)));max-width:100%;box-sizing:border-box;margin:36px 0 40px;padding:clamp(16px,2.6vw,28px);border-radius:24px;background:linear-gradient(160deg,var(--sky,#EAF4FF),#fff 70%);border:1px solid var(--line)}
+.mxd-eyes{display:grid;grid-template-columns:1fr;gap:24px}
+.mxd-eye{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 14px 18px;display:flex;flex-direction:column}
+.mxd-art{position:relative;width:100%;aspect-ratio:534/300}
+.mxd-svg{width:100%;height:100%;display:block;overflow:visible}
+.mxd-lbl{position:absolute;transform:translate(-50%,-100%);font:600 14px/1.2 var(--body,sans-serif);color:var(--ink);background:rgba(255,255,255,.92);padding:2px 7px;border-radius:6px;white-space:nowrap;box-shadow:0 1px 2px rgba(29,36,43,.08);z-index:1}
+.mxd-eye-h{margin:14px 0 4px;font-size:17px;font-weight:600;color:var(--ink)}
+.mxd-focus{margin:0 0 14px;font-size:14px;color:var(--ink-2)}
+.mxd-focus b{color:var(--ink);font-weight:600}
+.mxd-prev{border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
+.mxd-scene{width:100%;max-width:260px;display:block;margin:0 auto;border-radius:10px}
+.mxd-prevcap{text-align:center;margin:8px 0 0;font-size:14px;color:var(--ink-2)}
+.mxd-prevcap b{color:var(--ink);font-weight:600}
+.mxd-ctrl{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 18px 22px}
+.mxd-ctrl-h{margin:0 0 16px;font-size:17px;font-weight:600;color:var(--ink)}
+.mxd-chart-wrap{display:flex;align-items:stretch;gap:10px;max-width:500px;margin:0 auto}
+.mxd-yaxis{flex:none;writing-mode:vertical-rl;transform:rotate(180deg);font-size:14px;color:var(--ink-2);align-self:center;white-space:nowrap}
+.mxd-chart{flex:1;min-width:0}
+.mxd-chartsvg{width:100%;display:block}
+.mxd-xaxis{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--ink-2);padding:0 2px;margin-top:4px}
+.mxd-xaxis-title{display:block;text-align:center;font-size:14px;color:var(--ink-2);margin-top:6px}
+.mxd-legend{list-style:none;display:flex;gap:18px;flex-wrap:wrap;margin:16px 0 0;padding:0;font-size:14px;color:var(--ink)}
+.mxd-legend li{display:flex;align-items:center;gap:8px}
+.mxd-legend li::before{content:"";width:16px;height:3px;border-radius:2px;display:inline-block;flex:none}
+.mxd-leg-a::before{background:var(--ink-2)}
+.mxd-leg-b::before{background:#2F6FED}
+.mxd-ctrl-cap{margin:12px 0 0;font-size:14px;color:var(--ink-2)}
+.mxd-cap{margin-top:22px;font-size:14px;color:var(--ink-2);text-align:center;line-height:1.5}
+.mxd-ray{fill:none;stroke:#2F6FED;stroke-width:2.4;stroke-linecap:round}
+.mxd-js .mxd-ray{stroke-dasharray:1200;stroke-dashoffset:1200}
+.mxd-js.mxd-animate .mxd-ray{stroke-dashoffset:0;transition:stroke-dashoffset 1.2s ease-out}
+@media (min-width:760px){
+  .mxd-eyes{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media (max-width:389px){.mxd-legend{gap:12px}.mxd-xaxis{gap:4px}}
+@media (prefers-reduced-motion:reduce){
+  .mxd-js .mxd-ray,.mxd-js.mxd-animate .mxd-ray{stroke-dashoffset:0!important;transition:none!important}
+}
+@media (max-width:480px){.mxd .mxd-lbl{padding:2px 4px}}
+.mxd .mxd-lbl[style*="top:6.67%"]{transform:translate(-50%,calc(-100% - 12px))}@media (max-width:480px){.mxd .mxd-lbl[style*="top:6.67%"]{transform:translate(-50%,calc(-100% - 14px))}}
+.mxd .mxd-art{margin-top:22px}
