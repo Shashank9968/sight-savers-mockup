@@ -192,7 +192,7 @@ footer .legal a,.legal a{padding:12px 8px;min-width:44px;justify-content:center}
 @media (max-width:640px){.sp-tbl tbody th{font-size:17px!important;font-weight:600;padding:0 0 6px!important;border:0!important}.sp-tw{overflow:visible!important}}
 @media (max-width:640px){.sp-tbl,.sp-tbl tr,.sp-tbl td,.sp-tbl th{min-width:0!important;max-width:100%;white-space:normal!important;box-sizing:border-box}.sp-tw{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}}
 /* ===== Bright palette (Oct 16, Baymax spec) — swap colours via these tokens ===== */
-:root{--sky:#EAF4FF;--sky-2:#D6E9FF;--aqua:#E6FAF6;--lilac:#F1EDFF;--blush:#FFF1EC;--ink:#1D242B;--ink-2:#4A5560;--book:#961C31;--wa:#1E6B46;--line:#E3E8EF;
+:root{--sky:#EAF4FF;--sky-2:#D6E9FF;--aqua:#E6FAF6;--lilac:#F1EDFF;--blush:#EAF4FF;--ink:#1D242B;--ink-2:#4A5560;--book:#961C31;--wa:#1E6B46;--line:#E3E8EF;
 --g-sky:linear-gradient(180deg,var(--sky),#FFF);--g-aqua:linear-gradient(180deg,var(--aqua),#FFF);
 --bone:#FFFFFF;--band:#FFFFFF;--white:#FFFFFF;--bone-2:#F4F7FB;
 --ftr-bg:linear-gradient(180deg,#FFF,var(--sky));--ftr-text:var(--ink-2);--ftr-head:var(--ink);--ftr-mute:var(--ink-2);--ftr-line:var(--line)}
@@ -585,3 +585,77 @@ body.hiq .xq-iris{top:33%;transform:translate(-50%,-50%);width:min(68vh,660px);h
 @media (max-width:480px){.mxd .mxd-lbl{padding:2px 4px}}
 .mxd .mxd-lbl[style*="top:6.67%"]{transform:translate(-50%,calc(-100% - 12px))}@media (max-width:480px){.mxd .mxd-lbl[style*="top:6.67%"]{transform:translate(-50%,calc(-100% - 14px))}}
 .mxd .mxd-art{margin-top:22px}
+
+/* ===== Cool tone (Oct 17) ===== */
+/* Whole-site cooler colour feel: editorial grade on content photography, cool neutrals
+   everywhere, packshots/swatches/logos/svg left colour-true. cosmos.css loads last on every
+   page (quiz pages load quiz.css after this), so these rules win ties by file order; !important
+   is used only where needed to beat the lazy-reveal rules in motion.css (.m-on img.m-lz[.m-ld]). */
+
+/* -- 2a. Remaining warm UI tones -> cool equivalents (page bg / --bone / --line / --ink-2 are
+   already cool from the Oct 16 pass; only a stray badge colour and an unused token were warm) */
+.benefit.b2{background:var(--sky-2);color:var(--ink)}
+
+/* -- 1. Cool editorial grade on content photography ------------------------------------- */
+.iris .pupil img,
+.hq .xq1 img.bg,
+.lhero>img,
+.sp-hero .ph img,
+.eyewear .ph img,
+.m-on .cz-fd img,.cz-fd img,
+.m-on .duo img,.duo img,
+.m-on .pstory img,.pstory img,
+.tile.cat img,
+.m-on .col-t img,.col-t img,
+.m-on .lb img,.lb img,
+.home-sc .shortcuts img,
+.clinic .c .img img,
+.m-on img.feat-life,img.feat-life,
+.m-on .hq-cat img,.hiq .hq-cat img,.hq-cat img,
+.m-on .hq-cbox img,.hiq .hq-cbox img,.hq-cbox img,
+.gal img:not([data-ff]):not([src$=".svg"]),
+.gf-sec img:not([src*="/products/"]):not([src*="/studio/"]):not([src*="/frames/"]):not([src$=".svg"]):not([data-ff]),
+.gf-why img:not([src*="/products/"]):not([src*="/studio/"]):not([src*="/frames/"]):not([src$=".svg"]):not([data-ff]),
+.sv2 img:not([src*="/products/"]):not([src*="/studio/"]):not([src*="/frames/"]):not([src$=".svg"]):not([data-ff])
+{filter:saturate(.92) contrast(1.04) brightness(1.02)!important}
+/* .cz-ex-m img / .sp-rel img already desaturate(.92) on idle and sharpen on hover (line ~320-321);
+   left alone so that interaction is preserved, with a static fallback for non-hover/reduced-motion: */
+@media (hover:none),(prefers-reduced-motion:reduce){
+  .cz-ex-m img,.sp-rel img{filter:saturate(.92) contrast(1.04) brightness(1.02)!important}
+}
+/* hero-image-quiz entrance animation ends at filter:none — redefine so it settles on the grade */
+@keyframes hiqImg{from{transform:scale(1.04);filter:blur(6px)}to{transform:none;filter:saturate(.92) contrast(1.04) brightness(1.02)}}
+
+/* -- Explicit excludes: packshots, swatches, frame/product renders, logos, diagrams ------ */
+.pcard .ph img,.pcard .ph-f img,.pt-media img,.hq-pc img,.hq-pi img,.lq-sec img,
+.pgrid img,.plp-grid img,.grid-p img,[data-plp-grid] img,
+.bcard .ph img,.lc .pl img,.rc-img img,.mega-prod .mc-img img,.sdd-thumb img,.sres-th img,.bundle-item img,
+.pstage img,.feat-m img:first-child,img[data-ff],
+img[src*="/products/"],img[src*="/studio/"],img[src*="/frames/"],img[src$=".svg"],
+#mx-diagram,#mx-diagram *,.mxd-svg,.mxd-svg *
+{filter:none!important}
+
+/* -- Cool overlay wash on image-only wrappers (no text sharing the box, safe to add ::after) */
+.cz-ex-m,.duo,.home-sc .shortcuts a,.clinic .c .img{position:relative}
+.cz-ex-m::after,.iris .pupil::after,.duo::after{content:"";position:absolute;inset:0;background:rgba(47,111,237,.08);mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+.iris .pupil::after{border-radius:inherit}
+.sp-rel::after{content:"";position:absolute;top:0;left:0;width:100%;aspect-ratio:4/3;background:rgba(47,111,237,.08);mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+.clinic .c .img::after{content:"";position:absolute;inset:0;background:rgba(47,111,237,.08);mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+.home-sc .shortcuts a::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:120px;border-radius:50%;background:rgba(47,111,237,.08);mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+@media (max-width:1180px){.home-sc .shortcuts a::after{width:100px;height:100px}}
+@media (max-width:760px){.home-sc .shortcuts a::after{width:84px;height:84px}}
+/* tiles/category banners already carry a dark legibility scrim on ::after — add the cool wash as
+   an extra gradient layer on the same property instead of a second pseudo-element */
+.tile::after{background:linear-gradient(135deg,rgba(47,111,237,.10),transparent 42%),linear-gradient(180deg,transparent 40%,rgba(20,26,32,.72))}
+.hq-cat::after{background:radial-gradient(160px at 85% 12%,rgba(214,233,255,.28),transparent 60%),linear-gradient(0deg,rgba(13,27,42,.78),rgba(13,27,42,.1) 65%)}
+.col-t:after{background:radial-gradient(70% 60% at 85% 10%,rgba(47,111,237,.12),transparent 55%),linear-gradient(0deg,rgba(20,26,32,.72) 0%,rgba(20,26,32,.1) 55%,rgba(20,26,32,0) 100%)}
+.lb:after{background:radial-gradient(70% 60% at 85% 10%,rgba(47,111,237,.12),transparent 55%),linear-gradient(0deg,rgba(20,26,32,.7),rgba(20,26,32,0) 50%)}
+
+/* -- 3. Subtle cool light-leak on the specialist-clinic / about hero (not already present
+   on .irishero or body.hiq .xq1, which already have one); dark text-scrim stops kept identical */
+.lhero:after,[dir=rtl] .lhero:after{background:radial-gradient(640px 420px at 88% 6%,rgba(214,233,255,.3),transparent 60%),linear-gradient(90deg,rgba(13,27,42,.78) 0%,rgba(13,27,42,.55) 40%,rgba(13,27,42,.12) 70%,rgba(13,27,42,0) 85%),linear-gradient(180deg,rgba(13,27,42,.35),transparent 120px)!important}
+@media (max-width:760px){.lhero:after,[dir=rtl] .lhero:after{background:radial-gradient(420px 260px at 85% 4%,rgba(214,233,255,.26),transparent 60%),linear-gradient(0deg,rgba(13,27,42,.82) 0%,rgba(13,27,42,.6) 45%,rgba(13,27,42,.1) 80%),linear-gradient(180deg,rgba(13,27,42,.35),transparent 120px)!important}}
+/* dark-hero WhatsApp button contrast */
+.lhero .ctas .btn-wa{color:#fff;border-color:rgba(255,255,255,.55);background:rgba(13,27,42,.35)}
+.lhero .ctas .btn-wa:hover{background:rgba(13,27,42,.55)}
+.hq-cat img[src*="frame-round"]{filter:none!important}
