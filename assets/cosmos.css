@@ -784,3 +784,11 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .lhero .ctas .btn-wa{color:#fff!important;border-color:rgba(255,255,255,.55)!important;background:rgba(13,27,42,.35)!important}
 .lhero .ctas .btn-wa .ico,.lhero .ctas .btn-wa svg{color:#7FD3A6}
 @media (hover:hover){.lhero .ctas .btn-wa:hover{background:rgba(13,27,42,.55)!important;border-color:#fff!important}}
+
+/* ===== Header legibility over photo heroes (Oct 18) =====
+   The white transparent header only applies on body.ohero (set only when the page opens on a dark photo hero).
+   Add a soft top scrim so white nav text stays readable where the photo is light at the top (e.g. vision therapy on phone). */
+body.ohero .hdr::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(100% + 72px);background:linear-gradient(180deg,rgba(13,27,42,.58) 0%,rgba(13,27,42,.36) 55%,rgba(13,27,42,0) 100%);pointer-events:none;z-index:-1;opacity:0;transition:opacity .2s ease-out}
+body.ohero .hdr:not(.m-scrolled):not(:hover):not(:focus-within):not(.search-open)::before{opacity:1}
+@media (max-width:760px){body.ohero .hdr::before{background:linear-gradient(180deg,rgba(13,27,42,.66) 0%,rgba(13,27,42,.44) 55%,rgba(13,27,42,0) 100%)}}
+@media (prefers-reduced-motion:reduce){body.ohero .hdr::before{transition:none}}
