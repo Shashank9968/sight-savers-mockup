@@ -48,7 +48,7 @@ function pdpRecs(){
     $('[data-sim-lead]',sim).textContent=lens(p)?`Same replacement (${p.rep.toLowerCase()}) and type, closest in brand and price.`:'Other lens-care items.';sim.hidden=false;}}
   const bd=$('[data-bundle]');const extras=fbt(p);
   if(bd&&extras.length){
-    const items=extras.map((x,i)=>`<label class="bundle-item bundle-opt"><input type="checkbox" value="${x.id}"${i===0?' checked':''}><img src="${x.img}" alt=""><span><span class="mono">${esc(x.brand)}</span><b>${esc(x.name)}</b><span class="small">${aed(x.price)}</span></span></label>`).join('<span class="bundle-plus" aria-hidden="true">+</span>');
+    const items=extras.map((x,i)=>`<label class="bundle-item bundle-opt"><input class="sr" type="checkbox" value="${x.id}"${i===0?' checked':''}><span class="ckbox" aria-hidden="true"></span><img src="${x.img}" alt=""><span><span class="mono">${esc(x.brand)}</span><b>${esc(x.name)}</b><span class="small">${aed(x.price)}</span></span></label>`).join('<span class="bundle-plus" aria-hidden="true">+</span>');
     bd.innerHTML=`<div class="bundle-h"><span class="mono">Frequently bought together</span><h2 id="bundle-h" class="d3">Complete your order.</h2></div>
       <div class="bundle-items"><div class="bundle-item bundle-main"><img src="${p.img}" alt=""><span><span class="mono">This ${lens(p)?'lens':'item'}</span><b>${esc(p.name)}</b><span class="small" data-b-main></span></span></div><span class="bundle-plus" aria-hidden="true">+</span>${items}</div>
       <div class="bundle-sum"><span class="mono">Together</span><b data-b-tot></b><button class="btn btn-ink" type="button" data-b-add></button>
