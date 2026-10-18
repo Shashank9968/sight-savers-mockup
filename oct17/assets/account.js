@@ -23,7 +23,7 @@ const SEED_USER={
     contact:{expiry:addDays(todayISO(),150),OD:{SPH:'-2.00',CYL:'',AXIS:'',ADD:'',BC:'8.6',DIA:'14.2'},OS:{SPH:'-1.75',CYL:'',AXIS:'',ADD:'',BC:'8.6',DIA:'14.2'}},
     glasses:{expiry:addDays(todayISO(),150),PD:'62',OD:{SPH:'-2.25',CYL:'-0.50',AXIS:'180',ADD:''},OS:{SPH:'-2.00',CYL:'-0.75',AXIS:'170',ADD:''}}
   },
-  subscription:{product:'Acuvue Oasys 1-Day with HydraLuxe (example)',frequencyMonths:2,nextDelivery:addDays(todayISO(),18),status:'active'}
+  subscription:{product:'Acuvue Oasys 1-Day with HydraLuxe',frequencyMonths:2,nextDelivery:addDays(todayISO(),18),status:'active'}
 };
 
 function seedOrders(){
@@ -95,7 +95,7 @@ function renderRx(u){
         <div class="fld"><label class="mono" for="c-expiry">Expiry date</label><input class="in" type="date" id="c-expiry" value="${esc(c.expiry)}"></div>
         <div class="rx-foot"><button class="btn btn-ink btn-sm" type="submit">Save prescription</button><span class="small muted" data-saved-c hidden>Saved.</span></div>
       </form>
-      <div class="rx-cta"><p><span class="asst-ex">Example reminder</span> We&rsquo;ll suggest a check-up before your prescription expiry date.</p><a class="btn btn-book btn-sm" href="book.html?s=cl">Book an eye test</a></div>
+      <div class="rx-cta"><p>We&rsquo;ll suggest a check-up before your prescription expiry date.</p><a class="btn btn-book btn-sm" href="book.html?s=cl">Book an eye test</a></div>
     </div>
     <div class="rx-card">
       <div class="rx-top"><h3>Glasses prescription</h3><span class="mono">Expires ${esc(g.expiry)}</span></div>
@@ -180,14 +180,14 @@ function orderItemRow(it){
 function renderOrders(){
   const panel=$('[data-orders-panel]');if(!panel)return;
   const orders=getOrders();
-  if(!orders.length){panel.innerHTML='<p class="muted">No orders yet (example data).</p>';return;}
+  if(!orders.length){panel.innerHTML='<p class="muted">No orders yet.</p>';return;}
   panel.innerHTML=`<div class="ord-list">${orders.map(o=>`
     <div class="ord-card" data-order="${o.id}">
-      <div class="ord-top"><div><b>Order ${esc(o.id)}</b><span class="mono">${esc(o.date)} &middot; example order</span></div><span class="status-chip">${esc(o.status)}</span></div>
+      <div class="ord-top"><div><b>Order ${esc(o.id)}</b><span class="mono">${esc(o.date)}</span></div><span class="status-chip">${esc(o.status)}</span></div>
       <details class="ord-detail"><summary>Order details</summary>
         <ul class="ord-items">${o.items.map(orderItemRow).join('')}</ul>
-        <p class="small muted">Delivered to ${esc(o.address.label)} &middot; ${esc(o.address.line1)}<br>Payment: ${esc(o.payment)} (example)</p>
-        <p class="small muted">Subtotal ${aed(o.subtotal)} + VAT ${aed(o.vat)} (example) = <b>${aed(o.total)}</b></p>
+        <p class="small muted">Delivered to ${esc(o.address.label)} &middot; ${esc(o.address.line1)}<br>Payment: ${esc(o.payment)}</p>
+        <p class="small muted">Subtotal ${aed(o.subtotal)} + VAT ${aed(o.vat)} = <b>${aed(o.total)}</b></p>
       </details>
       <div class="ord-bottom"><b>${aed(o.total)}</b><button class="btn btn-ink btn-sm" type="button" data-reorder="${o.id}">Reorder</button></div>
     </div>`).join('')}</div>`;
@@ -209,8 +209,8 @@ function renderSub(u){
   const statusLabel={active:'Active',paused:'Paused',cancelled:'Cancelled'}[s.status]||s.status;
   panel.innerHTML=`<div class="sub-card">
     <div class="sub-top"><h3>${esc(s.product)}</h3><span class="status-chip${s.status==='active'?' on':''}">${esc(statusLabel)}</span></div>
-    <p class="small muted">Example subscription &middot; delivery date and frequency are illustrative, not a real order.</p>
-    <div class="sub-row"><span class="mono">Next delivery (example)</span><b data-sub-next>${s.status==='cancelled'?'&ndash;':esc(s.nextDelivery)}</b></div>
+    <p class="small muted">You can skip, pause or cancel deliveries from this page.</p>
+    <div class="sub-row"><span class="mono">Next delivery</span><b data-sub-next>${s.status==='cancelled'?'&ndash;':esc(s.nextDelivery)}</b></div>
     <div class="fld"><label class="mono" for="sub-freq">Delivery frequency</label>
       <select class="sel" id="sub-freq" ${s.status==='cancelled'?'disabled':''}>
         <option value="1" ${s.frequencyMonths===1?'selected':''}>Every 1 month</option>

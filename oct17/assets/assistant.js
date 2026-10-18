@@ -19,15 +19,15 @@ var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){re
 
 /* ---------------- static UI copy ---------------- */
 var UI = AR ? {
-  launch:'اسأل Sight Savers', title:'مساعد Sight Savers', subtitle:'مساعد تجريبي، إجابات معدة مسبقًا لهذا النموذج',
+  launch:'اسأل Sight Savers', title:'مساعد Sight Savers', subtitle:'اسأل عن العدسات أو فحوصات النظر أو عياداتنا',
   close:'إغلاق المحادثة', placeholder:'اكتب رسالة…', send:'إرسال',
-  greet:'مرحبًا! أنا مساعد تجريبي لمتجر Sight Savers Optics. كل الإجابات هنا معدة مسبقًا لهذا النموذج التجريبي — اختر أحد الخيارات أو اكتب سؤالك.',
+  greet:'مرحبًا! يمكنني مساعدتك في العدسات وفحوصات النظر وعياداتنا ومتاجرنا. اختر أحد الخيارات أو اكتب سؤالك.',
   menuAgain:'كيف يمكنني مساعدتك أيضًا؟',
   chips:{lenses:'البحث عن عدسات لاصقة', book:'حجز فحص للعين', returns:'الإرجاع', hours:'مواعيد العمل', track:'تتبع طلبي', human:'التحدث مع شخص', menu:'القائمة الرئيسية', askMore:'سؤال آخر', talkPerson:'التحدث مع شخص'}
 } : {
-  launch:'Ask Sight Savers', title:'Sight Savers Assistant', subtitle:'Demo assistant, scripted answers for the mockup',
+  launch:'Ask Sight Savers', title:'Sight Savers Assistant', subtitle:'Ask about lenses, eye tests or our clinics',
   close:'Close chat', placeholder:'Type a message…', send:'Send',
-  greet:'Hello! I’m a scripted demo assistant for Sight Savers Optics. Every answer here is pre-written for this mockup — pick an option below or type a question.',
+  greet:'Hello! I can help with lenses, eye tests, our clinics and stores. Pick an option below or type a question.',
   menuAgain:'What else can I help with?',
   chips:{lenses:'Find contact lenses', book:'Book an eye test', returns:'Returns', hours:'Store timings', track:'Track my order', human:'Talk to a person', menu:'Main menu', askMore:'Ask something else', talkPerson:'Talk to a person'}
 };
@@ -88,24 +88,24 @@ var TOPICS = [
     ar:'<p>نعم — تحتاج العدسات اللاصقة إلى وصفة طبية سارية. عند الدفع يمكنك رفع صورة، أو إرسالها عبر واتساب، أو استخدام وصفة محفوظة من فحص سابق لدى Sight Savers. إذا كانت المرة الأولى، احجز فحص عدسات لاصقة.</p>',
     page:'lens.html', svc:'cl'},
   {key:'delivery', kw:['delivery','shipping','ship to','how long to deliver','توصيل'],
-    en:'<p>We offer delivery across the UAE, or collection from any of our three stores. Exact delivery times and fees are shown at checkout.</p>'+ex(AR?'مثال، قيد التأكيد':'Example, to be confirmed'),
-    ar:'<p>نوفّر التوصيل داخل الإمارات، أو الاستلام من أحد متاجرنا الثلاثة. تظهر أوقات ورسوم التوصيل الدقيقة عند إتمام الطلب.</p>'+ex('مثال، قيد التأكيد'),
+    en:'<p>We offer delivery across the UAE, or collection from any of our three stores. Our team will confirm delivery times and any fees for your order.</p>',
+    ar:'<p>نوفّر التوصيل داخل الإمارات، أو الاستلام من أحد متاجرنا الثلاثة. سيؤكد فريقنا أوقات التوصيل وأي رسوم لطلبك.</p>',
     page:'cart.html', svc:''},
   {key:'payment', kw:['payment','pay','tabby','apple pay','cash on delivery','card payment','طرق الدفع'],
-    en:'<p>At checkout you can pay by card, Apple Pay, Tabby (split in 4) or cash on delivery.</p>'+ex(AR?'تجريبي، لا يتم تحصيل أي مبلغ':'Demo, no payment is taken'),
-    ar:'<p>عند إتمام الطلب يمكنك الدفع بالبطاقة، أو Apple Pay، أو Tabby (الدفع على 4 دفعات)، أو الدفع عند الاستلام.</p>'+ex('تجريبي، لا يتم تحصيل أي مبلغ'),
+    en:'<p>Ask our team which payment options are available for your order.</p>',
+    ar:'<p>اسأل فريقنا عن طرق الدفع المتاحة لطلبك.</p>',
     page:'checkout.html', svc:''},
   {key:'returns', kw:['return','refund','exchange','إرجاع','استرجاع'],
-    en:'<p>Unopened contact lens boxes and unworn frames can usually be returned — our team can confirm the details for your order.</p>'+ex(AR?'مثال، قيد التأكيد':'Example, to be confirmed'),
-    ar:'<p>يمكن عادة إرجاع علب العدسات غير المفتوحة والإطارات غير المستخدمة — يمكن لفريقنا تأكيد التفاصيل الخاصة بطلبك.</p>'+ex('مثال، قيد التأكيد'),
+    en:'<p>Our team can confirm the returns options for your order.</p>',
+    ar:'<p>يمكن لفريقنا تأكيد خيارات الإرجاع الخاصة بطلبك.</p>',
     page:'page.html?p=delivery', svc:''},
   {key:'stores', kw:['store location','where are you','address','which stores','branches','locations','مواقع المتاجر'],
     en:'<p>We have three stores: Al Karama, BurJuman and Dubai Investment Park. All three offer eye tests and contact lens fittings.</p>',
     ar:'<p>لدينا ثلاثة متاجر: الكرامة، وبورجمان، ودبي للاستثمار الصناعي. تقدّم المتاجر الثلاثة فحوصات العين وتركيب العدسات اللاصقة.</p>',
     page:'stores.html', svc:''},
   {key:'hours', kw:['opening hours','store hours','timing','what time do you open','when do you close','مواعيد العمل','ساعات العمل'],
-    en:'<p>Opening hours vary a little by store and day.</p>'+ex(AR?'مثال، قيد التأكيد':'Example, to be confirmed')+'<p>Check the current hours on the store page before you visit.</p>',
-    ar:'<p>تختلف مواعيد العمل قليلًا حسب المتجر واليوم.</p>'+ex('مثال، قيد التأكيد')+'<p>يُرجى التحقق من المواعيد الحالية في صفحة المتجر قبل الزيارة.</p>',
+    en:'<p>Opening hours can vary by store.</p>'+'<p>Check the current hours on the store page before you visit.</p>',
+    ar:'<p>قد تختلف مواعيد العمل حسب المتجر.</p>'+'<p>يُرجى التحقق من المواعيد الحالية في صفحة المتجر قبل الزيارة.</p>',
     page:'stores.html', svc:''},
   {key:'eyetest', kw:['eye test','eye exam','vision test','فحص العين'],
     en:'<p>A comprehensive eye test checks your vision and eye health with an optometrist, who explains the result to you.</p>',
@@ -262,12 +262,12 @@ function trackOrder(){
   try{ orders = JSON.parse(localStorage.getItem('ss_orders'))||[]; }catch(e){}
   if(!orders.length){
     botSay(AR?
-      '<p>لا يوجد لديك طلب محفوظ على هذا المتصفح بعد (تجريبي). إذا سبق أن أتممت الدفع أو سجّلت الدخول، تحقق من حسابك.</p><div class="asst-links">'+link('account.html','فتح حسابي')+'</div>':
-      '<p>I can’t find a saved order on this browser yet (demo data only). If you’ve checked out before or signed in, check your account.</p><div class="asst-links">'+link('account.html', 'Open my account')+'</div>'
+      '<p>لا يوجد لديك طلب محفوظ على هذا المتصفح بعد. إذا سبق أن أتممت الدفع أو سجّلت الدخول، تحقق من حسابك.</p><div class="asst-links">'+link('account.html','فتح حسابي')+'</div>':
+      '<p>I can’t find a saved order on this browser yet. If you’ve checked out before or signed in, check your account.</p><div class="asst-links">'+link('account.html', 'Open my account')+'</div>'
     );
   } else {
     var o = orders[0];
-    var statusLine = (AR?'الحالة: ':'Status: ') + esc(o.status) + ' ' + ex(AR?'مثال':'example');
+    var statusLine = (AR?'الحالة: ':'Status: ') + esc(o.status);
     botSay(
       (AR?'<p>أحدث طلب: <b>':'<p>Your most recent order: <b>') + esc(o.id) + '</b> &middot; ' + esc(o.date) + '</p>' +
       '<p>' + statusLine + '<br>' + (AR?'الإجمالي: ':'Total: ') + 'AED ' + Math.round(o.total) + '</p>' +
@@ -279,12 +279,12 @@ function trackOrder(){
 
 function handover(){
   botSay(AR?
-    '<p>جارٍ تحويلك إلى فريقنا… <i>(تجريبي: في النسخة الحقيقية سينضم أحد أعضاء الفريق إلى هذه المحادثة هنا.)</i></p><p>يمكنك أيضًا التواصل معنا مباشرة:</p>':
-    '<p>Connecting you to our team… <i>(demo: in a live version, a team member would join this chat here.)</i></p><p>You can also reach us directly:</p>'
+    '<p>يمكنك التواصل مع فريقنا مباشرة:</p>':
+    '<p>You can reach our team directly:</p>'
   );
   var waMsg = AR ? 'مرحبًا Sight Savers Optics، أحتاج إلى مساعدة من فريقكم.' : 'Hello Sight Savers Optics, I need some help from your team.';
   var links = '<div class="asst-links">'+
-    '<a class="btn btn-wa btn-sm" href="https://wa.me/'+WA+'?text='+encodeURIComponent(waMsg)+'" data-wa="'+esc(waMsg)+'" target="_blank" rel="noopener">'+(AR?'واتساب (مثال)':'WhatsApp (example)')+'</a>'+
+    '<a class="btn btn-wa btn-sm" href="https://wa.me/'+WA+'?text='+encodeURIComponent(waMsg)+'" data-wa="'+esc(waMsg)+'" target="_blank" rel="noopener">'+(AR?'واتساب':'WhatsApp')+'</a>'+
     '<a class="btn btn-white btn-sm" href="stores.html">'+(AR?'زيارة متجر':'Visit a store')+'</a>'+
     '</div>';
   botSay(links);
@@ -334,7 +334,7 @@ function showStoreChips(){
   ]);
 }
 function showDayChips(){
-  botSay(AR?'أي يوم يناسبك؟ '+ex('مواعيد تجريبية'):'Which day works? '+ex('Example slots'));
+  botSay(AR?'أي يوم يناسبك؟':'Which day works?');
   var chips = dayList().map(function(d){ return chip(d.label,'day',d.iso); });
   chips.push(chip(UI.chips.askMore,'booking','cancel'));
   showChips(chips);
@@ -361,7 +361,7 @@ function confirmSummary(){
   var html = (AR?'<p>يرجى تأكيد التفاصيل:</p><ul>':'<p>Please confirm your details:</p><ul>') +
     '<li>'+(AR?'الخدمة: ':'Service: ')+esc(SVC_NAME[b.svc]||b.svc)+'</li>'+
     '<li>'+(AR?'المتجر: ':'Store: ')+esc(STORE_NAME[b.store])+'</li>'+
-    '<li>'+(AR?'الموعد: ':'When: ')+esc(dayLabel)+', '+esc(b.slot)+' '+ex(AR?'مثال':'example')+'</li>'+
+    '<li>'+(AR?'الموعد: ':'When: ')+esc(dayLabel)+', '+esc(b.slot)+'</li>'+
     '<li>'+(AR?'الاسم: ':'Name: ')+esc(b.name)+'</li>'+
     '<li>'+(AR?'الجوال: ':'Phone: ')+esc(b.phone)+'</li></ul>';
   botSay(html);
@@ -378,9 +378,9 @@ function finishBooking(){
   addBooking(record);
   var bookUrl = 'book.html?' + (b.svc?('s='+encodeURIComponent(b.svc)+'&'):'') + 'store='+encodeURIComponent(b.store)+'&d='+encodeURIComponent(b.day);
   botSay(
-    (AR?'<p>تم! رقم الحجز التجريبي: <b>':'<p>All set! Your demo booking reference: <b>') + esc(ref) + '</b></p>' +
-    '<p>'+ex(AR?'حجز تجريبي، لم يُرسل':'Demo booking, not sent')+'</p>'+
-    '<div class="asst-links">' + link(bookUrl, AR?'عرض تفاصيل الحجز':'View booking details') + '</div>'
+    (AR?'<p>شكرًا. رقم طلبك: <b>':'<p>Thanks. Your request reference: <b>') + esc(ref) + '</b></p>' +
+    '<p>'+(AR?'تم حفظ طلبك في هذا المتصفح. تابع إلى صفحة الحجز لإكماله.':'Your request is saved in this browser. Continue to the booking page to finish.')+'</p>'+
+    '<div class="asst-links">' + link(bookUrl, AR?'متابعة إلى الحجز':'Continue to booking') + '</div>'
   );
   state.booking = null; saveState();
   showChips(askMoreChips());
@@ -451,8 +451,8 @@ function handleFreeText(text){
   var t = matchFreeText(text);
   if(t){ answerTopic(t); return; }
   botSay(AR?
-    '<p>لم أتعرّف على ذلك بعد (أنا مساعد تجريبي بإجابات محدودة). جرّب أحد الخيارات، أو تحدّث مع فريقنا.</p>':
-    '<p>I don’t have a scripted answer for that yet (I’m a demo with limited answers). Try one of the options below, or talk to our team.</p>'
+    '<p>لا تتوفر لدي إجابة على ذلك بعد. جرّب أحد الخيارات، أو تحدّث مع فريقنا.</p>':
+    '<p>I don’t have an answer for that yet. Try one of the options below, or talk to our team.</p>'
   );
   showChips(mainMenuChips());
 }

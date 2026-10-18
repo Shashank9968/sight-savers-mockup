@@ -126,3 +126,7 @@
 @media (min-width:1280px) and (max-width:1439px){[dir=rtl] .hdr .wrap{gap:8px!important}[dir=rtl] .hdr .hr{gap:0!important}[dir=rtl] .hdr .nav a,[dir=rtl] .hdr .nav-top{padding-left:5px!important;padding-right:5px!important}}
 /* Phone header (Oct 18): wordmark ran under the search icon. Account stays in the menu drawer. */
 @media (max-width:480px){.hdr .hr [data-account-link]{display:none!important}}
+/* Small phones (Oct 18): keep the 14px wordmark clear of the header icons without shrinking text.
+   <=400px: tighter header side padding. <=374px: search moves to the menu (the drawer already has a Search link). */
+@media (max-width:400px){.hdr .wrap{padding-left:12px!important;padding-right:12px!important;column-gap:6px!important}}
+@media (max-width:374px){.hdr .hr [data-search]{display:none!important}}

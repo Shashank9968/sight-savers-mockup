@@ -152,13 +152,13 @@ function validateStep3(){
     mark($('#ck-cexp'),!expOk);
     const cvcOk=/^\d{3,4}$/.test(cvc);mark($('#ck-ccvc'),!cvcOk);
     const nameOk=$('#ck-cname').value.trim().length>0;mark($('#ck-cname'),!nameOk);
-    if(!numOk||!expOk||!cvcOk||!nameOk){f.textContent='Check your demo card details (number, expiry, CVC and name).';return false;}
+    if(!numOk||!expOk||!cvcOk||!nameOk){f.textContent='Check your card details (number, expiry, CVC and name).';return false;}
   }
   return true;
 }
 function getPayment(){
   const v=$('input[name=ckpay]:checked').value;
-  const label={apple:'Apple Pay (demo)',card:'Card ending '+($('#ck-cnum').value.replace(/\s+/g,'').slice(-4)||'4242')+' (demo)',tabby:'Tabby · pay in 4 (demo)',cod:'Cash on delivery (example)'}[v];
+  const label={apple:'Apple Pay',card:'Card ending '+($('#ck-cnum').value.replace(/\s+/g,'').slice(-4)||'4242')+'',tabby:'Tabby · pay in 4',cod:'Cash on delivery'}[v];
   return {method:v,label};
 }
 
@@ -171,7 +171,7 @@ function renderReview(){
   const addr=getAddress();
   $('[data-rev-address]').textContent=`${addr.name}, ${addr.phone||$('#ck-phone').value.trim()} — ${addr.line1||''} ${addr.city||''}`.trim();
   const del=getDelivery();
-  $('[data-rev-delivery]').textContent=del.type==='collect'?('Click & collect at '+(STN[del.store]||del.store)+' (example time, to be confirmed)'):('Delivery on '+del.day+', '+del.slot+' (example, to be confirmed)');
+  $('[data-rev-delivery]').textContent=del.type==='collect'?('Click & collect at '+(STN[del.store]||del.store)+' (time confirmed by our team)'):('Delivery on '+del.day+', '+del.slot);
   $('[data-rev-payment]').textContent=getPayment().label;
   updSummary();
 }
@@ -180,7 +180,7 @@ function updSummary(){
   const delFee=0; // example: fee is "to be confirmed", shown as AED 0 (example) in the summary
   const vat=subtotal*VAT_RATE;
   $('[data-ckt-sub]').textContent=aed(subtotal);
-  $('[data-ckt-delfee]').textContent=del==='collect'?'No fee (example)':aed(delFee)+' (example)';
+  $('[data-ckt-delfee]').textContent=del==='collect'?'Confirmed by our team':'Confirmed by our team';
   $('[data-ckt-vat]').textContent=aed(vat);
   $('[data-ckt-total]').textContent=aed(subtotal+vat+delFee);
 }

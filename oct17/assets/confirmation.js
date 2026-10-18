@@ -23,7 +23,7 @@ $('[data-conf-items]').innerHTML=order.items.map(l=>{
 }).join('');
 $('[data-conf-address]').textContent=`${order.address.name} &middot; ${order.address.line1||''} ${order.address.city||''}`.replace('&middot;','·');
 const del=order.delivery||{};
-$('[data-conf-delivery]').textContent=del.type==='collect'?('Click & collect, example time, to be confirmed'):('Delivery '+(del.day||'')+' '+(del.slot||'')+' (example, to be confirmed)');
+$('[data-conf-delivery]').textContent=del.type==='collect'?('Click & collect, time confirmed by our team'):('Delivery '+(del.day||'')+' '+(del.slot||''));
 $('[data-conf-payment]').textContent=order.payment;
-$('[data-conf-total]').textContent=aed(order.total)+' (incl. VAT, example)';
+$('[data-conf-total]').textContent=aed(order.total)+' (incl. VAT)';
 })();

@@ -792,3 +792,7 @@ body.ohero .hdr::before{content:"";position:absolute;left:0;right:0;top:0;height
 body.ohero .hdr:not(.m-scrolled):not(:hover):not(:focus-within):not(.search-open)::before{opacity:1}
 @media (max-width:760px){body.ohero .hdr::before{background:linear-gradient(180deg,rgba(13,27,42,.66) 0%,rgba(13,27,42,.44) 55%,rgba(13,27,42,0) 100%)}}
 @media (prefers-reduced-motion:reduce){body.ohero .hdr::before{transition:none}}
+/* Small phones (Oct 18): keep the 14px wordmark clear of the header icons without shrinking text.
+   <=400px: tighter header side padding. <=374px: search moves to the menu (the drawer already has a Search link). */
+@media (max-width:400px){.hdr .wrap{padding-left:12px!important;padding-right:12px!important;column-gap:6px!important}}
+@media (max-width:374px){.hdr .hr [data-search]{display:none!important}}
