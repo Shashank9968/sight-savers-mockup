@@ -1,0 +1,170 @@
+/* Sight Savers Optics · commerce add-on (account, checkout, order confirmation)
+   Load AFTER buttons.css on: account.html, checkout.html, order-confirmation.html.
+   Reuses theme.css tokens only; no new colours. */
+
+.demo-note{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 12px;border-radius:var(--r-pill);background:var(--moss-2);color:var(--ink-2);font:500 12.5px/1.3 var(--sans)}
+.demo-note::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink-3);flex:none}
+
+/* ---------- sign-in card ---------- */
+.signin-card{max-width:460px;border:1px solid var(--hair);border-radius:var(--r-card);box-shadow:var(--sh-2);padding:34px 36px;background:var(--pure)}
+.signin-card h2{font:400 26px/1.15 var(--sans);letter-spacing:-.02em;margin:8px 0 10px}
+.signin-card form{margin-top:22px;display:flex;flex-direction:column;gap:0}
+.signin-card .fld{display:block}
+.signin-card .fld label{display:block;margin-bottom:6px}
+.demo-or{display:flex;align-items:center;gap:12px;margin:22px 0;color:var(--ink-2);font:400 var(--fs-min)/1 var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.demo-or::before,.demo-or::after{content:"";flex:1;height:1px;background:var(--hair-2)}
+.ord-detail summary{cursor:pointer;min-height:36px;display:flex;align-items:center;font:500 13.5px/1.2 var(--sans);color:var(--ink-2);margin-top:10px}
+.ord-detail[open] summary{color:var(--ink)}
+.rx-cta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--hair)}
+.rx-cta p{font-size:13px;color:var(--ink-2);margin:0;max-width:340px}
+
+/* ---------- dashboard header ---------- */
+.acct-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.acct-head h2{font:400 28px/1.15 var(--sans);letter-spacing:-.02em;margin-top:6px}
+.tabs{margin-bottom:28px}
+
+/* ---------- status chips (neutral; never red/green) ---------- */
+.status-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:var(--r-pill);font:500 12.5px/1.3 var(--sans);background:var(--bone-2);color:var(--ink-2);border:1px solid var(--hair-2)}
+.status-chip.on{background:var(--ink);color:var(--on-dark);border-color:var(--ink)}
+
+/* ---------- prescription ---------- */
+.rx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.rx-card{border:1px solid var(--hair);border-radius:var(--r-card);padding:26px 28px;background:var(--pure);box-shadow:var(--sh-1)}
+.rx-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.rx-top h3{font:400 19px/1.2 var(--sans)}
+.rx-tbl{width:100%;border-collapse:collapse;margin-bottom:18px}
+.rx-tbl th,.rx-tbl td{padding:6px 6px 6px 0;text-align:start;font-size:13px}
+.rx-tbl thead th{color:var(--ink-2);font:400 var(--fs-min)/1.4 var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.rx-tbl tbody th{font-weight:500;white-space:nowrap;padding-inline-end:10px}
+.rx-tbl input{width:100%;min-width:56px;height:38px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:var(--pure);padding:0 8px;font-size:13.5px}
+.rx-tbl input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(29,36,43,.08);outline:0}
+.rx-card .fld{max-width:220px;margin-bottom:16px}
+.rx-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+
+/* ---------- addresses ---------- */
+.addr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.addr-card{border:1px solid var(--hair);border-radius:var(--r-card);padding:22px 24px;background:var(--pure);box-shadow:var(--sh-1)}
+.addr-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.addr-top b{font-size:15.5px}
+.addr-default{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
+.addr-default input{accent-color:var(--ink)}
+.addr-card p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.addr-acts{display:flex;gap:16px;margin-top:12px}
+.addr-form{margin-top:16px;padding-top:16px;border-top:1px solid var(--hair);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.addr-form .fld{grid-column:span 1}
+.addr-form .fld.w2{grid-column:1/-1}
+.addr-form .fld label{display:block;margin-bottom:6px}
+.addr-form .fld input{width:100%;height:44px;border:1px solid var(--line-2);border-radius:var(--r-md);padding:0 12px;font-size:14px}
+.addr-form .frm-acts{grid-column:1/-1;display:flex;gap:12px;margin-top:4px}
+.addr-add{display:flex;align-items:flex-start}
+.addr-add .addr-form{border-top:0;padding-top:0;margin-top:0;width:100%}
+
+/* ---------- orders ---------- */
+.ord-list{display:flex;flex-direction:column;gap:18px}
+.ord-card{border:1px solid var(--hair);border-radius:var(--r-card);padding:22px 26px;background:var(--pure);box-shadow:var(--sh-1)}
+.ord-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.ord-top b{font-size:15.5px}
+.ord-top .mono{display:block;margin-top:2px}
+.ord-items{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;padding-top:14px;border-top:1px solid var(--hair)}
+.ord-item{display:flex;align-items:center;gap:12px;font-size:13.5px}
+.ord-item img{width:44px;height:44px;border-radius:var(--r-sm);background:var(--bone-2);object-fit:contain;padding:4px;flex:none;mix-blend-mode:multiply}
+.ord-item .nm{flex:1;min-width:0}
+.ord-item .nm b{display:block;font-weight:500}
+.ord-item .nm span{color:var(--ink-2);font-size:12.5px}
+.ord-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--hair)}
+
+/* ---------- subscription ---------- */
+.sub-card{max-width:620px;border:1px solid var(--hair);border-radius:var(--r-card);padding:28px 30px;background:var(--pure);box-shadow:var(--sh-1)}
+.sub-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sub-top h3{font:400 19px/1.25 var(--sans);max-width:360px}
+.sub-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-top:1px solid var(--hair);margin-top:12px}
+.sub-card .fld{max-width:240px;margin:16px 0}
+.sub-card .fld label{display:block;margin-bottom:6px}
+.sub-card .ctas .btn[disabled]{opacity:.4;pointer-events:none}
+
+/* ---------- checkout: progress stepper ---------- */
+.ckt-steps{display:flex;align-items:center;gap:0;list-style:none;margin:0 0 40px;counter-reset:ckt}
+.ckt-steps li{display:flex;align-items:center;gap:10px;flex:1;position:relative}
+.ckt-steps li:not(:last-child)::after{content:"";flex:1;height:1px;background:var(--hair-2);margin-inline:12px}
+.ckt-steps li.done:not(:last-child)::after{background:var(--ink)}
+.ckt-s-n{counter-increment:ckt;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:500 14px/1 var(--sans);background:var(--bone-2);color:var(--ink-2);flex:none;border:1px solid var(--hair-2)}
+.ckt-steps li.on .ckt-s-n{background:var(--ink);color:var(--on-dark);border-color:var(--ink)}
+.ckt-steps li.done .ckt-s-n{background:var(--ink);color:var(--on-dark);border-color:var(--ink)}
+.ckt-s-lbl{font:500 14px/1.2 var(--sans);color:var(--ink-2);white-space:nowrap}
+.ckt-steps li.on .ckt-s-lbl,.ckt-steps li.done .ckt-s-lbl{color:var(--ink)}
+@media (max-width:700px){.ckt-s-lbl{display:none}.ckt-steps li:not(:last-child)::after{margin-inline:6px}}
+
+.ckt-grid{display:grid;grid-template-columns:7fr 5fr;gap:56px;align-items:start}
+.ckt-panel .fld{margin-bottom:16px}
+.ckt-panel .fld label{display:block;margin-bottom:6px}
+.ckt-panel .fld input,.ckt-panel .fld select{width:100%;height:50px;border:1px solid var(--line-2);border-radius:var(--r-md);padding:0 14px;font-size:15px;background:var(--pure)}
+.ckt-panel .fld.w2{grid-column:1/-1}
+.ckt-row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ckt-nav{display:flex;justify-content:space-between;gap:14px;margin-top:28px}
+.ckt-h{font:400 24px/1.2 var(--sans);letter-spacing:-.02em;margin-bottom:18px}
+.addr-pick{display:grid;gap:10px;margin-bottom:20px}
+.addr-pick .ch{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.addr-pick .ch input{margin-top:3px}
+
+/* day/slot picker (reuses .days/.slots look from booking) */
+.ckt-fee-note{margin-top:10px;font-size:13px;color:var(--ink-2)}
+
+/* prescription-per-item confirmation */
+.ckt-rx-item{border:1px solid var(--hair-2);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.ckt-rx-item .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ckt-rx-item .hd b{font-size:14.5px}
+
+/* payment tiles */
+.pay-tiles{display:grid;gap:10px;margin-bottom:20px}
+.pay-tile{border:1px solid var(--hair-2);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;min-height:56px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.pay-tile:hover{border-color:var(--line-2)}
+.pay-tile:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.pay-tile input{accent-color:var(--ink);width:16px;height:16px;flex:none}
+.pay-tile b{font-weight:500;font-size:14.5px}
+.pay-tile span.sub{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.card-form{display:none;margin:4px 0 20px;padding:18px 20px;border:1px solid var(--hair);border-radius:14px;background:var(--band)}
+.card-form.on{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card-form .fld{margin:0}
+.card-form .fld.w2{grid-column:1/-1}
+.tabby-note{display:none;margin:4px 0 20px;padding:16px 18px;border:1px solid var(--hair);border-radius:14px;background:var(--band);font-size:13.5px;color:var(--ink-2)}
+.tabby-note.on{display:block}
+.tabby-note .tb-split{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.tabby-note .tb-split b{display:block;color:var(--ink);font-size:15px}
+
+/* review */
+.rev-sec{border-top:1px solid var(--hair);padding:18px 0}
+.rev-sec:first-child{border-top:0;padding-top:0}
+.rev-sec .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.rev-sec .hd b{font-size:14px}
+.rev-sec .hd button{font-size:13px}
+.rev-items{list-style:none;display:flex;flex-direction:column;gap:10px}
+
+.ckt-aside .sticky{position:sticky;top:calc(var(--hdr-h) + 16px)}
+.ckt-empty{max-width:460px}
+
+/* order confirmation */
+.conf-wrap{max-width:720px}
+.conf-card{border:1px solid var(--hair);border-radius:var(--r-card);box-shadow:var(--sh-2);padding:36px 40px;background:var(--pure);margin-top:24px}
+.conf-ref{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.conf-steps{list-style:none;counter-reset:cf;margin-top:22px;border-top:1px solid var(--hair);padding-top:18px}
+.conf-steps li{display:flex;gap:14px;padding:10px 0}
+.conf-steps li::before{counter-increment:cf;content:counter(cf);width:26px;height:26px;border-radius:50%;background:var(--bone-2);color:var(--ink-2);display:flex;align-items:center;justify-content:center;font:500 12px/1 var(--sans);flex:none}
+
+@media (max-width:980px){
+  .rx-grid,.addr-grid{grid-template-columns:1fr}
+  .ckt-grid{grid-template-columns:1fr}
+  .ckt-aside .sticky{position:static}
+}
+@media (max-width:640px){
+  .addr-form,.card-form.on{grid-template-columns:1fr}
+  .conf-card{padding:26px 22px}
+  .rx-card{padding:20px 18px}
+  /* stack the prescription table into a compact per-eye card instead of a wide table (no horizontal clipping) */
+  .rx-tbl,.rx-tbl tbody,.rx-tbl tr,.rx-tbl th,.rx-tbl td{display:block;width:100%}
+  .rx-tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .rx-tbl tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;border:1px solid var(--hair-2);border-radius:14px;padding:14px 16px 16px;margin-bottom:12px;background:var(--band)}
+  .rx-tbl tbody tr th{grid-column:1/-1;font:500 15px/1.2 var(--sans);padding:0 0 2px;text-align:start}
+  .rx-tbl tbody td{padding:0}
+  .rx-tbl tbody td[data-l]::before{content:attr(data-l);display:block;font:400 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);margin-bottom:4px}
+  .rx-tbl input{width:100%;min-width:0}
+}

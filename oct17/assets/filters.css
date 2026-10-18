@@ -1,0 +1,55 @@
+/* Sight Savers Optics · PLP filters (shop/contact-lenses/coloured/eyewear) + slim title band hero. Loads after nav.css. */
+
+/* ---------- slim title band (replaces tall photo hero on PLPs, keeps products above the fold) ---------- */
+.plp-head{position:relative;padding:24px 0 18px;overflow:hidden;background:linear-gradient(120deg,var(--sky,#EAF4FF) 0%,var(--aqua,#E6FAF6) 55%,var(--lilac,#F1EDFF) 100%)}
+.plp-head .wrap{position:relative;z-index:1}
+.plp-head h1{font:400 clamp(28px,3.2vw,40px)/1.1 var(--disp,"Fraunces",Georgia,serif);letter-spacing:-.02em;margin:4px 0 6px}
+.plp-head p{font-size:15.5px;color:var(--ink-2);max-width:620px}
+.plp-head .mono{color:var(--ink-2)}
+
+/* ---------- filter bar shell ---------- */
+.pf{position:relative}
+.pf-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.pf-pill{display:inline-flex;align-items:center;gap:8px;min-height:var(--tap);padding:0 18px;border-radius:var(--r-pill);border:1px solid var(--hair-2);background:var(--pure);font-size:14px;font-weight:500}
+.pf-pill:hover{border-color:var(--ink-3)}
+.pf-pill .pf-pillcount{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--ink);color:var(--on-dark);font:500 11px/1 var(--mono)}
+.pf-pill .pf-pillcount[hidden]{display:none}
+.pf-sort{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+.pf-sort label{font-size:13px;color:var(--ink-2);white-space:nowrap}
+.pf-sort select{min-height:40px;border:1px solid var(--hair-2);border-radius:var(--r-md);background:var(--pure);padding:0 30px 0 12px;font-size:13.5px}
+.pf-groups{display:block}
+.pf-groups .fgroup{margin-bottom:22px}
+.pf-groups .fgroup .chips{max-width:none}
+.pf-groups label.chip{cursor:pointer;gap:7px}
+.pf-groups label.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.pf-groups label.chip:has(input:checked){background:var(--ink);border-color:var(--ink);color:var(--on-dark)}
+.pf-groups label.chip:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:2px}
+.pf-groups label.chip.pf-zero{opacity:.4}
+.pf-groups label.chip .n{font:400 var(--fs-min)/1 var(--mono);opacity:.75}
+
+/* ---------- active filter chips row ---------- */
+.pf-activechips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding-top:14px;border-top:1px solid var(--hair)}
+.pf-activechips[hidden]{display:none}
+.pf-achip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 10px 0 14px;border-radius:var(--r-pill);background:var(--bone-2);font-size:13px;color:var(--ink)}
+.pf-achip .ico{width:14px;height:14px}
+.pf-achip:hover{background:var(--hair-2)}
+.pf-clearall-i{min-height:34px;padding:0 4px;font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+.pf-clearall-i:hover{color:var(--ink)}
+
+/* ---------- result line ---------- */
+.pf-resultline{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:8px;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- filter panel: an on-demand side drawer at every breakpoint (keeps the page compact
+   and products above the fold; reuses .drawer/.panel visual language from site.css) ---------- */
+.pf-scrim{position:fixed;inset:0;z-index:129;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.pf-scrim.open{opacity:1;pointer-events:auto}
+.pf-side{position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:130;width:min(380px,88vw);background:var(--bone);box-shadow:var(--sh-pop);padding:16px 20px 20px;overflow:auto;
+  transform:translateX(100%);transition:transform .3s ease}
+[dir=rtl] .pf-side{transform:translateX(-100%)}
+.pf-side.open{transform:translateX(0)}
+.pf-pan-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pf-pan-f{display:grid;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line);position:sticky;bottom:-20px;background:var(--bone)}
+
+@media (max-width:860px){
+  .pf-sort{margin-inline-start:0}
+}
