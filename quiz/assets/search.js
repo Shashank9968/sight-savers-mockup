@@ -21,7 +21,7 @@ const SYN={astig:['toric'],astigmatism:['toric'],cyl:['toric'],cylinder:['toric'
   kc:['keratoconus'],shortsighted:['myopia'],nearsighted:['myopia'],amblyopia:['lazy'],orthok:['ortho'],licence:['license'],license:['licence'],drop:['drops'],
   solutions:['solution'],kids:['children'],kid:['child'],child:['children'],blurred:['blurry'],blur:['blurry'],
   'يوميه':['daily'],'شهريه':['monthly'],'ملونه':['coloured'],'نظارات':['glasses'],'محلول':['solution'],'قطره':['drops'],'كرامه':['karama'],'برجمان':['burjuman']};
-const MED=['keratoconus','cornea','corneal','scleral','myopia','shortsighted','blurry','lazy','amblyopia','halos','ghosting','glare','vision','reading','magnifier','ortho',
+const MED=['keratoconus','cornea','corneal','scleral','myopia','shortsighted','blurry','lazy','amblyopia','halos','ghosting','glare','vision','reading','bioptic','ortho',
   'قرنيه','مخروطيه','قصر','ضعف','كسل'];
 // Damerau-Levenshtein (optimal string alignment) with a cut-off
 function dl(a,b,lim){if(Math.abs(a.length-b.length)>lim)return lim+1;const m=a.length,n=b.length;let d=[];for(let i=0;i<=m;i++){d[i]=[i];}for(let j=0;j<=n;j++)d[0][j]=j;

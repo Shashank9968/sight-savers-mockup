@@ -1,0 +1,142 @@
+/* Scleral-lens hero figure: a real close-up photo of an eye wearing a clear scleral lens, not a
+   drawing and not a mechanical rig. Card chrome matches the site's other anatomy figures
+   (.e3-fig/.an-fig); the photo itself carries the realism, with a light colour grade, a slow
+   gloss sheen across the lens and a pointer-tracked highlight, plus a hover/tap/keyboard toggle
+   that lights up the tear reservoir as a soft blue ring. Scoped under .pr-fig. */
+.pr-fig{margin:0;max-width:760px;margin-inline:auto;background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:30px 30px 32px;box-shadow:var(--sh-2)}
+.pr-head{margin:0 0 18px}
+.pr-head h2{margin:0 0 8px}
+.pr-eyebrow{margin:0 0 7px;font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--moss,#24323E)}
+.pr-hint{margin:0;color:var(--ink-2);font-size:14px}
+
+.pr-card{margin-top:2px}
+.pr-card-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;
+  font-family:var(--mono);font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.pr-fignum{color:var(--ink)}
+.pr-title{text-align:right}
+
+/* The stage is a <button> (one toggle for the whole figure) sized to the photo's own 16:9 ratio
+   so every percentage anchor below lines up with the real pixel it names, at any width. */
+.pr-stage{position:relative;display:block;width:100%;aspect-ratio:1280/720;border:0;margin:0;padding:0;
+  appearance:none;-webkit-appearance:none;font:inherit;
+  border-radius:var(--r-md);overflow:hidden;cursor:pointer;
+  background:
+    radial-gradient(120% 130% at 50% 32%,#202a38 0%,#121821 55%,#090c10 100%);
+  outline:1px solid oklch(0 0 0/.1);outline-offset:-1px;
+  -webkit-tap-highlight-color:transparent;isolation:isolate}
+.pr-stage:focus-visible{box-shadow:0 0 0 3px var(--white),0 0 0 6px var(--moss,#24323E)}
+
+.pr-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.05) contrast(1.05)}
+
+/* Colour grade: the raw photo runs warm (peach/orange skin) and the rest of the page runs cool
+   (--moss/--sky); this recolours the skin and lashes toward that same cool slate without touching
+   luminance (mix-blend-mode:color swaps hue+saturation only, so contrast and detail survive), and
+   stays off entirely in the centre -- a hole wider than the lens itself -- so the iris and pupil
+   keep their own true, saturated colour instead of being pulled toward slate. */
+.pr-grade{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color;opacity:.72;
+  background:
+    radial-gradient(60% 56% at 50% 48%,transparent 0%,transparent 36%,
+      color-mix(in srgb,var(--moss,#24323E) 68%,transparent) 76%,
+      color-mix(in srgb,var(--moss,#24323E) 90%,transparent) 100%)}
+
+/* Edge feather: normal-blended (not soft-light, which can't reliably reach white over dark lashes),
+   so the photo's hard rectangle reliably fades toward the card's own white at the rim -- the photo
+   sits in the page instead of reading as a pasted-in crop. The centre, where the eye itself sits,
+   stays untouched. */
+.pr-edge{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(58% 58% at 50% 50%,rgba(252,252,253,0) 58%,rgba(252,252,253,.96) 100%)}
+
+/* Pointer-parallax highlight: a soft light that drifts a few percent toward the cursor, screen
+   blended so it only ever brightens. Position comes from --gx/--gy, written by photoreal.js;
+   it rests at the lens's own highlight when the pointer isn't present. */
+.pr-glare{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:0;
+  transition:opacity .5s var(--ease-out,ease-out);
+  background:radial-gradient(140px 140px at var(--gx,42%) var(--gy,40%),rgba(255,255,255,.35),rgba(255,255,255,.08) 55%,rgba(255,255,255,0) 80%)}
+.pr-stage:hover .pr-glare,.pr-stage:focus-visible .pr-glare{opacity:1}
+.pr-glare{transition:opacity .5s var(--ease-out,ease-out),background-position .6s cubic-bezier(.22,1,.36,1)}
+
+.pr-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* Lens gloss sheen: a bright diagonal band clipped to the lens circle, sweeping across every
+   few seconds like light catching the lens surface. Calm and infrequent, never a constant
+   shimmer. clip-path ellipse() percentages resolve against width/height separately, so the
+   oval below reads as the lens's true circle once stretched to the card's own 16:9 box. */
+.pr-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+  clip-path:ellipse(18.07% 32.12% at 51.27% 51.22%);
+  background:linear-gradient(72deg,rgba(255,255,255,0) 44%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 56%);
+  transform:translateX(-60%);transform-origin:50% 50%;animation:pr-sweep 7.5s ease-in-out infinite}
+@keyframes pr-sweep{
+  0%{transform:translateX(-60%);opacity:0}
+  6%{opacity:.6}
+  24%{opacity:.6}
+  34%{transform:translateX(60%);opacity:0}
+  100%{transform:translateX(60%);opacity:0}
+}
+
+/* Tear reservoir: hidden until the figure is hovered, tapped (persists via [data-revealed]) or
+   activated from the keyboard -- a soft, subtle glow ring right at the lens's own edge
+   (#pr-ring-clip, the lens ellipse minus a slightly smaller copy of itself), reading as the tear
+   film catching light at the rim. Tinted from the brand's own mist/aqua tones (cosmos.css --sky/
+   --aqua) rather than a generic bright blue. Screen-blended and low-opacity so it never crosses
+   into or desaturates the iris/pupil. */
+.pr-ring{position:absolute;inset:0;pointer-events:none;opacity:0;overflow:hidden;
+  mix-blend-mode:screen;clip-path:url(#pr-ring-clip);
+  background:radial-gradient(ellipse 18.07% 32.12% at 51.27% 51.22%,
+    rgba(230,250,246,0) 76%,rgba(230,250,246,.46) 88%,rgba(234,244,255,.64) 95%,
+    rgba(199,214,224,.42) 100%);
+  transition:opacity .6s var(--ease-smooth-out,cubic-bezier(.22,1,.36,1))}
+.pr-stage:hover .pr-ring,.pr-stage[data-revealed="true"] .pr-ring,.pr-stage:focus-visible .pr-ring{opacity:1}
+
+.pr-leaders line{stroke:var(--on-dark,#fff);stroke-opacity:.78;stroke-width:2px;vector-effect:non-scaling-stroke}
+.pr-leaders circle{fill:var(--on-dark,#fff);stroke:var(--moss,#24323E);stroke-opacity:.55;stroke-width:1.4px;vector-effect:non-scaling-stroke}
+
+/* Labels sit near the edge of the frame, outside the iris and pupil, each with its own thin
+   leader line back to a dot anchored on the real feature. Percent positions, like the dots, so
+   they track the photo responsively (see photoreal.py SCLERAL_LABELS). Pill tint is the site's own
+   --moss token (a cool slate, matching the page's own ink/accent colour) rather than a generic
+   dark grey, so the overlay chrome reads as this brand's cool palette even over a photo. */
+.pr-label{position:absolute;max-width:30%;font:600 14px/1.3 var(--sans);color:var(--on-dark,#fff);
+  background:color-mix(in srgb,var(--moss,#24323E) 62%,transparent);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  padding:4px 10px;border-radius:999px;letter-spacing:.01em;white-space:nowrap;
+  border:1px solid rgba(255,255,255,.16);pointer-events:none;
+  box-shadow:0 0 0 0 transparent;transition:background .3s var(--ease-out,ease-out),box-shadow .3s var(--ease-out,ease-out)}
+
+/* Tap/hover state: when the reservoir is revealed, every pill picks up a faint cool ring so the
+   change registers even on a pointer-only glance, and the tear pill itself (the part actually lit)
+   shifts toward the same soft blue as the glow ring, instead of motion being the only cue. */
+.pr-stage:hover .pr-label,.pr-stage[data-revealed="true"] .pr-label{
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--sky,#EAF4FF) 65%,transparent)}
+.pr-stage:hover .pr-label[data-part="tear"],.pr-stage[data-revealed="true"] .pr-label[data-part="tear"]{
+  background:color-mix(in srgb,var(--moss,#24323E) 58%,var(--sky,#EAF4FF) 22%);
+  box-shadow:0 0 0 1.5px color-mix(in srgb,var(--sky,#EAF4FF) 85%,transparent)}
+.pr-label-top{top:4.5%;left:50%;transform:translateX(-50%);text-align:center}
+.pr-label-left{top:27%;left:3%;text-align:left}
+.pr-label-right{top:44%;right:3%;text-align:right}
+.pr-label-bottom{bottom:4%;left:24%;text-align:left}
+
+.pr-card-bottom{display:flex;justify-content:flex-end;margin-top:10px}
+.pr-readout{font-family:var(--mono);font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums;
+  background:var(--bone-2,#E8EBEE);border-radius:var(--r-pill,999px);padding:6px 13px;
+  transition:background .25s var(--ease-out,ease-out),color .25s var(--ease-out,ease-out),box-shadow .25s var(--ease-out,ease-out)}
+.pr-stage[data-revealed="true"]~.pr-card-bottom .pr-readout{background:var(--moss-2,#E7ECF0);color:var(--moss,#24323E);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--moss,#24323E) 22%,transparent)}
+
+.pr-caption{margin:18px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+@media (max-width:640px){
+  .pr-fig{padding:20px 18px 24px;border-radius:var(--r-lg,16px)}
+  .pr-card-top{flex-direction:column;align-items:flex-start;gap:3px}
+  .pr-label{font-size:14px;line-height:1.2;padding:3.5px 9px;max-width:44%;white-space:normal}
+  .pr-label-left{left:2%;max-width:38%}
+  .pr-label-right{right:2%;max-width:38%}
+  .pr-label-bottom{left:3%;max-width:94%;bottom:3%}
+  .pr-label-top{max-width:58%;top:3%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pr-sheen{animation:none;opacity:.22;transform:translateX(0) rotate(12deg)}
+  .pr-ring,.pr-glare,.pr-readout{transition:none}
+}

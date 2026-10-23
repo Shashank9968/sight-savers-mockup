@@ -1,0 +1,161 @@
+/* Low-vision central-scotoma figure: a realistic, self-built scene (a printed lunch-menu card lying
+   on a stone table, no photos, no cartoon face) sits behind a fixed, soft, dark, slightly
+   irregular blurred patch standing in for the central scotoma of macular degeneration. A
+   continuous slider (plus two 48px jump buttons at its ends) scales the whole scene around that
+   same fixed centre as the patch (--lvf-scale-with, modest, so the card's own edges stay in
+   frame), while the single bold key word at the middle of the menu carries a *second*, larger
+   scale of its own (--lvf-key-extra, see .lvf-keyscale) so it clears the patch -- the patch itself
+   never moves or resizes. Card chrome copies .pr-fig/.pr-card (the scleral photoreal figure) so
+   the two interactive figures match. Scoped under .lvf-fig; linked only on low-vision.html. */
+.lvf-fig{margin:0;max-width:760px;margin-inline:auto;background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:26px 28px 26px;box-shadow:var(--sh-2);
+  --lvf-scale-dur:250ms;--lvf-scale-ease:cubic-bezier(.22,1,.36,1);--lvf-scale-with:2;--lvf-key-extra:3.6;--lvf-amt:0}
+.lvf-head{margin:0 0 12px}
+.lvf-head h2{margin:0 0 5px}
+.lvf-eyebrow{margin:0 0 5px;font:700 14px/1.3 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--moss)}
+.lvf-hint{margin:0;color:var(--ink-2);font-size:14px}
+
+.lvf-card{margin-top:2px}
+.lvf-card-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;
+  font-family:var(--mono);font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.lvf-fignum{color:var(--ink)}
+.lvf-title-lbl{text-align:right}
+
+/* ---- the scene: a stone tabletop holding the printed menu, a wide 2:1 (600x300 viewBox) tabletop
+   photo on desktop. On narrow screens the container turns closer to square (see the media query
+   below) while the SVG keeps the same 600x300 viewBox -- preserveAspectRatio="xMidYMid slice" (set
+   in lowvisionfig.py) then crops the sides instead of letterboxing, so the card renders bigger and
+   the surrounding menu lines stay legible instead of shrinking into a tiny strip ---- */
+.lvf-scene{position:relative;width:100%;aspect-ratio:2/1;border-radius:var(--r-md);overflow:hidden;
+  outline:1px solid oklch(0 0 0/.08);outline-offset:-1px;isolation:isolate;background:var(--stone)}
+.lvf-scenesvg{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.lvf-table{fill:url(#lvf-table-grad)}
+.lvf-stonetex-rect{fill:url(#lvf-stonetex)}
+.lvf-fleck{fill:var(--ink);opacity:.1}
+.lvf-vignette{fill:url(#lvf-vignette)}
+.lvf-paper{fill:url(#lvf-paper-grad);stroke:var(--line);stroke-width:1}
+.lvf-rule{stroke:var(--line-2);stroke-width:1.4;stroke-linecap:round}
+.lvf-motif-dot{fill:var(--moss);opacity:.5}
+.lvf-title{font:600 11px/1 var(--disp,serif);font-variation-settings:"opsz" 18;letter-spacing:.09em;fill:var(--ink)}
+.lvf-key{font:800 9.5px/1 var(--disp,serif);font-variation-settings:"opsz" 30;letter-spacing:-.02em;fill:var(--ink)}
+.lvf-dish{font:500 12.5px/1 var(--disp,serif);font-variation-settings:"opsz" 18;letter-spacing:.005em;fill:var(--ink)}
+.lvf-footnote{font:italic 400 8.5px/1 var(--sans);letter-spacing:.01em;fill:var(--ink);fill-opacity:.62}
+
+/* the key word's own, independent faster scale -- see the module docstring in lowvisionfig.py
+   for why this is a second transform rather than folding it into the card's own scale. Shares the
+   same fixed pivot as .lvf-scenegroup below, so composing the two keeps the word dead-centred at
+   every slider position. */
+.lvf-keyscale{transform:scale(calc(1 + var(--lvf-amt,0) * (var(--lvf-key-extra) - 1)));
+  transform-box:view-box;transform-origin:300px 150px}
+.lvf-card.lvf-animate .lvf-keyscale{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
+
+/* the one group that moves: scaling happens around the viewBox's own centre (300,150), which is
+   also the centre the blind-spot overlay below is positioned at, so the two always share one
+   fixed pivot no matter how far the scene grows. --lvf-amt (0 to 1) is written by
+   lowvision-fig.js from the slider; the transition is only switched on for the button-jump
+   animation (see .lvf-card.lvf-animate below), so dragging the slider tracks the pointer with no
+   added lag. */
+.lvf-scenegroup{transform:scale(calc(1 + var(--lvf-amt,0) * (var(--lvf-scale-with) - 1)));
+  transform-box:view-box;transform-origin:300px 150px}
+.lvf-card.lvf-animate .lvf-scenegroup{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
+
+/* ---- the fixed blind spot: soft, dark, blurred and slightly irregular in outline (a true
+   circle reads too mechanical for a scotoma) -- same size and place in every slider position.
+   Sized as a percentage of the container's own width, so at this fixed 2:1 box a given
+   percentage-of-width also fixes its size relative to height, and the circle's solid core (the
+   mask's 0-58% stop) always sits fully over the key word at rest -- see lowvisionfig.py. ---- */
+.lvf-spot{position:absolute;left:50%;top:50%;width:9.5%;aspect-ratio:1/1;transform:translate(-50%,-50%);
+  border-radius:47% 53% 51% 49%/51% 47% 53% 49%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--ink) 62%,transparent) 0%,
+    color-mix(in srgb,var(--ink) 46%,transparent) 58%,transparent 100%);
+  -webkit-backdrop-filter:blur(7px) brightness(.6) saturate(.7);backdrop-filter:blur(7px) brightness(.6) saturate(.7);
+  -webkit-mask-image:radial-gradient(circle,#000 58%,transparent 100%);
+  mask-image:radial-gradient(circle,#000 58%,transparent 100%)}
+
+/* ---- legend chips under the scene: plain-English labels, never floating over the art ---- */
+.lvf-legend{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.lvf-chip{display:inline-flex;align-items:center;gap:7px;font:500 14px/1.3 var(--sans);color:var(--ink-2);
+  background:var(--bone-2);border:1px solid var(--line);border-radius:var(--r-pill);padding:5px 12px 5px 9px}
+.lvf-chip-dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+.lvf-chip-dot--spot{background:var(--ink)}
+.lvf-chip-dot--clear{background:var(--sky-2);box-shadow:inset 0 0 0 1px var(--moss-line)}
+
+/* ---- slider: a native range input styled to the site's tokens, with a 48px thumb and two
+   48px jump buttons at either end ---- */
+.lvf-sliderrow{display:flex;align-items:center;gap:10px;margin-top:12px}
+.lvf-endbtn{appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:var(--bone-2);
+  color:var(--ink-2);font:500 14px/1.2 var(--sans);min-height:48px;padding:0 14px;border-radius:var(--r-pill);
+  cursor:pointer;display:inline-flex;align-items:center;flex:none;-webkit-tap-highlight-color:transparent;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.lvf-endbtn:hover{border-color:var(--moss-line)}
+.lvf-endbtn:active{transform:scale(.96)}
+.lvf-endbtn[aria-pressed="true"]{background:var(--moss);border-color:var(--moss);color:#fff}
+.lvf-endbtn:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+
+.lvf-slider{flex:1 1 auto;min-width:0;-webkit-appearance:none;appearance:none;height:48px;background:transparent;
+  margin:0;padding:0;cursor:pointer;--lvf-pct:0%;outline:none}
+.lvf-slider::-webkit-slider-runnable-track{height:8px;border-radius:var(--r-pill);
+  background:linear-gradient(to right,var(--moss) var(--lvf-pct),var(--line) var(--lvf-pct))}
+.lvf-slider::-moz-range-track{height:8px;border-radius:var(--r-pill);background:var(--line)}
+.lvf-slider::-moz-range-progress{height:8px;border-radius:var(--r-pill);background:var(--moss)}
+/* the thumb itself is the 48px tap target (matching the two end buttons), drawn as a small
+   moss dot on a white disc so it doesn't read as oversized against the thin 8px track */
+.lvf-slider::-webkit-slider-thumb{-webkit-appearance:none;width:48px;height:48px;margin-top:-20px;border-radius:50%;
+  background:radial-gradient(circle,var(--moss) 0 22%,var(--white) 23% 100%);border:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(22,30,38,.3);transition:transform var(--dur) var(--ease)}
+.lvf-slider::-moz-range-thumb{width:48px;height:48px;border-radius:50%;
+  background:radial-gradient(circle,var(--moss) 0 22%,var(--white) 23% 100%);border:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(22,30,38,.3);transition:transform var(--dur) var(--ease)}
+.lvf-slider:active::-webkit-slider-thumb{transform:scale(1.08)}
+.lvf-slider:active::-moz-range-thumb{transform:scale(1.08)}
+.lvf-slider:focus-visible::-webkit-slider-thumb{outline:2px solid var(--moss);outline-offset:2px}
+.lvf-slider:focus-visible::-moz-range-thumb{outline:2px solid var(--moss);outline-offset:2px}
+
+.lvf-card-bottom{display:flex;justify-content:flex-end;margin-top:10px}
+.lvf-readout{font-family:var(--mono);font-size:14px;color:var(--ink-2);background:var(--bone-2);
+  border-radius:var(--r-pill);padding:6px 13px;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.lvf-card[data-lvf-state="mid"] .lvf-readout{background:var(--sky-2);color:var(--ink)}
+.lvf-card[data-lvf-state="with"] .lvf-readout{background:var(--moss-2);color:var(--moss);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--moss) 22%,transparent)}
+
+/* two classes beats the site-wide ".sp-art p{margin:0 0 14px}" typography reset, which otherwise
+   zeroes this margin-top and lets the readout pill touch the caption */
+.lvf-fig .lvf-caption{margin:12px 0 0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+
+@media (max-width:640px){
+  .lvf-fig{padding:16px 16px 16px;border-radius:var(--r-lg,16px)}
+  .lvf-head{margin-bottom:8px}
+  .lvf-card-top{flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:8px}
+  /* taller, closer-to-square scene so the card is big enough at rest to read "Luncheon menu" and
+     the other printed line -- the SVG itself is unchanged, see the slice crop note above */
+  .lvf-scene{aspect-ratio:1/1}
+  /* the HTML spot overlay is sized as a % of the *container width*, not the SVG viewBox, so when
+     the slice crop above halves how many viewBox units a given container width covers, the spot
+     has to double its % to still read as the same absolute size over the card -- see
+     lowvisionfig.py's geometry note */
+  .lvf-spot{width:20%}
+  /* the slice crop only ever shows the middle half of the 600-wide viewBox (see the geometry
+     note in lowvisionfig.py), so the wider printed lines need a smaller scale here than on
+     desktop to stay clear of that narrower window once the aid is on */
+  .lvf-fig{--lvf-scale-with:1.5}
+  /* bigger printed lines at rest for legibility on a small screen, tuned together with the
+     mobile --lvf-scale-with above so the same lines still clear the slice-crop window once the
+     aid is on full */
+  .lvf-title{font-size:12.5px}
+  .lvf-dish{font-size:14px}
+  .lvf-footnote{font-size:9px}
+  .lvf-legend{margin-top:6px;gap:5px}
+  .lvf-chip{padding:4px 10px 4px 8px;font-size:14px}
+  /* buttons share a row; the slider gets its own full-width row below so its track isn't
+     squeezed to a sliver between two 48px buttons */
+  .lvf-sliderrow{flex-wrap:wrap;row-gap:10px;margin-top:10px}
+  .lvf-endbtn{padding:0 14px;min-width:0}
+  .lvf-slider{order:3;flex:1 1 100%}
+  .lvf-card-bottom{margin-top:8px}
+  .lvf-fig .lvf-caption{margin-top:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .lvf-scenegroup,.lvf-keyscale,.lvf-endbtn,.lvf-slider::-webkit-slider-thumb,.lvf-slider::-moz-range-thumb,.lvf-readout{transition:none}
+}
