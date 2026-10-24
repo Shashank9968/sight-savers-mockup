@@ -1,15 +1,21 @@
 /* Low-vision central-scotoma figure: a realistic, self-built scene (a printed lunch-menu card lying
-   on a stone table, no photos, no cartoon face) sits behind a fixed, soft, dark, slightly
-   irregular blurred patch standing in for the central scotoma of macular degeneration. A
-   continuous slider (plus two 48px jump buttons at its ends) scales the whole scene around that
-   same fixed centre as the patch (--lvf-scale-with, modest, so the card's own edges stay in
-   frame), while the single bold key word at the middle of the menu carries a *second*, larger
-   scale of its own (--lvf-key-extra, see .lvf-keyscale) so it clears the patch -- the patch itself
-   never moves or resizes. Card chrome copies .pr-fig/.pr-card (the scleral photoreal figure) so
-   the two interactive figures match. Scoped under .lvf-fig; linked only on low-vision.html. */
+   on a stone table, no photos, no cartoon face) sits behind a soft, dark, slightly irregular
+   blurred patch standing in for the central scotoma of macular degeneration. The patch is FIXED at
+   the scene's exact centre in every state -- a real scotoma doesn't move when you put an aid on, it
+   just stops being the only place you're looking. A continuous slider (plus two 48px jump buttons
+   at its ends) scales the whole scene around that same fixed centre (--lvf-scale-with, modest, so
+   the card's own edges stay in frame), while the single bold key word at the middle of the menu
+   carries a *second*, larger scale of its own (--lvf-key-extra, see .lvf-key-html) *and* shifts
+   sideways off the patch's centre (--lvf-key-shift, horizontal, see .lvf-key-wrap) as the aid comes
+   on, so the enlarged word ends up fully clear of the still-centred patch, in the reader's side
+   vision, instead of the patch chasing it (fix pass 2, Oct 23 -- the patch itself used to drift,
+   which read as if the blind spot moved, backwards from how macular degeneration actually works).
+   Card chrome copies .pr-fig/.pr-card (the scleral photoreal figure) so the two interactive figures
+   match. Scoped under .lvf-fig; linked only on low-vision.html. */
 .lvf-fig{margin:0;max-width:760px;margin-inline:auto;background:var(--white);border:1px solid var(--line);
   border-radius:var(--r-lg);padding:26px 28px 26px;box-shadow:var(--sh-2);
-  --lvf-scale-dur:250ms;--lvf-scale-ease:cubic-bezier(.22,1,.36,1);--lvf-scale-with:2;--lvf-key-extra:3.6;--lvf-amt:0}
+  --lvf-scale-dur:250ms;--lvf-scale-ease:cubic-bezier(.22,1,.36,1);--lvf-scale-with:1.5;--lvf-key-extra:2;
+  --lvf-key-shift:18%;--lvf-amt:0}
 .lvf-head{margin:0 0 12px}
 .lvf-head h2{margin:0 0 5px}
 .lvf-eyebrow{margin:0 0 5px;font:700 14px/1.3 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--moss)}
@@ -37,18 +43,45 @@
 .lvf-paper{fill:url(#lvf-paper-grad);stroke:var(--line);stroke-width:1}
 .lvf-rule{stroke:var(--line-2);stroke-width:1.4;stroke-linecap:round}
 .lvf-motif-dot{fill:var(--moss);opacity:.5}
-.lvf-title{font:600 11px/1 var(--disp,serif);font-variation-settings:"opsz" 18;letter-spacing:.09em;fill:var(--ink)}
-.lvf-key{font:800 9.5px/1 var(--disp,serif);font-variation-settings:"opsz" 30;letter-spacing:-.02em;fill:var(--ink)}
-.lvf-dish{font:500 12.5px/1 var(--disp,serif);font-variation-settings:"opsz" 18;letter-spacing:.005em;fill:var(--ink)}
-.lvf-footnote{font:italic 400 8.5px/1 var(--sans);letter-spacing:.01em;fill:var(--ink);fill-opacity:.62}
 
-/* the key word's own, independent faster scale -- see the module docstring in lowvisionfig.py
-   for why this is a second transform rather than folding it into the card's own scale. Shares the
-   same fixed pivot as .lvf-scenegroup below, so composing the two keeps the word dead-centred at
-   every slider position. */
-.lvf-keyscale{transform:scale(calc(1 + var(--lvf-amt,0) * (var(--lvf-key-extra) - 1)));
-  transform-box:view-box;transform-origin:300px 150px}
-.lvf-card.lvf-animate .lvf-keyscale{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
+/* ---- printed lines: real HTML text laid over the (now text-less) paper SVG, never SVG <text>,
+   so every line renders at a true, explicit CSS px size and can never be shrunk by the viewBox
+   scaling down into a narrow container (Task 2e). Two wrappers mirror the SVG's own transform
+   chain exactly so the text tracks the paper at every slider position: .lvf-textscale = the
+   card's own scale (was .lvf-scenegroup), .lvf-textrotate = the paper's tilt (was .lvf-papergroup
+   rotate). Both share the same fixed pivot (50% 50%) as the blind-spot overlay below. The
+   footnote (.lvf-footnote-html) is positioned straight on .lvf-scene, outside both wrappers -- see
+   its own rule and lowvisionfig.py's FOOT_Y_PCT comment for why. ---- */
+.lvf-textscale{position:absolute;inset:0;pointer-events:none;
+  transform:scale(calc(1 + var(--lvf-amt,0) * (var(--lvf-scale-with) - 1)));transform-origin:50% 50%}
+.lvf-card.lvf-animate .lvf-textscale{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
+.lvf-textrotate{position:absolute;inset:0;transform:rotate(-1.6deg);transform-origin:50% 50%}
+
+.lvf-title-html,.lvf-dish-html,.lvf-footnote-html{position:absolute;left:50%;transform:translate(-50%,-50%);
+  margin:0;text-align:center;white-space:nowrap}
+.lvf-title-html{font:600 14px/1.2 var(--disp,serif);font-variation-settings:"opsz" 18;letter-spacing:.07em;color:var(--ink)}
+.lvf-dish-html{font:500 14px/1.2 var(--disp,serif);font-variation-settings:"opsz" 18;color:var(--ink)}
+/* fixed at a flat % of .lvf-scene (its own `top`, set inline from FOOT_Y_PCT) and never scaled by
+   --lvf-amt -- stacking four lines plus the blind-spot overlay in a 2:1 card left no --lvf-foot-y
+   that could both clear the scaled-up dish line and stay inside the scene's bottom edge at once
+   (fix pass 3). Always a true, explicit 14px regardless of slider position (Task 2e). */
+.lvf-footnote-html{font:italic 400 14px/1.15 var(--sans);color:var(--ink);opacity:.62}
+
+/* the key word's own, independent faster scale *and* a sideways shift that grows with --lvf-amt,
+   so at full aid "SOUP" has both grown and moved clear of the fixed, centred blind-spot overlay
+   below instead of just growing underneath it (Task 2a). Horizontal, not vertical: the title and
+   dish lines sit close above/below on this same row's narrow vertical budget, so moving sideways
+   into the card's wide margin is what has somewhere to go. The shift lives on `left` (resolved
+   against the .lvf-textrotate containing block, same fixed pivot as the spot below), not inside
+   `transform`, so it composes predictably with the scale instead of being resolved against the
+   word's own, growing box. Tuned against real bounding-box measurements at 1440 and 390. */
+.lvf-key-wrap{position:absolute;top:var(--lvf-key-y, 51.333%);transform:translate(-50%,-50%);pointer-events:none;
+  left:calc(50% + var(--lvf-amt,0) * var(--lvf-key-shift))}
+.lvf-card.lvf-animate .lvf-key-wrap{transition:left var(--lvf-scale-dur) var(--lvf-scale-ease)}
+.lvf-key-html{display:block;font:800 16px/1.1 var(--disp,serif);font-variation-settings:"opsz" 30;
+  letter-spacing:-.02em;color:var(--ink);white-space:nowrap;
+  transform:scale(calc(1 + var(--lvf-amt,0) * (var(--lvf-key-extra) - 1)))}
+.lvf-card.lvf-animate .lvf-key-html{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
 
 /* the one group that moves: scaling happens around the viewBox's own centre (300,150), which is
    also the centre the blind-spot overlay below is positioned at, so the two always share one
@@ -60,13 +93,17 @@
   transform-box:view-box;transform-origin:300px 150px}
 .lvf-card.lvf-animate .lvf-scenegroup{transition:transform var(--lvf-scale-dur) var(--lvf-scale-ease)}
 
-/* ---- the fixed blind spot: soft, dark, blurred and slightly irregular in outline (a true
-   circle reads too mechanical for a scotoma) -- same size and place in every slider position.
-   Sized as a percentage of the container's own width, so at this fixed 2:1 box a given
-   percentage-of-width also fixes its size relative to height, and the circle's solid core (the
-   mask's 0-58% stop) always sits fully over the key word at rest -- see lowvisionfig.py. ---- */
-.lvf-spot{position:absolute;left:50%;top:50%;width:9.5%;aspect-ratio:1/1;transform:translate(-50%,-50%);
-  border-radius:47% 53% 51% 49%/51% 47% 53% 49%;pointer-events:none;
+/* ---- the blind spot: soft, dark, blurred and slightly irregular in outline (a true circle reads
+   too mechanical for a scotoma). FIXED dead centre of the scene in every state -- it represents the
+   macular degeneration itself, which an optical aid doesn't relocate, only the key word moves
+   (see .lvf-key-wrap above). At rest it sits over the key word, same as a real scotoma hiding the
+   word you're looking at; once the aid is on, the word has moved and enlarged into clear side
+   vision while the spot stays exactly where it started. Sized as a percentage of the container's
+   own width, so at this fixed 2:1 box a given percentage-of-width also fixes its size relative to
+   height -- see lowvisionfig.py. ---- */
+.lvf-spot{position:absolute;width:9.5%;aspect-ratio:1/1;pointer-events:none;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:47% 53% 51% 49%/51% 47% 53% 49%;
   background:radial-gradient(circle,color-mix(in srgb,var(--ink) 62%,transparent) 0%,
     color-mix(in srgb,var(--ink) 46%,transparent) 58%,transparent 100%);
   -webkit-backdrop-filter:blur(7px) brightness(.6) saturate(.7);backdrop-filter:blur(7px) brightness(.6) saturate(.7);
@@ -137,14 +174,19 @@
   .lvf-spot{width:20%}
   /* the slice crop only ever shows the middle half of the 600-wide viewBox (see the geometry
      note in lowvisionfig.py), so the wider printed lines need a smaller scale here than on
-     desktop to stay clear of that narrower window once the aid is on */
-  .lvf-fig{--lvf-scale-with:1.5}
-  /* bigger printed lines at rest for legibility on a small screen, tuned together with the
-     mobile --lvf-scale-with above so the same lines still clear the slice-crop window once the
-     aid is on full */
-  .lvf-title{font-size:12.5px}
-  .lvf-dish{font-size:14px}
-  .lvf-footnote{font-size:9px}
+     desktop to stay clear of that narrower window once the aid is on; the key word's sideways
+     shift is also a container-% (same basis as the fixed spot's own 20% width just below), tuned
+     so the grown word clears the spot inside this narrower crop. The smaller --lvf-scale-with
+     (vs. desktop's 1.5) also keeps the dish line's own full-aid growth short enough to leave the
+     fixed-position footnote below it (see .lvf-footnote-html) a real, measured gap on this
+     shorter mobile card. */
+  .lvf-fig{--lvf-scale-with:1.3;--lvf-key-shift:22%;--lvf-key-extra:1.25}
+  /* the mobile scene is a narrow square (not the wide 2:1 desktop box), so the footnote's one
+     line from the base rule no longer fits -- wrapped back to two lines here, same as it was
+     before this became HTML, but at a real, explicit 14px (Task 2d/2e). Its fixed `top` (see
+     lowvisionfig.py's FOOT_Y_PCT) already clears both the dish line and this card's shorter
+     bottom edge at this width, so no override is needed here. */
+  .lvf-footnote-html{white-space:normal;width:52%}
   .lvf-legend{margin-top:6px;gap:5px}
   .lvf-chip{padding:4px 10px 4px 8px;font-size:14px}
   /* buttons share a row; the slider gets its own full-width row below so its track isn't
@@ -157,5 +199,6 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  .lvf-scenegroup,.lvf-keyscale,.lvf-endbtn,.lvf-slider::-webkit-slider-thumb,.lvf-slider::-moz-range-thumb,.lvf-readout{transition:none}
+  .lvf-scenegroup,.lvf-textscale,.lvf-key-wrap,.lvf-key-html,.lvf-spot,.lvf-endbtn,
+  .lvf-slider::-webkit-slider-thumb,.lvf-slider::-moz-range-thumb,.lvf-readout{transition:none}
 }
