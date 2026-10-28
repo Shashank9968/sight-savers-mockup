@@ -1,0 +1,179 @@
+/* Sight Savers Optics · Scleral lenses hero E5 — calm ambient loop.
+   Self-contained: does not load scleral-hero-e.css / -e2.css / -e3.css / -e4.css.
+   Scoped "shx-e5-" classes. Loaded after scleral-hero.css (hero-e5.html only).
+   Pure CSS, no JS. Nothing in this block looks clickable: pointer-events:none throughout,
+   no hover/focus/cursor states. */
+
+/* total loop = 26s, 4 scenes x 6.5s. Loop STARTS on Morning "without" at 0s (the patient's
+   problem is the first frame seen, no fade-in from empty). Order: Morning, Drive, Family,
+   then the real lens photo "Fitted by our specialists" last, wrapping seamlessly back to
+   Morning "without" at 26s(=0s). Every boundary crossfade is 1.2s, shared between the
+   outgoing and incoming scene (it happens entirely inside the ending scene's last 1.2s —
+   the incoming scene is already fully opaque the instant its own slot begins).
+   Scenes 1-3(content slots 0-2) hold "without" ~2.05s, dissolve to "with" over 1.2s, hold
+   "with" ~2.05s, then crossfade 1.2s into the next slot. The lens (slot 3) is a single
+   image: crossfades in, holds ~5.3s, crossfades out into Morning "without" at the seam.
+   Scene windows (abs s): Morning 0-6.5, Drive 6.5-13, Family 13-19.5, Lens 19.5-26(=0).
+   Timeline (s):
+     0.00  Morning "without" fully in (first frame on load, doubled/blurry phone text)
+     5.30  Morning "without" starts dissolving to "with"
+     6.50  Morning "with" fully in (also: Drive "without" starts its own slot)
+     7.30  Drive "without" fully in
+    12.30  Morning "with" has long since settled; (kept for readability — see per-scene list below)
+    13.00  Family "without" fully in
+    19.50  Lens opener fully in, holds
+    24.80  Lens starts crossfading out
+    26.00  = 0.00, Morning "without" fully back in, loop repeats seamlessly
+   Full per-scene breakdown is in the keyframes below; each slot is 0-25% / 25-50% / 50-75% /
+   75-100% of the 26s animation, i.e. ×0.26 to get seconds. */
+
+.shx-e-eyebrow{color:#475569}
+
+.shx-e5-media{background:#dfe7ee}
+.shx-e5-media,.shx-e5-media *{pointer-events:none}
+
+/* ---- scene stack + Ken Burns (scale only, max 1.03, continuous through each scene) ---- */
+.shx-e5-scene{position:absolute;inset:0;animation:26s cubic-bezier(.4,0,.2,1) infinite}
+.shx-e5-scene[data-scene="0"]{--shx-e5-ox:68%;--shx-e5-oy:24%;transform-origin:var(--shx-e5-ox) var(--shx-e5-oy);animation-name:shx-e5-zoom0}
+.shx-e5-scene[data-scene="1"]{--shx-e5-ox:68%;--shx-e5-oy:40%;transform-origin:var(--shx-e5-ox) var(--shx-e5-oy);animation-name:shx-e5-zoom1}
+.shx-e5-scene[data-scene="2"]{--shx-e5-ox:58%;--shx-e5-oy:30%;transform-origin:var(--shx-e5-ox) var(--shx-e5-oy);animation-name:shx-e5-zoom2}
+.shx-e5-scene[data-scene="3"]{transform-origin:var(--shx-e5-lens-ox,53%) var(--shx-e5-lens-oy,33%);animation-name:shx-e5-zoom3}
+
+@keyframes shx-e5-zoom0{0%{transform:scale(1)}25%{transform:scale(1.03)}25.001%{transform:scale(1)}100%{transform:scale(1)}}
+@keyframes shx-e5-zoom1{0%{transform:scale(1)}25%{transform:scale(1)}50%{transform:scale(1.03)}50.001%{transform:scale(1)}100%{transform:scale(1)}}
+@keyframes shx-e5-zoom2{0%{transform:scale(1)}50%{transform:scale(1)}75%{transform:scale(1.03)}75.001%{transform:scale(1)}100%{transform:scale(1)}}
+@keyframes shx-e5-zoom3{0%{transform:scale(1)}75%{transform:scale(1)}100%{transform:scale(1.03)}}
+
+.shx-e5-img{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  object-fit:cover;will-change:opacity;opacity:0;
+  animation-duration:26s;animation-timing-function:cubic-bezier(.4,0,.2,1);animation-iteration-count:infinite;
+}
+.shx-e5-scene[data-scene="0"] .shx-e5-img{object-position:var(--shx-e5-ox) var(--shx-e5-oy)}
+.shx-e5-scene[data-scene="1"] .shx-e5-img{object-position:var(--shx-e5-ox) var(--shx-e5-oy)}
+.shx-e5-scene[data-scene="2"] .shx-e5-img{object-position:var(--shx-e5-ox) var(--shx-e5-oy)}
+
+/* scene "Morning" (slot 0): the very first frame on load. opacity:1 at 0% so it is visible
+   immediately — no fade-in from empty. It also straddles the loop seam: Lens (slot 3)
+   crossfades out into it during the last 1.2s of the timeline. */
+.shx-e5-scene[data-scene="0"] .shx-e5-without{animation-name:shx-e5-s0w;opacity:1}
+.shx-e5-scene[data-scene="0"] .shx-e5-with{animation-name:shx-e5-s0x}
+.shx-e5-scene[data-scene="1"] .shx-e5-without{animation-name:shx-e5-s1w}
+.shx-e5-scene[data-scene="1"] .shx-e5-with{animation-name:shx-e5-s1x}
+.shx-e5-scene[data-scene="2"] .shx-e5-without{animation-name:shx-e5-s2w}
+.shx-e5-scene[data-scene="2"] .shx-e5-with{animation-name:shx-e5-s2x}
+
+@keyframes shx-e5-s0w{0%{opacity:1}7.885%{opacity:1}12.5%{opacity:0}95.385%{opacity:0}100%{opacity:1}}
+@keyframes shx-e5-s0x{0%{opacity:0}7.885%{opacity:0}12.5%{opacity:1}20.385%{opacity:1}25%{opacity:0}100%{opacity:0}}
+@keyframes shx-e5-s1w{0%{opacity:0}20.385%{opacity:0}25%{opacity:1}32.885%{opacity:1}37.5%{opacity:0}100%{opacity:0}}
+@keyframes shx-e5-s1x{0%{opacity:0}32.885%{opacity:0}37.5%{opacity:1}45.385%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@keyframes shx-e5-s2w{0%{opacity:0}45.385%{opacity:0}50%{opacity:1}57.885%{opacity:1}62.5%{opacity:0}100%{opacity:0}}
+@keyframes shx-e5-s2x{0%{opacity:0}57.885%{opacity:0}62.5%{opacity:1}70.385%{opacity:1}75%{opacity:0}100%{opacity:0}}
+
+/* scene "Lens" (slot 3, last): single real fitting photo, no without/with dissolve.
+   Crossfades in from Family "with", holds, crossfades out into Morning "without" at the seam. */
+@keyframes shx-e5-s3-lens{0%{opacity:0}70.385%{opacity:0}75%{opacity:1}95.385%{opacity:1}100%{opacity:0}}
+.shx-e5-img.shx-e5-lens-img{animation-name:shx-e5-s3-lens;object-position:var(--shx-e5-lens-ox,53%) var(--shx-e5-lens-oy,33%)}
+
+/* ---- desktop lens opener: whole photo visible, contained, on a soft cool backdrop ---- */
+@media(min-width:761px){
+  /* the backdrop is a ::before (not a plain background on the scene div) so it fades in/out
+     in lockstep with the lens photo's own opacity — the scene div is last in DOM order (it
+     is shown last in the loop) so a plain opaque background on it would otherwise permanently
+     paint over the Morning/Drive/Family scenes underneath, even while they are on screen. */
+  .shx-e5-scene-lens::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(60% 55% at 72% 42%,rgba(255,255,255,.6),transparent 70%),
+      linear-gradient(135deg,#eef2f6 0%,#e2e8f0 100%);
+    opacity:0;
+    animation:26s cubic-bezier(.4,0,.2,1) infinite shx-e5-s3-lens;
+  }
+  .shx-e5-scene[data-scene="3"]{animation:none;transform:none}
+  .shx-e5-media .shx-e5-scene-lens .shx-e5-lens-img{
+    top:0;bottom:0;left:min(480px,44%);right:16px;margin:auto;
+    width:auto;height:60%;max-width:calc(100% - min(480px,44%) - 16px);
+    aspect-ratio:16/9;object-fit:contain;object-position:center;
+    border-radius:22px;
+    box-shadow:0 30px 60px -35px rgba(30,41,59,.3);
+    -webkit-mask-image:radial-gradient(ellipse 68% 68% at 50% 50%,#000 58%,transparent 100%);
+    mask-image:radial-gradient(ellipse 68% 68% at 50% 50%,#000 58%,transparent 100%);
+    animation:26s cubic-bezier(.4,0,.2,1) infinite shx-e5-s3-lens,26s cubic-bezier(.4,0,.2,1) infinite shx-e5-zoom3;
+    transform-origin:50% 50%;
+  }
+}
+
+/* ---- quiet caption pills, bottom-right of the photo, each sized to its own text ---- */
+.shx-e5-pill{position:absolute;right:12px;bottom:12px;z-index:3;margin:0;width:0;height:0;overflow:visible}
+.shx-e5-cap{
+  position:absolute;right:0;bottom:0;inline-size:fit-content;max-width:calc(100vw - 24px);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  font:600 14px/1.3 var(--sans,"Inter Tight",system-ui,sans-serif);color:#fff;
+  background:rgba(15,23,42,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:6px 12px;border-radius:999px;
+  opacity:0;transform:translateY(3px);
+  animation-duration:26s;animation-timing-function:cubic-bezier(.4,0,.2,1);animation-iteration-count:infinite;
+}
+.shx-e5-cap[data-cap="s1-without"]{animation-name:shx-e5-cap-s1w}
+.shx-e5-cap[data-cap="s1-with"]{animation-name:shx-e5-cap-s1x}
+.shx-e5-cap[data-cap="s2-without"]{animation-name:shx-e5-cap-s2w}
+.shx-e5-cap[data-cap="s2-with"]{animation-name:shx-e5-cap-s2x}
+.shx-e5-cap[data-cap="s3-without"]{animation-name:shx-e5-cap-s3w}
+.shx-e5-cap[data-cap="s3-with"]{animation-name:shx-e5-cap-s3x}
+.shx-e5-cap[data-cap="s0"]{animation-name:shx-e5-cap-s0}
+.shx-e5-cap-ico{width:13px;height:13px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Morning (slot 0) captions */
+@keyframes shx-e5-cap-s1w{0%{opacity:0;transform:translateY(3px)}1.538%{opacity:0;transform:translateY(3px)}3.077%{opacity:1;transform:translateY(0)}6.731%{opacity:1;transform:translateY(0)}7.885%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+@keyframes shx-e5-cap-s1x{0%{opacity:0}14.038%{opacity:0;transform:translateY(3px)}15.577%{opacity:1;transform:translateY(0)}19.231%{opacity:1;transform:translateY(0)}20.385%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+/* Drive (slot 1) captions */
+@keyframes shx-e5-cap-s2w{0%{opacity:0}26.538%{opacity:0;transform:translateY(3px)}28.077%{opacity:1;transform:translateY(0)}31.731%{opacity:1;transform:translateY(0)}32.885%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+@keyframes shx-e5-cap-s2x{0%{opacity:0}39.038%{opacity:0;transform:translateY(3px)}40.577%{opacity:1;transform:translateY(0)}44.231%{opacity:1;transform:translateY(0)}45.385%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+/* Family (slot 2) captions */
+@keyframes shx-e5-cap-s3w{0%{opacity:0}51.538%{opacity:0;transform:translateY(3px)}53.077%{opacity:1;transform:translateY(0)}56.731%{opacity:1;transform:translateY(0)}57.885%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+@keyframes shx-e5-cap-s3x{0%{opacity:0}64.038%{opacity:0;transform:translateY(3px)}65.577%{opacity:1;transform:translateY(0)}69.231%{opacity:1;transform:translateY(0)}70.385%{opacity:0;transform:translateY(3px)}100%{opacity:0}}
+/* Lens (slot 3) caption — covers the whole slot, same shape as a scene-level caption */
+@keyframes shx-e5-cap-s0{0%{opacity:0;transform:translateY(3px)}76.538%{opacity:0;transform:translateY(3px)}78.077%{opacity:1;transform:translateY(0)}94.231%{opacity:1;transform:translateY(0)}95.385%{opacity:0;transform:translateY(3px)}100%{opacity:0;transform:translateY(3px)}}
+
+@media(min-width:761px){
+  .shx-e5-pill{right:22px;bottom:20px}
+}
+
+/* ---- optional hairline progress, bottom edge of the photo, no labels ---- */
+.shx-e5-hair{position:absolute;left:0;right:0;bottom:0;height:1px;z-index:3;display:flex}
+.shx-e5-hair-seg{flex:1 1 25%;position:relative;overflow:hidden}
+.shx-e5-hair-fill{position:absolute;inset:0;background:#fff;opacity:.25;transform:scaleX(0);transform-origin:left;
+  animation-duration:26s;animation-timing-function:cubic-bezier(.4,0,.2,1);animation-iteration-count:infinite}
+.shx-e5-hair-seg[data-seg="0"] .shx-e5-hair-fill{animation-name:shx-e5-hair0}
+.shx-e5-hair-seg[data-seg="1"] .shx-e5-hair-fill{animation-name:shx-e5-hair1}
+.shx-e5-hair-seg[data-seg="2"] .shx-e5-hair-fill{animation-name:shx-e5-hair2}
+.shx-e5-hair-seg[data-seg="3"] .shx-e5-hair-fill{animation-name:shx-e5-hair3}
+
+@keyframes shx-e5-hair0{0%{transform:scaleX(0)}25%{transform:scaleX(1)}25.001%{transform:scaleX(0)}100%{transform:scaleX(0)}}
+@keyframes shx-e5-hair1{0%{transform:scaleX(0)}25%{transform:scaleX(0)}50%{transform:scaleX(1)}50.001%{transform:scaleX(0)}100%{transform:scaleX(0)}}
+@keyframes shx-e5-hair2{0%{transform:scaleX(0)}50%{transform:scaleX(0)}75%{transform:scaleX(1)}75.001%{transform:scaleX(0)}100%{transform:scaleX(0)}}
+@keyframes shx-e5-hair3{0%{transform:scaleX(0)}75%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+
+/* ---- reduced motion: static Morning "with" frame, static caption ---- */
+@media(prefers-reduced-motion:reduce){
+  .shx-e5-scene,.shx-e5-img,.shx-e5-cap,.shx-e5-hair-fill,.shx-e5-lens-img{animation:none}
+  .shx-e5-scene{transform:none}
+  .shx-e5-img{opacity:0}
+  .shx-e5-scene[data-scene="0"] .shx-e5-with{opacity:1}
+  .shx-e5-cap{opacity:0}
+  .shx-e5-cap[data-cap="s1-with"]{opacity:1;transform:none}
+  .shx-e5-hair-fill{transform:scaleX(0)}
+}
+
+/* ---- 390px fix: nav.crumb must sit fully above .sp-glance-sec with a clear 16px gap.
+   .sp-glance-sec normally pulls itself up (margin-top:-56px / -28px at <=900px) to overlap
+   a hero photo it sits directly under elsewhere on the site; this hero has a breadcrumb in
+   between instead, so that negative margin makes the crumb and the glance card overlap. ---- */
+@media(max-width:900px){
+  .shx-hero + .crumb + .sp-glance-sec{margin-top:16px}
+}
+
+/* reduced motion: keep the (higher-specificity) desktop lens rule static and hidden */
+@media(prefers-reduced-motion:reduce){
+  .shx-e5-media .shx-e5-scene-lens .shx-e5-lens-img,.shx-e5-scene-lens::before{animation:none;opacity:0}
+}

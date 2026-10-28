@@ -74,3 +74,6 @@
 
   .shx-caption{left:auto;max-width:300px}
 }
+
+/* breadcrumb fix at all widths: clean gap between nav.crumb and the "Who it's for" card */
+.shx-hero + .crumb + .sp-glance-sec{margin-top:16px}
