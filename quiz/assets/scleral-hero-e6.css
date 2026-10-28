@@ -1,0 +1,32 @@
+/* Sight Savers Optics · Scleral lenses hero E6 — same navy undertone family as the
+   other live hero pages (cosmos.css: #0D1B2A / rgba(13,27,42,a)), applied subtly to
+   the photo only. Loaded after scleral-hero-live.css + scleral-hero-e5-live.css
+   (hero-e6.html only). Overrides only: no edits to the live files.
+
+   Text stays off the photo here (unlike cosmos.css pages) — .shx-wrap/.shx-scrim
+   are untouched. The wash lives on a ::after above the images, below the caption
+   pill/hairline: .shx-e5-pill/.shx-e5-hair keep explicit z-index:3 and .shx-scrim/
+   .shx-wrap keep z-index:1/2, so this unlayered (z-index:auto) pseudo-element
+   always paints under all four and above the (also z-index:auto) scene images,
+   with no z-index of its own needed. Static, not animated, pointer-events:none. */
+
+.shx-e5-media::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(0deg,rgba(13,27,42,.22) 0%,rgba(13,27,42,0) 25%),
+    linear-gradient(180deg,rgba(13,27,42,.18),rgba(13,27,42,0) 100px),
+    radial-gradient(640px 420px at 88% 6%,rgba(214,233,255,.12),transparent 60%),
+    rgba(13,27,42,.13);
+}
+
+.shx-e5-img{filter:saturate(1.05) contrast(1.03)}
+
+@media(min-width:761px){
+  .shx-e5-media::after{
+    background:
+      linear-gradient(90deg,rgba(13,27,42,.28) 0%,rgba(13,27,42,.14) 22%,rgba(13,27,42,0) 45%),
+      linear-gradient(180deg,rgba(13,27,42,.18),rgba(13,27,42,0) 100px),
+      radial-gradient(640px 420px at 88% 6%,rgba(214,233,255,.12),transparent 60%),
+      rgba(13,27,42,.13);
+  }
+}
