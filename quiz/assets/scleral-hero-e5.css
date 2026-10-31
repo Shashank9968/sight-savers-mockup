@@ -177,3 +177,7 @@
 @media(prefers-reduced-motion:reduce){
   .shx-e5-media .shx-e5-scene-lens .shx-e5-lens-img,.shx-e5-scene-lens::before{animation:none;opacity:0}
 }
+
+/* scene 4 photo: Shashank's own plunger shot (scleral-lens-plunger.jpg); its lens sits a little
+   left of and lower than the old stock frame, so re-centre the crop and zoom on it */
+.shx-e5-scene[data-scene="3"]{--shx-e5-lens-ox:46%;--shx-e5-lens-oy:46%}

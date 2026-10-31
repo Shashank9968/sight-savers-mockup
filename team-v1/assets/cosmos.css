@@ -796,3 +796,25 @@ body.ohero .hdr:not(.m-scrolled):not(:hover):not(:focus-within):not(.search-open
    <=400px: tighter header side padding. <=374px: search moves to the menu (the drawer already has a Search link). */
 @media (max-width:400px){.hdr .wrap{padding-left:12px!important;padding-right:12px!important;column-gap:6px!important}}
 @media (max-width:374px){.hdr .hr [data-search]{display:none!important}}
+
+/* clickable anatomy labels (anatomy-click.js): the 48px button is transparent, the visible pill
+   sits at its bottom so the label looks and lines up exactly as before */
+.mxd-art{cursor:pointer}
+.mxd-lbl{background:none;padding:0;border:0;box-shadow:none;border-radius:0;min-height:48px;min-width:48px;
+  display:flex;align-items:flex-end;justify-content:center;cursor:pointer;font:600 14px/1.2 var(--body,sans-serif);
+  color:var(--ink);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.mxd-pill{display:block;background:rgba(255,255,255,.92);padding:2px 7px;border-radius:6px;white-space:nowrap;
+  box-shadow:0 1px 2px rgba(29,36,43,.08),0 0 0 1px var(--line,#E3E8EF);transition:background .18s ease-out,color .18s ease-out,transform .16s ease-out}
+.mxd-lbl:hover .mxd-pill{background:#fff;box-shadow:0 1px 3px rgba(29,36,43,.14),0 0 0 1px var(--ink-2,#4A5560)}
+.mxd-lbl:active .mxd-pill{transform:scale(.96)}
+.mxd-lbl:focus-visible{outline:none}
+.mxd-lbl:focus-visible .mxd-pill{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--moss,#24323E)}
+.mxd-lbl.is-active{z-index:2}
+.mxd-lbl.is-active .mxd-pill{background:var(--moss,#24323E);color:#fff}
+.mxd-readout{margin:12px 0 0;min-height:48px;font-size:14px;line-height:1.5;color:var(--ink-2);
+  background:var(--bone-2,#EEF1F4);border-radius:12px;padding:10px 12px}
+.mxd-readout.is-on{color:var(--ink);background:var(--moss-2,#E7ECF0);animation:mxd-in .22s ease-out}
+.mxd-readout b{color:var(--moss,#24323E);margin-right:4px}
+@keyframes mxd-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (max-width:480px){.mxd .mxd-lbl{padding:0}.mxd .mxd-pill{padding:2px 4px}}
+@media (prefers-reduced-motion:reduce){.mxd-readout.is-on{animation:none}.mxd-pill{transition:none}.mxd-lbl:active .mxd-pill{transform:none}}
